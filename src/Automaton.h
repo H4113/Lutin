@@ -14,12 +14,12 @@
 
 
 class Automaton {
-public: 
-	State state;
-private: 
-	Program program;
-	LexicalAnalyzer analyzer;
-	std::vector<Word> words;
+	public: 
+		State* state;
+	private: 
+		Program program;
+		LexicalAnalyzer analyzer;
+		std::vector<Word> words;
 };
 
 #endif //_AUTOMATON_H

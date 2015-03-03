@@ -6,6 +6,8 @@
 #ifndef _WORDTYPE_H
 #define _WORDTYPE_H
 
-enum WordType {  };
+enum WordType {
+	
+};
 
 #endif //_WORDTYPE_H

@@ -13,12 +13,12 @@
 
 
 class Program {
-public:
-	Program();
-	
-private: 
-	std::vector<Instruction> instructions;
-	std::vector<Variable> variables;
+	public:
+		Program();
+		
+	private: 
+		std::vector<Instruction> instructions;
+		std::vector<Variable> variables;
 };
 
 #endif //_PROGRAM_H

@@ -7,11 +7,11 @@
 #define _INSTRUCTION_H
 
 class Instruction {
-public: 
-	Instruction();
-	void execute();
-	
-	void display();
+	public: 
+		Instruction();
+		void execute();
+		
+		void display();
 };
 
 #endif //_INSTRUCTION_H

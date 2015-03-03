@@ -12,11 +12,11 @@
 
 
 class Operation: public Expression {
-public:
-	Operation();
-private: 
-	Expression expressions;
-	Operator op;
+	public:
+		Operation();
+	private: 
+		Expression expressions;
+		Operator op;
 };
 
 #endif //_OPERATION_H

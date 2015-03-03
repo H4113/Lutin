@@ -11,8 +11,8 @@
 
 
 class Read: public Instruction {
-private: 
-	Variable var;
+	private: 
+		Variable var;
 };
 
 #endif //_READ_H

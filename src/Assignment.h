@@ -12,9 +12,9 @@
 
 
 class Assignment: public Instruction {
-private: 
-	Variable var;
-	Expression exp;
+	private: 
+		Variable var;
+		Expression exp;
 };
 
 #endif //_ASSIGNMENT_H

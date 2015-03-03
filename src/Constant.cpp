@@ -13,6 +13,6 @@
 /**
  * @param value
  */
-Constant::Constant(int value) {
+Constant::Constant(const int& value) {
 
 }
