@@ -15,6 +15,8 @@
 class Program {
 	public:
 		Program();
+
+		void displayCode();
 		
 	private: 
 		std::vector<Instruction> instructions;

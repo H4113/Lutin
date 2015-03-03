@@ -15,11 +15,11 @@
 
 class Automaton {
 	public: 
-		State* state;
 	private: 
 		Program program;
 		LexicalAnalyzer analyzer;
 		std::vector<Word> words;
+		State* state;
 };
 
 #endif //_AUTOMATON_H

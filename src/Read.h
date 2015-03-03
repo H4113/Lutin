@@ -15,4 +15,4 @@ class Read: public Instruction {
 		Variable var;
 };
 
-#endif //_READ_H
+#endif //_READ_Hvi

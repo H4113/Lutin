@@ -522,4 +522,3 @@ State39::~State39() {
 
 void State39::transition(Automaton& automate, Symbol& symbol) {
 }
-

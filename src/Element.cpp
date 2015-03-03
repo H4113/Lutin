@@ -14,12 +14,13 @@
  * @return bool
  */
 bool Element::set(int value) {
-	return false;
+	*pointer = value;
+	return true;
 }
 
 /**
  * @return int
  */
 int Element::get() {
-	return 0;
+	return *pointer;
 }
