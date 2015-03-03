@@ -1,7 +1,7 @@
 DIR = "../src/"
 FILENAME = "ConcreteStates"
 STATES_NUM = 40
-PREFIX = "/**\n* Project Lutin\n*/\n\n\n"
+PREFIX = "/**\n * Project Lutin\n */\n\n\n"
 
 with open("%s%s.h"%(DIR,FILENAME), "w") as headerfile:
 	headerfile.write(PREFIX)
@@ -15,7 +15,7 @@ with open("%s%s.h"%(DIR,FILENAME), "w") as headerfile:
 		headerfile.write("\tpublic:\n")
 		headerfile.write("\t\t%s();\n"%classname)
 		headerfile.write("\t\tvirtual ~%s();\n\n"%classname)
-		headerfile.write("\t\tvoid transition(Automaton& automate, Symbol& symbol);\n")
+		headerfile.write("\t\tvoid transition(Automaton& automaton, Symbol& symbol);\n")
 		headerfile.write("};\n\n")
 	headerfile.write("\n#endif //_CONCRETE_STATES_H\n\n")
 
@@ -27,7 +27,7 @@ with open("%s%s.cpp"%(DIR,FILENAME), "w") as cppfile:
 		classname = "State%02d"%x
 		cppfile.write("%s::%s() :\n\tState()\n{\n}\n\n"%(classname, classname))
 		cppfile.write("%s::~%s() {\n}\n\n"%((classname, classname)))
-		cppfile.write("void %s::transition(Automaton& automate, Symbol& symbol) {\n}\n\n"%classname)
+		cppfile.write("void %s::transition(Automaton& automaton, Symbol& symbol) {\n}\n\n"%classname)
 		if x != STATES_NUM-1:
 			cppfile.write("// %s\n\n"%("-"*64))
 

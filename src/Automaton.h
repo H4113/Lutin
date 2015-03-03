@@ -10,16 +10,18 @@
 #include "Program.h"
 #include "LexicalAnalyzer.h"
 #include "Word.h"
+
 #include <vector>
+#include <stack>
 
 
 class Automaton {
-	public: 
-	private: 
+	public:
+	private:
 		Program program;
 		LexicalAnalyzer analyzer;
 		std::vector<Word> words;
-		State* state;
+		std::stack<State*> states;
 };
 
 #endif //_AUTOMATON_H
