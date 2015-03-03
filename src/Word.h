@@ -10,8 +10,8 @@
 
 
 class Word {
-private: 
-	Symbol symbol;
+	private: 
+		Symbol symbol;
 };
 
 #endif //_WORD_H

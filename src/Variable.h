@@ -12,21 +12,12 @@
 
 
 class Variable: public Element {
-public: 
-	
-	Variable();
-	
-	/**
-	 * @param value
-	 */
-	bool set(int value);
-	
-	int get();
-protected: 
-	std::string name;
-	int* pointer;
-private: 
-	bool initialized;
+	public: 
+		Variable();
+	protected: 
+		std::string name;
+	private: 
+		bool initialized;
 };
 
 #endif //_VARIABLE_H

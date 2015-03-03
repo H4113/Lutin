@@ -14,6 +14,6 @@
  * @param automate
  * @param symbol
  */
-void State::transition(Automaton& automate, Symbol& symbol) {
+void State::transition(const Automaton* automate, const Symbol& symbol) {
 
 }

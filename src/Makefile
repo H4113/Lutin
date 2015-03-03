@@ -1,30 +1,49 @@
-PACKAGES=display inputs model sound util
-SRC= $(wildcard $(addsuffix /*.cpp,$(PACKAGES)))
-SRC_GAME= $(SRC) $(wildcard *.cpp) 
-SRC_TEST=test/test.cpp $(SRC)
-OBJ=$(SRC_GAME:.cpp=.o)
-OBJ_TEST=$(SRC_TEST:.cpp=.o)
-CC=g++ -std=c++11
-NAME=ProtoGame
-NAME_TEST=Tests
-CCFLAGS=-Wall -g
-LIBS=-lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
-LIBS_TEST=lib/libUnitTest++.a $(LIBS)
+BINDIR=bin
+OBJDIR=obj
 
-all: test game
+BINNAME=Fractals
+BIN=$(BINDIR)/$(BINNAME)
+CLEAN=clean
 
-game: $(OBJ)
-	@echo Compiling game...
-	$(CC) $(OBJ) -o $(NAME) $(LIBS)
+DEBUGDIR=Debug
+RELEASEDIR=Release
 
-test: $(OBJ_TEST)
-	@echo Linking $(NAME_TEST)...
-	@$(CC) -o $(NAME_TEST) $(OBJ_TEST) $(LIBS_TEST)
-	@echo Running unit tests...
-	@./$(NAME_TEST)
+DEBUG=debug
+RELEASE=release
 
-%.o: %.cpp %.h
-	$(CC) -c $< -o $@
+GPP=g++
+CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic -Werror
+INCLUDE=-I"./"
 
-clean:
-	@rm -rf $(OBJ) $(OBJ_TEST) $(NAME) $(NAME_TEST)
+MAINFILE=main.cpp
+
+CPPFILES=$(MAINFILE) 
+
+OBJ=$(CPPFILES:.cpp=.o)
+OBJABS=$(addprefix $(OBJDIR)/,$(OBJ))
+
+OBJDEBUG=$(addprefix $(DEBUGDIR)/,$(OBJABS))
+OBJRELEASE=$(addprefix $(RELEASEDIR)/,$(OBJABS))
+
+BINDEBUG=$(addprefix $(DEBUGDIR)/,$(BIN))
+BINRELEASE=$(addprefix $(RELEASEDIR)/,$(BIN))
+
+FLAGSDEBUG=-g -pg
+FLAGSRELEASE=-O2
+
+LIBS=-lsfml-system -lsfml-window -lsfml-graphics
+
+$(DEBUG): $(OBJDEBUG)
+	$(GPP) $(CFLAGS) $(FLAGSDEBUG) $(LIBS) -o $(BINDEBUG) $(OBJDEBUG)
+
+$(RELEASE): $(OBJRELEASE)
+	$(GPP) $(CFLAGS) $(FLAGSRELEASE) $(LIBS) -o $(BINRELEASE) $(OBJRELEASE)
+
+$(CLEAN):
+	rm -f $(BINDEBUG) $(BINRELEASE) $(OBJDEBUG) $(OBJRELEASE)
+
+$(DEBUGDIR)/$(OBJDIR)/%.o: %.cpp
+	$(GPP) $(CFLAGS) $(FLAGSDEBUG) $(INCLUDE) -c -o $@ $<
+
+$(RELEASEDIR)/$(OBJDIR)/%.o: %.cpp
+	$(GPP) $(CFLAGS) $(FLAGSRELEASE) $(INCLUDE) -c -o $@ $<

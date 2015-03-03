@@ -10,8 +10,8 @@
 
 
 class LexicalAnalyzer {
-private: 
-	Program analyzer;
+	private: 
+		Program analyzer;
 };
 
 #endif //_LEXICALANALYZER_H

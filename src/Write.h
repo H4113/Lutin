@@ -11,8 +11,8 @@
 
 
 class Write: public Instruction {
-private: 
-	Expression expression;
+	private: 
+		Expression expression;
 };
 
 #endif //_WRITE_H
