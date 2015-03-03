@@ -10,7 +10,7 @@
  */
 
 
-void Variable::Variable() {
+Variable::Variable() {
 
 }
 

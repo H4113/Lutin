@@ -6,13 +6,15 @@
 #ifndef _VARIABLE_H
 #define _VARIABLE_H
 
+#include <string>
+
 #include "Element.h"
 
 
 class Variable: public Element {
 public: 
 	
-	void Variable();
+	Variable();
 	
 	/**
 	 * @param value
@@ -21,7 +23,7 @@ public:
 	
 	int get();
 protected: 
-	string name;
+	std::string name;
 	int* pointer;
 private: 
 	bool initialized;

@@ -6,14 +6,19 @@
 #ifndef _PROGRAM_H
 #define _PROGRAM_H
 
+#include <vector>
+
 #include "Instruction.h"
 #include "Variable.h"
 
 
 class Program {
+public:
+	Program();
+	
 private: 
-	Vector<Instruction> instructions;
-	Vector<Variable> variables;
+	std::vector<Instruction> instructions;
+	std::vector<Variable> variables;
 };
 
 #endif //_PROGRAM_H

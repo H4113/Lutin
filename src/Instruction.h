@@ -8,7 +8,7 @@
 
 class Instruction {
 public: 
-	
+	Instruction();
 	void execute();
 	
 	void display();

@@ -8,6 +8,9 @@
 /**
  * Instruction implementation
  */
+ 
+Instruction::Instruction(){
+}
 
 
 void Instruction::execute() {
