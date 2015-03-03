@@ -15,7 +15,7 @@ public:
 	/**
 	 * @param value
 	 */
-	void Constant(int value);
+	Constant(int value);
 };
 
 #endif //_CONSTANT_H
