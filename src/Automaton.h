@@ -10,6 +10,7 @@
 #include "Program.h"
 #include "LexicalAnalyzer.h"
 #include "Word.h"
+#include <vector>
 
 
 class Automaton {
@@ -18,7 +19,7 @@ public:
 private: 
 	Program program;
 	LexicalAnalyzer analyzer;
-	Vector<Word> words;
+	std::vector<Word> words;
 };
 
 #endif //_AUTOMATON_H
