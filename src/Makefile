@@ -1,7 +1,7 @@
 BINDIR=bin
 OBJDIR=obj
 
-BINNAME=Fractals
+BINNAME=lutin
 BIN=$(BINDIR)/$(BINNAME)
 CLEAN=clean
 
@@ -12,12 +12,12 @@ DEBUG=debug
 RELEASE=release
 
 GPP=g++
-CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic -Werror
+CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic 
 INCLUDE=-I"./"
 
 MAINFILE=main.cpp
 
-CPPFILES=$(MAINFILE) 
+CPPFILES=$(MAINFILE) Assignment.cpp Automaton.cpp ConcreteStates.cpp Constant.cpp Element.cpp Expression.cpp Instruction.cpp LexicalAnalyzer.cpp Operation.cpp Program.cpp Read.cpp State.cpp Value.cpp Variable.cpp Word.cpp Write.cpp
 
 OBJ=$(CPPFILES:.cpp=.o)
 OBJABS=$(addprefix $(OBJDIR)/,$(OBJ))
@@ -31,7 +31,7 @@ BINRELEASE=$(addprefix $(RELEASEDIR)/,$(BIN))
 FLAGSDEBUG=-g -pg
 FLAGSRELEASE=-O2
 
-LIBS=-lsfml-system -lsfml-window -lsfml-graphics
+LIBS=
 
 $(DEBUG): $(OBJDEBUG)
 	$(GPP) $(CFLAGS) $(FLAGSDEBUG) $(LIBS) -o $(BINDEBUG) $(OBJDEBUG)

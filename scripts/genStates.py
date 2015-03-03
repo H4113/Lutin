@@ -26,7 +26,7 @@ with open("%s%s.cpp"%(DIR,FILENAME), "w") as cppfile:
 	for x in range(STATES_NUM):
 		classname = "State%02d"%x
 		cppfile.write("%s::%s() :\n\tState()\n{\n}\n\n"%(classname, classname))
-		cppfile.write("~%s::%s() {\n}\n\n"%((classname, classname)))
+		cppfile.write("%s::~%s() {\n}\n\n"%((classname, classname)))
 		cppfile.write("void %s::transition(Automaton& automate, Symbol& symbol) {\n}\n\n"%classname)
 		if x != STATES_NUM-1:
 			cppfile.write("// %s\n\n"%("-"*64))
