@@ -8,6 +8,11 @@
 /**
  * Program implementation
  */
+
+Program::Program()
+{
+}
+
 void Program::displayCode() {
 	for(std::vector<Variable>::iterator itV = variables.begin(); itV != variables.end(); ++itV)
 		itV->display();
