@@ -12,6 +12,7 @@
 #include "Word.h"
 #include "Symbol.h"
 
+#include <iostream>
 #include <vector>
 #include <stack>
 
@@ -20,6 +21,8 @@ class Automaton {
 	public:
 		Automaton();
 		virtual ~Automaton();
+
+		void Read(std::istream &stream);
 
 		void Shift(const Symbol &symbol, State *state);
 		void Reduce(void);
