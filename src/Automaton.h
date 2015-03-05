@@ -10,16 +10,26 @@
 #include "Program.h"
 #include "LexicalAnalyzer.h"
 #include "Word.h"
+#include "Symbol.h"
+
 #include <vector>
+#include <stack>
 
 
 class Automaton {
-	public: 
-	private: 
+	public:
+		Automaton();
+		virtual ~Automaton();
+
+		void Shift(const Symbol &symbol, State *state);
+		void Reduce(void);
+
+	private:
 		Program program;
 		LexicalAnalyzer analyzer;
 		std::vector<Word> words;
-		State* state;
+		std::stack<Symbol> symbols;
+		std::stack<State*> states;
 };
 
 #endif //_AUTOMATON_H
