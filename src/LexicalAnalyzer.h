@@ -22,6 +22,7 @@ struct LexResult
 class LexicalAnalyzer {
 	public:
 		static Word* AnalyzeLine(std::string & str);
+		
 	protected:
 		
 	private: 

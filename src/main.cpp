@@ -7,7 +7,7 @@
 
 void LexerTest()
 {
-	std::string test  ="var x := 1;";
+	std::string test  ="var x := 42;";
 	Word* w;
 	while(!test.empty())
 	{
@@ -19,7 +19,7 @@ void LexerTest()
 				case SYM_v: std::cout<<"Keyword var"; break;
 				case SYM_aff: std::cout<<"Operator :="; break;
 				case SYM_id: std::cout<<"Variable id "<<" ("<<*(std::string*)(w->getVal())<<")"; break;
-				case SYM_n: std::cout<<"Number ";break;//<<" ("<<*(int*)w->getVal()<<")"; break;
+				case SYM_n: std::cout<<"Number "<<" ("<<*(int*)w->getVal()<<")"; break;
 				case SYM_pv: std::cout<<"Semicolon ";break;
 				default:std::cout<<"Token code ("<<(int)(w->getSymbol())<<")";
 			}

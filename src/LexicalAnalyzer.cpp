@@ -4,6 +4,7 @@
 
 
 #include "LexicalAnalyzer.h"
+#include "Utils.h"
 #include <iostream>
 
 const int LexicalAnalyzer::NB_RULES = 5;
@@ -28,36 +29,39 @@ const std::regex LexicalAnalyzer::regJunk("^[ \\t\\n]+");
  */
 Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
 {
-	if(str.empty())
-	{
-		
+	if(str.empty()) {
 		return 0;
 	}
 	std::smatch match;
+	// erase blank characters at the begining of the string
 	if(std::regex_search(str, match, regJunk) ) {
-		std::cout << "junk"<<std::endl;
 		str.erase(str.begin(),str.begin()+match[0].length());
+	}
+	if(str.empty()) {
 		return 0;
 	}
+	// test all the rules
 	for(int i=0; i<LexicalAnalyzer::NB_RULES;++i) {
 		if(std::regex_search(str, match, reg[i]) ) {
 			Symbol symbolReturn = symbols[i];
-			void* valReturn = 0;
-			if(match.size() >= 2) {
+
+			void* valReturn = 0; // to save the matched value
+			if(match.size() >= 2) { 
 				if(symbolReturn == SYM_id) {
 					valReturn = new std::string(match[1].str());
-				}
-				if(symbolReturn == SYM_n) {
-					valReturn = 0; // todo convert to int
+				}else if(symbolReturn == SYM_n) {
+					valReturn = new int(stot<int>(match[1].str()));
 				}
 				str.erase(str.begin(),str.begin()+match[1].length());
 			}else{
 				str.erase(str.begin(),str.begin()+match[0].length());
 			}
+
 			Word* wordReturn = new Word(symbolReturn, valReturn);
 			return wordReturn;
 		}
 	}
+	// no matched rules:
 	std::cout << "lexer error"<<std::endl;
 	str.erase(str.begin(),str.begin()+1);
 	return 0;
