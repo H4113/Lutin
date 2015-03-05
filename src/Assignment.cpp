@@ -7,3 +7,15 @@
 /**
  * Assignment implementation
  */
+
+std::string Assignment::toString() const {
+	return var->toString() + " := " + exp->toString();
+}
+
+void Assignment::display() const {
+	std::cout << toString() << std::endl;
+}
+
+int Assignment::execute() {
+	return exp->execute();
+}

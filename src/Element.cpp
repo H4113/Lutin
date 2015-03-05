@@ -1,13 +1,15 @@
 /**
  * Project Lutin
  */
-
-
 #include "Element.h"
 
 /**
  * Element implementation
  */
+
+ Element::Element() {
+ 	
+ }
 
 /**
  * @param value
@@ -22,5 +24,9 @@ bool Element::set(int value) {
  * @return int
  */
 int Element::get() {
+	return *pointer;
+}
+
+int Element::execute() {
 	return *pointer;
 }

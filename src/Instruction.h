@@ -6,12 +6,16 @@
 #ifndef _INSTRUCTION_H
 #define _INSTRUCTION_H
 
+ #include <string>
+
 class Instruction {
 	public: 
 		Instruction();
-		void execute();
+		virtual int execute() = 0;
 		
-		void display();
+		virtual void display() const = 0;
+
+		virtual std::string toString() const = 0;
 };
 
 #endif //_INSTRUCTION_H
