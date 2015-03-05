@@ -9,7 +9,14 @@
  * Word implementation
  */
 
-Word::Word(){
+Word::Word(Symbol nsymbol, void* nval) :
+	symbol(nsymbol), val(nval)
+{
+}
+
+Word::~Word()
+{
+	delete val;
 }
 
 Symbol Word::getSymbol() const {

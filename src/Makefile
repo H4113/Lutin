@@ -11,8 +11,8 @@ RELEASEDIR=Release
 DEBUG=debug
 RELEASE=release
 
-GPP=g++
-CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic 
+GPP=clang++
+CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic -std=c++11 -stdlib=libc++
 INCLUDE=-I"./"
 
 MAINFILE=main.cpp

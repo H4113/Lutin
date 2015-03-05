@@ -10,6 +10,9 @@
 
 
 class Word {
+	public:
+		Word(Symbol nsymbol, void* nval);
+		virtual ~Word();
 	private: 
 		Symbol symbol;
 		void* val;

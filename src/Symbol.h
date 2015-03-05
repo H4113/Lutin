@@ -7,23 +7,24 @@
 #define _SYMBOL_H
 
 enum Symbol {
-	Pprim,
-	P,
-	Pd,
-	D,
-	Lval,
-	Lconst,
-	Pi,
-	I,
-	E,
-	pv,
-	aff,
-	vg,
-	n,
-	w,
-	r,
-	v,
-	c
+	SYM_Pprim,
+	SYM_P,
+	SYM_Pd,
+	SYM_D,
+	SYM_Lval,
+	SYM_Lconst,
+	SYM_Pi,
+	SYM_I,
+	SYM_E,
+	SYM_pv,
+	SYM_aff,
+	SYM_vg,
+	SYM_n,
+	SYM_w,
+	SYM_r,
+	SYM_v,
+	SYM_c,
+	SYM_id
 };
 
 #endif //_SYMBOL_H
