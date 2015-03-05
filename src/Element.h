@@ -8,7 +8,10 @@
 
 #include "Expression.h"
 
-
+/**
+ *	@class Element
+ *	An expression representing a specific value
+ */
 class Element: public Expression {
 	public:
 		/**
@@ -18,6 +21,7 @@ class Element: public Expression {
 		
 		int get();
 	protected:
+		// The value
 		int* pointer;
 };
 

@@ -10,10 +10,15 @@
 #include "Variable.h"
 #include "Expression.h"
 
-
+/**
+ *	@class Assignement
+ *	Instruction allowing to assign a value to a variable
+ */
 class Assignment: public Instruction {
-	private: 
+	private:
+		// The variable to be assigned
 		Variable var;
+		// The expression to assign to the variable
 		Expression exp;
 };
 

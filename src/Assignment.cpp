@@ -2,7 +2,6 @@
  * Project Lutin
  */
 
-
 #include "Assignment.h"
 
 /**

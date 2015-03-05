@@ -15,7 +15,9 @@
 #include <vector>
 #include <stack>
 
-
+/**
+ *	@class Automaton
+ */
 class Automaton {
 	public:
 		Automaton();

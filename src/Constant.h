@@ -8,7 +8,10 @@
 
 #include "Variable.h"
 
-
+/**
+ *	@class Constant
+ *	A variable with a value initialized with constructor and that can not be changed
+ */
 class Constant: public Variable {
 	public: 
 		
