@@ -22,5 +22,5 @@ int Read::execute() {
 }
 
 std::string Read::toString() const {
-	return "ecrire " + var->getName();
+	return "lire " + var->getName();
 }

@@ -12,7 +12,8 @@ DEBUG=debug
 RELEASE=release
 
 GPP=clang++
-CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic -std=c++11 -stdlib=libc++
+ADDFLAGS=-std=c++11 -stdlib=libstdc++
+CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic
 INCLUDE=-I"./"
 
 MAINFILE=main.cpp
@@ -34,16 +35,16 @@ FLAGSRELEASE=-O2
 LIBS=
 
 $(DEBUG): $(OBJDEBUG)
-	$(GPP) $(CFLAGS) $(FLAGSDEBUG) $(LIBS) -o $(BINDEBUG) $(OBJDEBUG)
+	$(GPP) $(ADDFLAGS) $(LIBS) -o $(BINDEBUG) $(OBJDEBUG)
 
 $(RELEASE): $(OBJRELEASE)
-	$(GPP) $(CFLAGS) $(FLAGSRELEASE) $(LIBS) -o $(BINRELEASE) $(OBJRELEASE)
+	$(GPP) $(ADDFLAGS) $(LIBS) -o $(BINRELEASE) $(OBJRELEASE)
 
 $(CLEAN):
 	rm -f $(BINDEBUG) $(BINRELEASE) $(OBJDEBUG) $(OBJRELEASE)
 
 $(DEBUGDIR)/$(OBJDIR)/%.o: %.cpp
-	$(GPP) $(CFLAGS) $(FLAGSDEBUG) $(INCLUDE) -c -o $@ $<
+	$(GPP) $(ADDFLAGS) $(CFLAGS) $(FLAGSDEBUG) $(INCLUDE) -c -o $@ $<
 
 $(RELEASEDIR)/$(OBJDIR)/%.o: %.cpp
-	$(GPP) $(CFLAGS) $(FLAGSRELEASE) $(INCLUDE) -c -o $@ $<
+	$(GPP) $(ADDFLAGS) $(CFLAGS) $(FLAGSRELEASE) $(INCLUDE) -c -o $@ $<

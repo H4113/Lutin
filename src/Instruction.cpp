@@ -12,11 +12,3 @@
 Instruction::Instruction(){
 }
 
-
-void Instruction::execute() {
-
-}
-
-void Instruction::display() {
-
-}

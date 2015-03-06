@@ -8,7 +8,6 @@
 
 
 #include <string>
-#include <regex>
 #include "Program.h"
 #include "Word.h"
 
@@ -21,17 +20,14 @@ struct LexResult
 
 class LexicalAnalyzer {
 	public:
-		static Word* AnalyzeLine(std::string & str);
+		LexicalAnalyzer();
+		Word* AnalyzeLine(std::string & str);
 		
 	protected:
 		
 	private: 
-		Program analyzer;
 
-		static const int NB_RULES;
-		static const std::regex reg[];
-		static const Symbol symbols[];
-		static const std::regex regJunk;
+		Program analyzer;
 };
 
 #endif //_LEXICALANALYZER_H

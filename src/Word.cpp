@@ -16,7 +16,8 @@ Word::Word(Symbol nsymbol, void* nval) :
 
 Word::~Word()
 {
-	delete val;
+	// Cannot delete val if it's not cast into non void pointer
+	//delete val;
 }
 
 Symbol Word::getSymbol() const {

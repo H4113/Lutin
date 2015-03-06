@@ -14,10 +14,10 @@ class State {
 	public: 
 		
 		/**
-		 * @param automate
+		 * @param automaton
 		 * @param symbol
 		 */
-		virtual void transition(const Automaton* automate, const Symbol& symbol) = 0;
+		virtual void Transition(Automaton* automaton, const Symbol& symbol) = 0;
 };
 
 #endif //_STATE_H

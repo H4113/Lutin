@@ -9,9 +9,11 @@ void LexerTest()
 {
 	std::string test  ="var x := 42;";
 	Word* w;
+	LexicalAnalyzer lexer;
+	
 	while(!test.empty())
 	{
-		w = LexicalAnalyzer::AnalyzeLine(test);
+		w = lexer.AnalyzeLine(test);
 		if(w != 0)
 		{
 			// for testing :

@@ -6,27 +6,33 @@
 #include "LexicalAnalyzer.h"
 #include "Utils.h"
 #include <iostream>
+#include <regex>
 
-const int LexicalAnalyzer::NB_RULES = 5;
-const std::regex LexicalAnalyzer::reg[LexicalAnalyzer::NB_RULES] = {
+const int NB_RULES = 5;
+const std::regex reg[NB_RULES] = {
 	std::regex("^var +"),
 	std::regex("^:= +"),
 	std::regex("^([a-zA-Z][a-zA-Z0-9]*)\\s+"),
 	std::regex("^([0-9]+)[^0-9]+"),
 	std::regex("^;")
 };
-const Symbol LexicalAnalyzer::symbols[LexicalAnalyzer::NB_RULES] = {
+const Symbol symbols[NB_RULES] = {
 	SYM_v,
 	SYM_aff,
 	SYM_id,
 	SYM_n,
 	SYM_pv
 };
-const std::regex LexicalAnalyzer::regJunk("^[ \\t\\n]+");
+const std::regex regJunk("^[ \\t\\n]+");
 
 /**
  * LexicalAnalyzer implementation
  */
+
+LexicalAnalyzer::LexicalAnalyzer()
+{
+}
+
 Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
 {
 	if(str.empty()) {
@@ -41,7 +47,7 @@ Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
 		return 0;
 	}
 	// test all the rules
-	for(int i=0; i<LexicalAnalyzer::NB_RULES;++i) {
+	for(int i=0; i<NB_RULES;++i) {
 		if(std::regex_search(str, match, reg[i]) ) {
 			Symbol symbolReturn = symbols[i];
 
@@ -66,3 +72,4 @@ Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
 	str.erase(str.begin(),str.begin()+1);
 	return 0;
 }
+

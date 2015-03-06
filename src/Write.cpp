@@ -15,9 +15,9 @@ void Write::display() const {
 }
 
 int Write::execute() {
-
+	return 0;
 }
 
 std::string Write::toString() const {
-	return "write " + expression->toString();
+	return "ecrire " + expression->toString();
 }
