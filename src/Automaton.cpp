@@ -27,9 +27,9 @@ void Automaton::Read(std::istream &stream)
 	}
 }
 
-void Automaton::Shift(const Symbol &symbol, State *state)
+void Automaton::Shift(const Word *word, State *state)
 {
-	symbols.push(symbol);
+	words.push(word);
 	states.push(state);
 }
 

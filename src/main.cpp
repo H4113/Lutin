@@ -7,7 +7,7 @@
 
 void LexerTest()
 {
-	std::string test  ="var x := 42;";
+	std::string test  ="var\nx :=42  ;";
 	Word* w;
 	LexicalAnalyzer lexer;
 	

@@ -9,21 +9,21 @@
 #include <regex>
 
 const int NB_RULES = 5;
-const std::regex reg[NB_RULES] = {
-	std::regex("^var +"),
-	std::regex("^:= +"),
+const std::regex REG[NB_RULES] = {
+	std::regex("^var\\s+"),
+	std::regex("^:="),
 	std::regex("^([a-zA-Z][a-zA-Z0-9]*)\\s+"),
 	std::regex("^([0-9]+)[^0-9]+"),
 	std::regex("^;")
 };
-const Symbol symbols[NB_RULES] = {
+const Symbol SYMBOLS[NB_RULES] = {
 	SYM_v,
 	SYM_aff,
 	SYM_id,
 	SYM_n,
 	SYM_pv
 };
-const std::regex regJunk("^[ \\t\\n]+");
+const std::regex REG_JUNK("^\\s+");
 
 /**
  * LexicalAnalyzer implementation
@@ -35,12 +35,13 @@ LexicalAnalyzer::LexicalAnalyzer()
 
 Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
 {
+	std::smatch match;
+	
 	if(str.empty()) {
 		return 0;
 	}
-	std::smatch match;
 	// erase blank characters at the begining of the string
-	if(std::regex_search(str, match, regJunk) ) {
+	if(std::regex_search(str, match, REG_JUNK) ) {
 		str.erase(str.begin(),str.begin()+match[0].length());
 	}
 	if(str.empty()) {
@@ -48,8 +49,8 @@ Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
 	}
 	// test all the rules
 	for(int i=0; i<NB_RULES;++i) {
-		if(std::regex_search(str, match, reg[i]) ) {
-			Symbol symbolReturn = symbols[i];
+		if(std::regex_search(str, match, REG[i]) ) {
+			Symbol symbolReturn = SYMBOLS[i];
 
 			void* valReturn = 0; // to save the matched value
 			if(match.size() >= 2) { 

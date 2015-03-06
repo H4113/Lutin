@@ -11,16 +11,16 @@
 
 class Word {
 	public:
+		Word();
 		Word(Symbol nsymbol, void* nval);
 		virtual ~Word();
+		
+		Symbol getSymbol() const;
+		void* getVal() const;
+
 	private: 
 		Symbol symbol;
 		void* val;
-
-	public:
-		Symbol getSymbol() const;
-		void* getVal() const;
-		Word();
 };
 
 #endif //_WORD_H

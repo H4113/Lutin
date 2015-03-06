@@ -6,7 +6,7 @@
 #ifndef _STATE_H
 #define _STATE_H
 
-#include "Symbol.h"
+#include "Word.h"
 
 class Automaton;
 
@@ -15,9 +15,9 @@ class State {
 		
 		/**
 		 * @param automaton
-		 * @param symbol
+		 * @param word
 		 */
-		virtual void Transition(Automaton* automaton, const Symbol& symbol) = 0;
+		virtual void Transition(Automaton* automaton, const Word *word) = 0;
 };
 
 #endif //_STATE_H

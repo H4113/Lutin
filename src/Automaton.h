@@ -13,7 +13,6 @@
 #include "Symbol.h"
 
 #include <iostream>
-#include <vector>
 #include <stack>
 
 /**
@@ -26,14 +25,13 @@ class Automaton {
 
 		void Read(std::istream &stream);
 
-		void Shift(const Symbol &symbol, State *state);
+		void Shift(const Word *word, State *state);
 		void Reduce(void);
 
 	private:
 		Program program;
 		LexicalAnalyzer analyzer;
-		std::vector<Word> words;
-		std::stack<Symbol> symbols;
+		std::stack<const Word*> words;
 		std::stack<State*> states;
 };
 
