@@ -14,9 +14,11 @@ class Word {
 		Word();
 		Word(Symbol nsymbol, void* nval);
 		virtual ~Word();
-		
-		Symbol getSymbol() const;
-		void* getVal() const;
+	
+		void SetSymbol(Symbol symbol);
+
+		Symbol GetSymbol(void) const;
+		void* GetVal(void) const;
 
 	private: 
 		Symbol symbol;

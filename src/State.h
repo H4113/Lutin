@@ -23,7 +23,7 @@ class State {
 		 * @param automaton
 		 * @param word
 		 */
-		virtual StateResult Transition(Automaton* automaton, const Word *word) = 0;
+		virtual StateResult Transition(Automaton* automaton, Word *word) = 0;
 };
 
 #endif //_STATE_H

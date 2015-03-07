@@ -20,10 +20,15 @@ Word::~Word()
 	//delete val;
 }
 
-Symbol Word::getSymbol() const {
+void Word::SetSymbol(Symbol nsymbol) {
+	symbol = nsymbol;
+}
+
+Symbol Word::GetSymbol(void) const {
 	return symbol;
 }
 
-void* Word::getVal() const {
+void* Word::GetVal(void) const {
 	return val;
 }
+
