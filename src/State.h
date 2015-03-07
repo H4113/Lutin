@@ -10,6 +10,12 @@
 
 class Automaton;
 
+enum StateResult {
+	SR_TRANSITION,
+	SR_ACCEPT,
+	SR_ERROR
+};
+
 class State {
 	public: 
 		
@@ -17,7 +23,7 @@ class State {
 		 * @param automaton
 		 * @param word
 		 */
-		virtual void Transition(Automaton* automaton, const Word *word) = 0;
+		virtual StateResult Transition(Automaton* automaton, const Word *word) = 0;
 };
 
 #endif //_STATE_H

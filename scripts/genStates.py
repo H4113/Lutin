@@ -15,7 +15,7 @@ with open("%s%s.h"%(DIR,FILENAME), "w") as headerfile:
 		headerfile.write("\tpublic:\n")
 		headerfile.write("\t\t%s();\n"%classname)
 		headerfile.write("\t\tvirtual ~%s();\n\n"%classname)
-		headerfile.write("\t\tvirtual void Transition(Automaton* automaton, const Word *word);\n")
+		headerfile.write("\t\tvirtual StateResult Transition(Automaton* automaton, const Word *word);\n")
 		headerfile.write("};\n\n")
 	headerfile.write("\n#endif //_CONCRETE_STATES_H\n\n")
 
@@ -27,7 +27,9 @@ with open("%s%s.cpp"%(DIR,FILENAME), "w") as cppfile:
 		classname = "State%02d"%x
 		cppfile.write("%s::%s() :\n\tState()\n{\n}\n\n"%(classname, classname))
 		cppfile.write("%s::~%s() {\n}\n\n"%((classname, classname)))
-		cppfile.write("void %s::Transition(Automaton* automaton, const Word *word) {\n}\n\n"%classname)
+		cppfile.write("StateResult %s::Transition(Automaton* automaton, const Word *word) {\n"%classname)
+		cppfile.write("\treturn SR_ERROR;\n")
+		cppfile.write("}\n\n")
 		if x != STATES_NUM-1:
 			cppfile.write("// %s\n\n"%("-"*64))
 
