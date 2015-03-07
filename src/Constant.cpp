@@ -14,14 +14,17 @@
 /**
  * @param value
  */
-Constant::Constant(const std::string& n, const int& value) : Variable(n) {
+Constant::Constant(const std::string& n, const int& value) : Variable(n) 
+{
 	*pointer = value;
 }
 
-void Constant::display() const {
+void Constant::display(void) const 
+{
 	std::cout << toString() << ";" << std::endl;
 }
 
-std::string Constant::toString() const {
+std::string Constant::toString(void) const 
+{
 	return "const " + name + " = " + std::to_string(*pointer);
 }

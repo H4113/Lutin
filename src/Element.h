@@ -12,7 +12,8 @@
  *	@class Element
  *	An expression representing a specific value
  */
-class Element: public Expression {
+class Element: public Expression 
+{
 	public:
 		Element();
 		/**
@@ -20,12 +21,12 @@ class Element: public Expression {
 		 */
 		bool set(int value);
 		
-		int get();
+		int get(void);
 
 		/**
 		 *	@return the int value of the constant
 		 */
-		int execute();
+		int execute(void);
 	protected:
 		// The value
 		int* pointer;

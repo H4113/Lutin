@@ -9,7 +9,8 @@
 
 #define RULE_COUNT 22
 
-typedef struct Rule {
+typedef struct Rule 
+{
 	Symbol leftPart;
 	unsigned int rightPartCount;
 } Rule;

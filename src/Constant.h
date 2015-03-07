@@ -14,7 +14,8 @@
  *	@class Constant
  *	A variable with a value initialized with constructor and that can not be changed
  */
-class Constant: public Variable {
+class Constant: public Variable 
+{
 	public: 
 		
 		/**
@@ -25,13 +26,13 @@ class Constant: public Variable {
 		/**
 		 *	Display the code corresponding to the constant.
 		 */ 
-		void display() const;
+		void display(void) const;
 
 		/**
 		 *	Creates a string representing the constant
 		 *	@return the string created
 		 */
-		std::string toString() const;
+		std::string toString(void) const;
 };
 
 #endif //_CONSTANT_H

@@ -13,8 +13,10 @@ State00::State00() :
 State00::~State00() {
 }
 
-StateResult State00::Transition(Automaton* automaton, Word *word) {
-	switch(word->GetSymbol()) {
+StateResult State00::Transition(Automaton* automaton, Word *word) 
+{
+	switch(word->GetSymbol()) 
+	{
 		case SYM_v:
 		case SYM_c:
 		case SYM_id:

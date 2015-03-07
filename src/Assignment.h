@@ -15,26 +15,27 @@
  *	@class Assignement
  *	Instruction allowing to assign a value to a variable
  */
-class Assignment: public Instruction {
+class Assignment: public Instruction 
+{
 	public:
 		Assignment(Variable*, Expression*);
 
 		/**
 		 *	Display the code corresponding to the assignment instruction.
 		 */ 
-		void display() const;
+		void display(void) const;
 
 		/**
 		 *	Execute the assignment instruction.
 		 *	@return the assigned value
 		 */ 
-		int execute();
+		int execute(void);
 
 		/**
 		 *	Creates a string representing the assignment instruction
 		 *	@return the string created
 		 */
-		std::string toString() const;
+		std::string toString(void) const;
 	private:
 		// The variable to be assigned
 		Variable* var;

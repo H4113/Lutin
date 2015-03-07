@@ -8,14 +8,15 @@
 
  #include <string>
 
-class Instruction {
+class Instruction 
+{
 	public: 
 		Instruction();
-		virtual int execute() = 0;
+		virtual int execute(void) = 0;
 		
-		virtual void display() const = 0;
+		virtual void display(void) const = 0;
 
-		virtual std::string toString() const = 0;
+		virtual std::string toString(void) const = 0;
 };
 
 #endif //_INSTRUCTION_H

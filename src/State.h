@@ -10,7 +10,8 @@
 
 class Automaton;
 
-enum StateResult {
+enum StateResult 
+{
 	SR_TRANSITION,
 	SR_ACCEPT,
 	SR_ERROR

@@ -7,7 +7,8 @@
  * Element implementation
  */
 
- Element::Element() {
+ Element::Element() 
+ {
  	
  }
 
@@ -15,7 +16,8 @@
  * @param value
  * @return bool
  */
-bool Element::set(int value) {
+bool Element::set(int value) 
+{
 	*pointer = value;
 	return true;
 }
@@ -23,10 +25,12 @@ bool Element::set(int value) {
 /**
  * @return int
  */
-int Element::get() {
+int Element::get(void) 
+{
 	return *pointer;
 }
 
-int Element::execute() {
+int Element::execute(void) 
+{
 	return *pointer;
 }

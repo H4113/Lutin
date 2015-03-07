@@ -11,30 +11,31 @@
 #include "Element.h"
 
 
-class Variable: public Element {
+class Variable: public Element 
+{
 	public: 
 		Variable(const std::string&);
 
 		/**
 		 *	@return name
 		 */
-		std::string getName() const;
+		std::string getName(void) const;
 
 		/**
 		 *	Display the code corresponding to the variable.
 		 */ 
-		void display() const;
+		void display(void) const;
 
 		/**
 		 *	@return initialized
 		 */
-		bool getInitialized() const;
+		bool getInitialized(void) const;
 
 		/**
 		 *	Creates a string representing the variable
 		 *	@return the string created
 		 */
-		std::string toString() const;
+		std::string toString(void) const;
 	protected: 
 		std::string name;
 	private: 

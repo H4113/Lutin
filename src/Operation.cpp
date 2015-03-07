@@ -9,13 +9,15 @@
  * Operation implementation
  */
 
-void Operation::display() const {
+void Operation::display(void) const {
 	std::cout << toString() << ";" << std::endl;
 }
 
-std::string Operation::toString() const {
+std::string Operation::toString(void) const 
+{
 	std::string oper;
-	switch(op) {
+	switch(op) 
+	{
 		case PLUS:
 			oper = "+";
 			break;
@@ -35,8 +37,10 @@ std::string Operation::toString() const {
 	return exp1->toString() + oper + exp2->toString();
 }
 
-int Operation::execute() {
-	switch(op) {
+int Operation::execute(void) 
+{
+	switch(op) 
+	{
 		case PLUS:
 			return exp1->execute() + exp2->execute();
 			break;

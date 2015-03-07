@@ -18,7 +18,8 @@
 /**
  *	@class Automaton
  */
-class Automaton {
+class Automaton 
+{
 	public:
 		Automaton();
 		virtual ~Automaton();

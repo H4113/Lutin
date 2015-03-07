@@ -10,20 +10,24 @@
  * Write implementation
  */
 
-Write::Write(Expression* e) : expression(e) {
+Write::Write(Expression* e) : expression(e) 
+{
 	
 }
 
-void Write::display() const {
+void Write::display(void) const 
+{
 	std::cout << toString() << ";" << std::endl;
 }
 
-int Write::execute() {
+int Write::execute(void) 
+{
 	int v = expression->execute();
 	std::cout << std::to_string(v) << std::endl;
 	return v;
 }
 
-std::string Write::toString() const {
+std::string Write::toString(void) const 
+{
 	return "ecrire " + expression->toString();
 }

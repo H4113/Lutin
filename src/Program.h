@@ -12,11 +12,12 @@
 #include "Variable.h"
 
 
-class Program {
+class Program 
+{
 	public:
 		Program();
 
-		void displayCode();
+		void displayCode(void);
 		
 	private: 
 		std::vector<Instruction> instructions;

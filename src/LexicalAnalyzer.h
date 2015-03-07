@@ -18,7 +18,8 @@ struct LexResult
 	Symbol symbol;
 };
 
-class LexicalAnalyzer {
+class LexicalAnalyzer 
+{
 	public:
 		LexicalAnalyzer();
 		Word* AnalyzeLine(std::string & str);

@@ -9,18 +9,19 @@
 #include "Element.h"
 #include <string>
 
-class Value: public Element {
+class Value: public Element 
+{
 	public:
 		/**
 		 *	Display the code corresponding to the constant.
 		 */ 
-		void display() const;
+		void display(void) const;
 
 		/**
 		 *	Creates a string representing the value
 		 *	@return the string created
 		 */
-		std::string toString() const;
+		std::string toString(void) const;
 };
 
 #endif //_VALUE_H

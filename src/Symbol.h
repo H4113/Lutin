@@ -6,7 +6,8 @@
 #ifndef _SYMBOL_H
 #define _SYMBOL_H
 
-enum Symbol {
+enum Symbol 
+{
 	SYM_pv,
 	SYM_v,
 	SYM_c,

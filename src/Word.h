@@ -9,7 +9,8 @@
 #include "Symbol.h"
 
 
-class Word {
+class Word 
+{
 	public:
 		Word();
 		Word(Symbol nsymbol, void* nval);

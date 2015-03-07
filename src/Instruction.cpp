@@ -9,6 +9,7 @@
  * Instruction implementation
  */
  
-Instruction::Instruction(){
+Instruction::Instruction()
+{
 }
 

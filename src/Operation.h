@@ -11,25 +11,26 @@
 #include "Operator.h"
 #include <iostream>
 
-class Operation: public Expression {
+class Operation: public Expression 
+{
 	public:
 		Operation();
 		/**
 		 *	Display the code corresponding to the operation instruction.
 		 */ 
-		void display() const;
+		void display(void) const;
 
 		/**
 		 *	Execute the operation instruction.
 		 *	@return the computed value
 		 */ 
-		int execute();
+		int execute(void);
 
 		/**
 		 *	Creates a string representing the operation instruction
 		 *	@return the string created
 		 */
-		std::string toString() const;
+		std::string toString(void) const;
 	private: 
 		Expression* exp1;
 		Expression* exp2;

@@ -10,21 +10,25 @@
  * Read implementation
  */
 
-Read::Read(Variable* v) : var(v) {
+Read::Read(Variable* v) : var(v) 
+{
 	
 }
 
-void Read::display() const {
+void Read::display(void) const 
+{
 	std::cout << toString() << ";" << std::endl;
 }
 
-int Read::execute() {
+int Read::execute(void) 
+{
 	int val;
 	std::cin >> val;
 	var->set(val);
 	return val;
 }
 
-std::string Read::toString() const {
+std::string Read::toString(void) const 
+{
 	return "lire " + var->getName();
 }
