@@ -30,8 +30,8 @@ void LexerTest()
 				case SYM_div: std::cout<<"Operator /"; break;
 				case SYM_eq: std::cout<<"Operator ="; break;
 				case SYM_aff: std::cout<<"Operator :="; break;
-				case SYM_id: std::cout<<"Variable id "<<" ("<<*(std::string*)(w->GetVal())<<")"; break;
-				case SYM_n: std::cout<<"Number "<<" ("<<*(int*)w->GetVal()<<")"; break;
+				case SYM_id: std::cout<<"Variable id "<<" ("<<*w->GetVal().varid<<")"; break;
+				case SYM_n: std::cout<<"Number "<<" ("<<*w->GetVal().number<<")"; break;
 				case SYM_pv: std::cout<<"Semicolon ";break;
 				case SYM_vg: std::cout<<"Colon ";break;
 				default:std::cout<<"Token code ("<<(int)(w->GetSymbol())<<")";

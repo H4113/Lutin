@@ -8,6 +8,10 @@
 #include <iostream>
 #include <regex>
 
+ /**
+ * LexicalAnalyzer implementation
+ */
+
 const int NB_RULES = 16;
 const std::regex REG[NB_RULES] = {
 	std::regex("^var\\s"),
@@ -24,7 +28,7 @@ const std::regex REG[NB_RULES] = {
 	std::regex("^="),
 	std::regex("^\\("),
 	std::regex("^\\)"),
-	std::regex("^([a-zA-Z][a-zA-Z0-9]*)\\s"),
+	std::regex("^([a-zA-Z][a-zA-Z0-9]*)[^a-zA-Z0-9]"),
 	std::regex("^([0-9]+)[^0-9]+")
 };
 const Symbol SYMBOLS[NB_RULES] = {
@@ -46,10 +50,6 @@ const Symbol SYMBOLS[NB_RULES] = {
 	SYM_n
 };
 const std::regex REG_JUNK("^\\s+");
-
-/**
- * LexicalAnalyzer implementation
- */
 
 LexicalAnalyzer::LexicalAnalyzer()
 {
@@ -74,12 +74,12 @@ Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
 		if(std::regex_search(str, match, REG[i]) ) {
 			Symbol symbolReturn = SYMBOLS[i];
 
-			void* valReturn = 0; // to save the matched value
+			UWordVal valReturn; // to save the matched value
 			if(match.size() >= 2) { 
 				if(symbolReturn == SYM_id) {
-					valReturn = new std::string(match[1].str());
+					valReturn.varid = new std::string(match[1].str());
 				}else if(symbolReturn == SYM_n) {
-					valReturn = new int(stot<int>(match[1].str()));
+					valReturn.number = new int(stot<int>(match[1].str()));
 				}
 				str.erase(str.begin(),str.begin()+match[1].length());
 			}else{

@@ -11,13 +11,6 @@
 #include "Program.h"
 #include "Word.h"
 
-struct LexResult
-{
-	int error;
-	char* value;
-	Symbol symbol;
-};
-
 class LexicalAnalyzer 
 {
 	public:

@@ -2,22 +2,25 @@
  * Project Lutin
  */
 
-
 #include "Word.h"
+#include "Symbol.h"
 
 /**
  * Word implementation
  */
 
-Word::Word(Symbol nsymbol, void* nval) :
+Word::Word(Symbol nsymbol, UWordVal nval) :
 	symbol(nsymbol), val(nval)
 {
 }
 
 Word::~Word()
 {
-	// Cannot delete val if it's not cast into non void pointer
-	//delete val;
+	if(symbol == SYM_id) {
+		delete val.varid;
+	} else if(symbol == SYM_n) {
+		delete val.number;
+	}
 }
 
 void Word::SetSymbol(Symbol nsymbol) 
@@ -30,7 +33,7 @@ Symbol Word::GetSymbol(void) const
 	return symbol;
 }
 
-void* Word::GetVal(void) const 
+UWordVal Word::GetVal(void) const 
 {
 	return val;
 }
