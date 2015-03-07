@@ -9,8 +9,7 @@
 
 static void debugWord(const Word *w)
 {
-	switch(w->GetSymbol())
-	{
+	switch(w->GetSymbol()){
 		case SYM_v: std::cout<<"Keyword var"; break;
 		case SYM_c: std::cout<<"Keyword const"; break;
 		case SYM_r: std::cout<<"Function lire"; break;
@@ -23,13 +22,13 @@ static void debugWord(const Word *w)
 		case SYM_div: std::cout<<"Operator /"; break;
 		case SYM_eq: std::cout<<"Operator ="; break;
 		case SYM_aff: std::cout<<"Operator :="; break;
-		case SYM_id: std::cout<<"Variable id "<<" ("<<*(std::string*)(w->GetVal())<<")"; break;
-		case SYM_n: std::cout<<"Number "<<" ("<<*(int*)w->GetVal()<<")"; break;
+		case SYM_id: std::cout<<"Variable id "<<" ("<<*w->GetVal().varid<<")"; break;
+		case SYM_n: std::cout<<"Number "<<" ("<<*w->GetVal().number<<")"; break;
 		case SYM_pv: std::cout<<"Semicolon ";break;
 		case SYM_vg: std::cout<<"Colon ";break;
 		default:std::cout<<"Token code ("<<(int)(w->GetSymbol())<<")";
 	}
-	std::cout << std::endl;
+	std::cout<<std::endl;
 }
 
 /**
@@ -81,7 +80,8 @@ void Automaton::Read(std::istream &stream)
 
 	if(!error) // EOF has been reached
 	{
-		Word *endWord = new Word(SYM_end, 0);
+		UWordVal endVal = {0};
+		Word *endWord = new Word(SYM_end, endVal);
 		switch(states.top()->Transition(this, endWord))
 		{
 			case SR_TRANSITION: // Should not happen
