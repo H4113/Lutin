@@ -526,6 +526,18 @@ State17::~State17()
 
 StateResult State17::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_id:
+		case SYM_w:
+		case SYM_r:
+		case SYM_end:
+			automaton->Reduce(word, 10);
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -542,6 +554,15 @@ State18::~State18()
 
 StateResult State18::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_eq:
+			automaton->Shift(word, new State19());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -558,6 +579,15 @@ State19::~State19()
 
 StateResult State19::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_n:
+			automaton->Shift(word, new State20());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -574,6 +604,16 @@ State20::~State20()
 
 StateResult State20::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+		case SYM_vg:
+			automaton->Reduce(word, 8);
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -590,6 +630,19 @@ State21::~State21()
 
 StateResult State21::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+			automaton->Reduce(word, 4);
+			return SR_TRANSITION;
+
+		case SYM_vg:
+			automaton->Shift(word, new State22());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -606,6 +659,15 @@ State22::~State22()
 
 StateResult State22::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_id:
+			automaton->Shift(word, new State23());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -622,6 +684,16 @@ State23::~State23()
 
 StateResult State23::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+		case SYM_vg:
+			automaton->Reduce(word, 7);
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -638,6 +710,31 @@ State24::~State24()
 
 StateResult State24::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_plus:
+			automaton->Shift(word, new State28());
+			return SR_TRANSITION;
+
+		case SYM_times:
+			automaton->Shift(word, new State34());
+			return SR_TRANSITION;
+
+		case SYM_minus:
+			automaton->Shift(word, new State32());
+			return SR_TRANSITION;
+
+		case SYM_div:
+			automaton->Shift(word, new State36());
+			return SR_TRANSITION;
+
+		case SYM_pv:
+			automaton->Reduce(word, 12);
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -654,6 +751,20 @@ State25::~State25()
 
 StateResult State25::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+		case SYM_plus:
+		case SYM_times:
+		case SYM_minus:
+		case SYM_div:
+		case SYM_cl_par:
+			automaton->Reduce(word, 20);
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -670,6 +781,20 @@ State26::~State26()
 
 StateResult State26::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+		case SYM_plus:
+		case SYM_times:
+		case SYM_minus:
+		case SYM_div:
+		case SYM_cl_par:
+			automaton->Reduce(word, 21);
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -686,6 +811,27 @@ State27::~State27()
 
 StateResult State27::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_id:
+			automaton->Shift(word, new State25());
+			return SR_TRANSITION;
+
+		case SYM_n:
+			automaton->Shift(word, new State26());
+			return SR_TRANSITION;
+
+		case SYM_op_par:
+			automaton->Shift(word, new State27());
+			return SR_TRANSITION;
+
+		case SYM_E:
+			automaton->Shift(word, new State30());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -702,6 +848,27 @@ State28::~State28()
 
 StateResult State28::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_id:
+			automaton->Shift(word, new State25());
+			return SR_TRANSITION;
+
+		case SYM_n:
+			automaton->Shift(word, new State26());
+			return SR_TRANSITION;
+
+		case SYM_op_par:
+			automaton->Shift(word, new State27());
+			return SR_TRANSITION;
+
+		case SYM_E:
+			automaton->Shift(word, new State29());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -718,6 +885,26 @@ State29::~State29()
 
 StateResult State29::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+		case SYM_plus:
+		case SYM_minus:
+		case SYM_cl_par:
+			automaton->Reduce(word, 15);
+			return SR_TRANSITION;
+
+		case SYM_times:
+			automaton->Shift(word, new State34());
+			return SR_TRANSITION;
+
+		case SYM_div:
+			automaton->Shift(word, new State36());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -734,6 +921,31 @@ State30::~State30()
 
 StateResult State30::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_plus:
+			automaton->Shift(word, new State28());
+			return SR_TRANSITION;
+
+		case SYM_times:
+			automaton->Shift(word, new State34());
+			return SR_TRANSITION;
+
+		case SYM_minus:
+			automaton->Shift(word, new State32());
+			return SR_TRANSITION;
+
+		case SYM_div:
+			automaton->Shift(word, new State36());
+			return SR_TRANSITION;
+
+		case SYM_cl_par:
+			automaton->Shift(word, new State31());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -750,6 +962,20 @@ State31::~State31()
 
 StateResult State31::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+		case SYM_plus:
+		case SYM_times:
+		case SYM_minus:
+		case SYM_div:
+		case SYM_cl_par:
+			automaton->Reduce(word, 19);
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -766,6 +992,27 @@ State32::~State32()
 
 StateResult State32::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_id:
+			automaton->Shift(word, new State25());
+			return SR_TRANSITION;
+
+		case SYM_n:
+			automaton->Shift(word, new State26());
+			return SR_TRANSITION;
+
+		case SYM_op_par:
+			automaton->Shift(word, new State27());
+			return SR_TRANSITION;
+
+		case SYM_E:
+			automaton->Shift(word, new State33());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -782,6 +1029,26 @@ State33::~State33()
 
 StateResult State33::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+		case SYM_plus:
+		case SYM_minus:
+		case SYM_cl_par:
+			automaton->Reduce(word, 17);
+			return SR_TRANSITION;
+
+		case SYM_times:
+			automaton->Shift(word, new State34());
+			return SR_TRANSITION;
+
+		case SYM_div:
+			automaton->Shift(word, new State36());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -798,6 +1065,27 @@ State34::~State34()
 
 StateResult State34::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_id:
+			automaton->Shift(word, new State25());
+			return SR_TRANSITION;
+
+		case SYM_n:
+			automaton->Shift(word, new State26());
+			return SR_TRANSITION;
+
+		case SYM_op_par:
+			automaton->Shift(word, new State27());
+			return SR_TRANSITION;
+
+		case SYM_E:
+			automaton->Shift(word, new State35());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -814,6 +1102,20 @@ State35::~State35()
 
 StateResult State35::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+		case SYM_plus:
+		case SYM_times:
+		case SYM_minus:
+		case SYM_div:
+		case SYM_cl_par:
+			automaton->Reduce(word, 16);
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -830,6 +1132,27 @@ State36::~State36()
 
 StateResult State36::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_id:
+			automaton->Shift(word, new State25());
+			return SR_TRANSITION;
+
+		case SYM_n:
+			automaton->Shift(word, new State26());
+			return SR_TRANSITION;
+
+		case SYM_op_par:
+			automaton->Shift(word, new State27());
+			return SR_TRANSITION;
+
+		case SYM_E:
+			automaton->Shift(word, new State37());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -846,6 +1169,20 @@ State37::~State37()
 
 StateResult State37::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+		case SYM_plus:
+		case SYM_times:
+		case SYM_minus:
+		case SYM_div:
+		case SYM_cl_par:
+			automaton->Reduce(word, 18);
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -862,6 +1199,27 @@ State38::~State38()
 
 StateResult State38::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_id:
+			automaton->Shift(word, new State25());
+			return SR_TRANSITION;
+
+		case SYM_n:
+			automaton->Shift(word, new State26());
+			return SR_TRANSITION;
+
+		case SYM_op_par:
+			automaton->Shift(word, new State27());
+			return SR_TRANSITION;
+
+		case SYM_E:
+			automaton->Shift(word, new State39());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
@@ -878,6 +1236,31 @@ State39::~State39()
 
 StateResult State39::Transition(Automaton* automaton, Word *word) 
 {
+	switch(word->GetSymbol()) 
+	{
+		case SYM_pv:
+			automaton->Reduce(word, 14);
+			return SR_TRANSITION;
+
+		case SYM_plus:
+			automaton->Shift(word, new State28());
+			return SR_TRANSITION;
+
+		case SYM_times:
+			automaton->Shift(word, new State34());
+			return SR_TRANSITION;
+
+		case SYM_minus:
+			automaton->Shift(word, new State32());
+			return SR_TRANSITION;
+
+		case SYM_div:
+			automaton->Shift(word, new State36());
+			return SR_TRANSITION;
+
+		default:
+			break;
+	}
 	return SR_ERROR;
 }
 
