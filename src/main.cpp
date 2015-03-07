@@ -17,13 +17,13 @@ void LexerTest()
 		if(w != 0)
 		{
 			// for testing :
-			switch(w->getSymbol()){
+			switch(w->GetSymbol()){
 				case SYM_v: std::cout<<"Keyword var"; break;
 				case SYM_aff: std::cout<<"Operator :="; break;
-				case SYM_id: std::cout<<"Variable id "<<" ("<<*(std::string*)(w->getVal())<<")"; break;
-				case SYM_n: std::cout<<"Number "<<" ("<<*(int*)w->getVal()<<")"; break;
+				case SYM_id: std::cout<<"Variable id "<<" ("<<*(std::string*)(w->GetVal())<<")"; break;
+				case SYM_n: std::cout<<"Number "<<" ("<<*(int*)w->GetVal()<<")"; break;
 				case SYM_pv: std::cout<<"Semicolon ";break;
-				default:std::cout<<"Token code ("<<(int)(w->getSymbol())<<")";
+				default:std::cout<<"Token code ("<<(int)(w->GetSymbol())<<")";
 			}
 			std::cout<<std::endl;
 			delete w;

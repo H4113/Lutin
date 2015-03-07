@@ -5,10 +5,15 @@
 #ifndef _RULES_H
 #define _RULES_H
 
-#include <map>
+#include "Symbol.h"
 
 #define RULE_COUNT 22
 
-extern const unsigned int RULE_SYMBOL_COUNT[RULE_COUNT];
+typedef struct Rule {
+	Symbol leftPart;
+	unsigned int rightPartCount;
+} Rule;
+
+extern const Rule RULES[RULE_COUNT];
 
 #endif //_RULES_H
