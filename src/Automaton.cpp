@@ -35,6 +35,6 @@ void Automaton::Shift(const Word *word, State *state)
 
 void Automaton::Reduce(void)
 {
-	// TODO
+
 }
 
