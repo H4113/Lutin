@@ -8,6 +8,10 @@
  * Assignment implementation
  */
 
+Assignment::Assignment(Variable* v, Expression* e) : var(v), exp(e) {
+
+}
+
 std::string Assignment::toString() const {
 	return var->toString() + " := " + exp->toString();
 }

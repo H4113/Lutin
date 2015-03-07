@@ -17,6 +17,8 @@
  */
 class Assignment: public Instruction {
 	public:
+		Assignment(Variable*, Expression*);
+
 		/**
 		 *	Display the code corresponding to the assignment instruction.
 		 */ 

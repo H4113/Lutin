@@ -8,6 +8,7 @@
 
 #include "Variable.h"
 #include <iostream>
+#include <string>
 
 /**
  *	@class Constant
@@ -19,7 +20,7 @@ class Constant: public Variable {
 		/**
 		 * @param value used to initilize the constant
 		 */
-		Constant(const int& value);
+		Constant(const std::string&, const int& value);
 
 		/**
 		 *	Display the code corresponding to the constant.

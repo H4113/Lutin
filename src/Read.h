@@ -12,9 +12,18 @@
 
 class Read: public Instruction {
 	public:
-		int execute();
+		Read(Variable*);
 
+		/**
+		 *	Display the code corresponding to the read instruction.
+		 */ 
 		void display() const;
+
+		/**
+		 *	Execute the read instruction.
+		 *	@return the read value
+		 */ 
+		int execute();
 
 		/**
 		 *	Creates a string representing the read instruction

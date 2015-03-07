@@ -10,6 +10,10 @@
  * Read implementation
  */
 
+Read::Read(Variable* v) : var(v) {
+	
+}
+
 void Read::display() const {
 	std::cout << toString() << ";" << std::endl;
 }

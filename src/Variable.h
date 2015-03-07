@@ -13,7 +13,7 @@
 
 class Variable: public Element {
 	public: 
-		Variable();
+		Variable(const std::string&);
 
 		/**
 		 *	@return name

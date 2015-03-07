@@ -11,7 +11,7 @@
  */
 
 
-Variable::Variable() {
+Variable::Variable(const std::string& n) : name(n) {
 
 }
 

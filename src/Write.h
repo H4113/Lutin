@@ -12,6 +12,8 @@
 
 class Write: public Instruction {
 	public:
+		Write(Expression*);
+
 		/**
 		 *	Display the code corresponding to the write instruction.
 		 */ 
