@@ -8,20 +8,42 @@
 #include <iostream>
 #include <regex>
 
-const int NB_RULES = 5;
+const int NB_RULES = 16;
 const std::regex REG[NB_RULES] = {
-	std::regex("^var\\s+"),
+	std::regex("^var\\s"),
+	std::regex("^ecrire\\s"),
+	std::regex("^lire\\s"),
+	std::regex("^const\\s"),
 	std::regex("^:="),
-	std::regex("^([a-zA-Z][a-zA-Z0-9]*)\\s+"),
-	std::regex("^([0-9]+)[^0-9]+"),
-	std::regex("^;")
+	std::regex("^;"),
+	std::regex("^,"),
+	std::regex("^\\+"),
+	std::regex("^\\-"),
+	std::regex("^\\*"),
+	std::regex("^/"),
+	std::regex("^="),
+	std::regex("^\\("),
+	std::regex("^\\)"),
+	std::regex("^([a-zA-Z][a-zA-Z0-9]*)\\s"),
+	std::regex("^([0-9]+)[^0-9]+")
 };
 const Symbol SYMBOLS[NB_RULES] = {
 	SYM_v,
+	SYM_w,
+	SYM_r,
+	SYM_c,
 	SYM_aff,
+	SYM_pv,
+	SYM_vg,
+	SYM_plus,
+	SYM_minus,
+	SYM_times,
+	SYM_div,
+	SYM_eq,
+	SYM_op_par,
+	SYM_cl_par,
 	SYM_id,
-	SYM_n,
-	SYM_pv
+	SYM_n
 };
 const std::regex REG_JUNK("^\\s+");
 
