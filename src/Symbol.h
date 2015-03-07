@@ -8,23 +8,23 @@
 
 enum Symbol 
 {
-	SYM_pv,
-	SYM_v,
-	SYM_c,
-	SYM_id,
-	SYM_vg,
-	SYM_eq,
-	SYM_n,
-	SYM_w,
-	SYM_r,
-	SYM_aff,
-	SYM_plus,
-	SYM_times,
-	SYM_minus,
-	SYM_div,
-	SYM_op_par,
-	SYM_cl_par,
-	SYM_end,
+	SYM_pv,		// ;
+	SYM_v,		// var
+	SYM_c,		// const
+	SYM_id,		// (variable id)
+	SYM_vg,		// ,
+	SYM_eq,		// =
+	SYM_n,		// (number)
+	SYM_w,		// ecrire
+	SYM_r,		// lire
+	SYM_aff,	// :=
+	SYM_plus,	// +
+	SYM_times,	// *
+	SYM_minus,	// -
+	SYM_div,	// /
+	SYM_op_par,	// (
+	SYM_cl_par,	// )
+	SYM_end,	// 
 
 	SYM_Pprim,
 	SYM_P,
