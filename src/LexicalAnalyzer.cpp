@@ -28,7 +28,7 @@ const std::regex REG[NB_RULES] = {
 	std::regex("^="),
 	std::regex("^\\("),
 	std::regex("^\\)"),
-	std::regex("^([a-zA-Z][a-zA-Z0-9]*)\\s"),
+	std::regex("^([a-zA-Z][a-zA-Z0-9]*)[^a-zA-Z0-9]"),
 	std::regex("^([0-9]+)[^0-9]+")
 };
 const Symbol SYMBOLS[NB_RULES] = {
