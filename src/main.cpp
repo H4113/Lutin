@@ -44,12 +44,11 @@ void LexerTest()
 
 int main(int argc, char** argv) {
 	std::string code = 
-		"var x;\n";
+		"var x ;\n";
 	std::istringstream iss(code);
 
 	Automaton automaton;
 
 	automaton.Read(iss);
-	LexerTest();
 	return 0;
 }

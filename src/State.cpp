@@ -9,3 +9,11 @@
  * State implementation
  */
 
+State::State()
+{
+}
+
+State::~State()
+{
+}
+

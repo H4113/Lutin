@@ -27,7 +27,7 @@ class Automaton
 		void Read(std::istream &stream);
 
 		void Shift(Word *word, State *state);
-		void Reduce(Word *word, unsigned int ruleId);
+		StateResult Reduce(Word *word, unsigned int ruleId);
 
 	private:
 		Program program;

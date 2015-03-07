@@ -19,7 +19,9 @@ enum StateResult
 
 class State {
 	public: 
-		
+		State();
+		virtual ~State();
+
 		/**
 		 * @param automaton
 		 * @param word

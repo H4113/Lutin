@@ -86,8 +86,7 @@ Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
 				str.erase(str.begin(),str.begin()+match[0].length());
 			}
 
-			Word* wordReturn = new Word(symbolReturn, valReturn);
-			return wordReturn;
+			return new Word(symbolReturn, valReturn);
 		}
 	}
 	// no matched rules:
