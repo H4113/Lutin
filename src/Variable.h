@@ -19,23 +19,23 @@ class Variable: public Element
 		/**
 		 *	@return name
 		 */
-		std::string getName(void) const;
+		std::string GetName(void) const;
 
 		/**
 		 *	Display the code corresponding to the variable.
 		 */ 
-		void display(void) const;
+		void Display(void) const;
 
 		/**
 		 *	@return initialized
 		 */
-		bool getInitialized(void) const;
+		bool GetInitialized(void) const;
 
 		/**
 		 *	Creates a string representing the variable
 		 *	@return the string created
 		 */
-		std::string toString(void) const;
+		std::string ToString(void) const;
 	protected: 
 		std::string name;
 	private: 

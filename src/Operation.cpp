@@ -9,11 +9,11 @@
  * Operation implementation
  */
 
-void Operation::display(void) const {
-	std::cout << toString() << ";" << std::endl;
+void Operation::Display(void) const {
+	std::cout << ToString() << ";" << std::endl;
 }
 
-std::string Operation::toString(void) const 
+std::string Operation::ToString(void) const 
 {
 	std::string oper;
 	switch(op) 
@@ -34,27 +34,27 @@ std::string Operation::toString(void) const
 			oper = "+";
 			break;
 	}
-	return exp1->toString() + oper + exp2->toString();
+	return exp1->ToString() + oper + exp2->ToString();
 }
 
-int Operation::execute(void) 
+int Operation::Execute(void) 
 {
 	switch(op) 
 	{
 		case PLUS:
-			return exp1->execute() + exp2->execute();
+			return exp1->Execute() + exp2->Execute();
 			break;
 		case MINUS:
-			return exp1->execute() - exp2->execute();
+			return exp1->Execute() - exp2->Execute();
 			break;
 		case DIVIDED:
-			return exp1->execute() / exp2->execute();
+			return exp1->Execute() / exp2->Execute();
 			break;
 		case TIMES:
-			return exp1->execute() * exp2->execute();
+			return exp1->Execute() * exp2->Execute();
 			break;
 		default: // dead code
-			return exp1->execute() + exp2->execute();
+			return exp1->Execute() + exp2->Execute();
 			break;
 	}
 }

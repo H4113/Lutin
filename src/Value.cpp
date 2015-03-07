@@ -10,12 +10,12 @@
  * Value implementation
  */
 
-void Value::display(void) const 
+void Value::Display(void) const 
 {
- 	std::cout << toString() << ";" << std::endl;
+ 	std::cout << ToString() << ";" << std::endl;
 }
 
-std::string Value::toString(void) const 
+std::string Value::ToString(void) const 
 {
 	return std::to_string(*pointer);
 }

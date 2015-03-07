@@ -19,12 +19,12 @@ Constant::Constant(const std::string& n, const int& value) : Variable(n)
 	*pointer = value;
 }
 
-void Constant::display(void) const 
+void Constant::Display(void) const 
 {
-	std::cout << toString() << ";" << std::endl;
+	std::cout << ToString() << ";" << std::endl;
 }
 
-std::string Constant::toString(void) const 
+std::string Constant::ToString(void) const 
 {
 	return "const " + name + " = " + std::to_string(*pointer);
 }

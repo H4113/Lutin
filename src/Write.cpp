@@ -15,19 +15,19 @@ Write::Write(Expression* e) : expression(e)
 	
 }
 
-void Write::display(void) const 
+void Write::Display(void) const 
 {
-	std::cout << toString() << ";" << std::endl;
+	std::cout << ToString() << ";" << std::endl;
 }
 
-int Write::execute(void) 
+int Write::Execute(void) 
 {
-	int v = expression->execute();
+	int v = expression->Execute();
 	std::cout << std::to_string(v) << std::endl;
 	return v;
 }
 
-std::string Write::toString(void) const 
+std::string Write::ToString(void) const 
 {
-	return "ecrire " + expression->toString();
+	return "ecrire " + expression->ToString();
 }

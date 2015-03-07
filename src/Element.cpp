@@ -16,7 +16,7 @@
  * @param value
  * @return bool
  */
-bool Element::set(int value) 
+bool Element::Set(int value) 
 {
 	*pointer = value;
 	return true;
@@ -25,12 +25,12 @@ bool Element::set(int value)
 /**
  * @return int
  */
-int Element::get(void) 
+int Element::Get(void) 
 {
 	return *pointer;
 }
 
-int Element::execute(void) 
+int Element::Execute(void) 
 {
 	return *pointer;
 }

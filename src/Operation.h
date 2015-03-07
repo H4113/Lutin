@@ -18,19 +18,19 @@ class Operation: public Expression
 		/**
 		 *	Display the code corresponding to the operation instruction.
 		 */ 
-		void display(void) const;
+		void Display(void) const;
 
 		/**
 		 *	Execute the operation instruction.
 		 *	@return the computed value
 		 */ 
-		int execute(void);
+		int Execute(void);
 
 		/**
 		 *	Creates a string representing the operation instruction
 		 *	@return the string created
 		 */
-		std::string toString(void) const;
+		std::string ToString(void) const;
 	private: 
 		Expression* exp1;
 		Expression* exp2;

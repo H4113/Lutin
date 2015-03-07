@@ -13,10 +13,10 @@ Program::Program()
 {
 }
 
-void Program::displayCode(void) 
+void Program::DisplayCode(void) 
 {
 	for(std::vector<Variable>::iterator itV = variables.begin(); itV != variables.end(); ++itV)
-		itV->display();
+		itV->Display();
 	for (std::vector<Instruction>::iterator itI = instructions.begin() ; itI != instructions.end(); ++itI)
-		itI->display();
+		itI->Display();
 }

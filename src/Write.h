@@ -18,19 +18,19 @@ class Write: public Instruction
 		/**
 		 *	Display the code corresponding to the write instruction.
 		 */ 
-		void display(void) const;
+		void Display(void) const;
 
 		/**
 		 *	Execute the write instruction.
 		 *	@return the writen value
 		 */ 
-		int execute(void);
+		int Execute(void);
 
 		/**
 		 *	Creates a string representing the write instruction
 		 *	@return the string created
 		 */
-		std::string toString(void) const;
+		std::string ToString(void) const;
 	private: 
 		Expression* expression;
 };

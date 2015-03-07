@@ -26,13 +26,13 @@ class Constant: public Variable
 		/**
 		 *	Display the code corresponding to the constant.
 		 */ 
-		void display(void) const;
+		void Display(void) const;
 
 		/**
 		 *	Creates a string representing the constant
 		 *	@return the string created
 		 */
-		std::string toString(void) const;
+		std::string ToString(void) const;
 };
 
 #endif //_CONSTANT_H

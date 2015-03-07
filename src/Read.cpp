@@ -15,20 +15,20 @@ Read::Read(Variable* v) : var(v)
 	
 }
 
-void Read::display(void) const 
+void Read::Display(void) const 
 {
-	std::cout << toString() << ";" << std::endl;
+	std::cout << ToString() << ";" << std::endl;
 }
 
-int Read::execute(void) 
+int Read::Execute(void) 
 {
 	int val;
 	std::cin >> val;
-	var->set(val);
+	var->Set(val);
 	return val;
 }
 
-std::string Read::toString(void) const 
+std::string Read::ToString(void) const 
 {
-	return "lire " + var->getName();
+	return "lire " + var->GetName();
 }

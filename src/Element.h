@@ -19,14 +19,14 @@ class Element: public Expression
 		/**
 		 * @param value
 		 */
-		bool set(int value);
+		bool Set(int value);
 		
-		int get(void);
+		int Get(void);
 
 		/**
 		 *	@return the int value of the constant
 		 */
-		int execute(void);
+		int Execute(void);
 	protected:
 		// The value
 		int* pointer;

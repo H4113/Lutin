@@ -18,19 +18,19 @@ class Read: public Instruction
 		/**
 		 *	Display the code corresponding to the read instruction.
 		 */ 
-		void display(void) const;
+		void Display(void) const;
 
 		/**
 		 *	Execute the read instruction.
 		 *	@return the read value
 		 */ 
-		int execute(void);
+		int Execute(void);
 
 		/**
 		 *	Creates a string representing the read instruction
 		 *	@return the string created
 		 */
-		std::string toString(void) const;
+		std::string ToString(void) const;
 	private: 
 		Variable* var;
 };

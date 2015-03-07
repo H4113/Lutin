@@ -16,22 +16,22 @@ Variable::Variable(const std::string& n) : name(n)
 
 }
 
-std::string Variable::getName(void) const 
+std::string Variable::GetName(void) const 
 {
 	return name;
 }
 
-void Variable::display(void) const 
+void Variable::Display(void) const 
 {
-	std::cout << toString() << ";" << std::endl;
+	std::cout << ToString() << ";" << std::endl;
 }
 
-bool Variable::getInitialized(void) const 
+bool Variable::GetInitialized(void) const 
 {
 	return initialized;
 }
 
-std::string Variable::toString(void) const 
+std::string Variable::ToString(void) const 
 {
 	return "var " + name;
 }

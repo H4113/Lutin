@@ -13,17 +13,17 @@ Assignment::Assignment(Variable* v, Expression* e) : var(v), exp(e)
 
 }
 
-std::string Assignment::toString(void) const 
+std::string Assignment::ToString(void) const 
 {
-	return var->toString() + " := " + exp->toString();
+	return var->ToString() + " := " + exp->ToString();
 }
 
-void Assignment::display(void) const 
+void Assignment::Display(void) const 
 {
-	std::cout << toString() << std::endl;
+	std::cout << ToString() << std::endl;
 }
 
-int Assignment::execute(void) 
+int Assignment::Execute(void) 
 {
-	return exp->execute();
+	return exp->Execute();
 }

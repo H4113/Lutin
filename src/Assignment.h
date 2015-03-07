@@ -23,19 +23,19 @@ class Assignment: public Instruction
 		/**
 		 *	Display the code corresponding to the assignment instruction.
 		 */ 
-		void display(void) const;
+		void Display(void) const;
 
 		/**
 		 *	Execute the assignment instruction.
 		 *	@return the assigned value
 		 */ 
-		int execute(void);
+		int Execute(void);
 
 		/**
 		 *	Creates a string representing the assignment instruction
 		 *	@return the string created
 		 */
-		std::string toString(void) const;
+		std::string ToString(void) const;
 	private:
 		// The variable to be assigned
 		Variable* var;
