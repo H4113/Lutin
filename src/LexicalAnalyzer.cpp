@@ -52,21 +52,39 @@ const Symbol SYMBOLS[NB_RULES] = {
 const std::regex REG_JUNK("^\\s+");
 
 LexicalAnalyzer::LexicalAnalyzer() :
-	lastWordKnown(false)
+	lastWordKnown(false), currentWord(0), stream(), str()
 {
 }
 
-Word* LexicalAnalyzer::GetCurrentWord(std::string & str)
+void LexicalAnalyzer::SetInputStream(std::istream *nstream)
+{
+	stream = nstream;
+	lineCount = 0;
+	characterCount = 0;
+}
+
+Word* LexicalAnalyzer::GetCurrentWord()
 {
 	if(lastWordKnown) {
 		return currentWord;
 	}
-	std::smatch match;
+	// get the new line 
 	if(str.empty()) {
-		return 0;
+		++lineCount;
+		characterCount = 0;
+		std::getline(*stream, str);
 	}
+	// EOF case
+	if(stream->eof()){
+		UWordVal endVal = {0};
+		currentWord = new Word(SYM_end, endVal);
+		return currentWord;
+	}
+
+	std::smatch match;
 	// erase blank characters at the begining of the string
 	if(std::regex_search(str, match, REG_JUNK) ) {
+		characterCount += match[0].length();
 		str.erase(str.begin(),str.begin()+match[0].length());
 	}
 	if(str.empty()) {
@@ -78,16 +96,19 @@ Word* LexicalAnalyzer::GetCurrentWord(std::string & str)
 			Symbol symbolReturn = SYMBOLS[i];
 
 			UWordVal valReturn; // to save the matched value
+			unsigned int nbCharactersToErase;
 			if(match.size() >= 2) { 
 				if(symbolReturn == SYM_id) {
 					valReturn.varid = new std::string(match[1].str());
 				}else if(symbolReturn == SYM_n) {
 					valReturn.number = new int(stot<int>(match[1].str()));
 				}
-				str.erase(str.begin(),str.begin()+match[1].length());
+				nbCharactersToErase = match[1].length();
 			} else {
-				str.erase(str.begin(),str.begin()+match[0].length());
+				nbCharactersToErase = match[0].length();
 			}
+			str.erase(str.begin(),str.begin()+nbCharactersToErase);
+			characterCount += nbCharactersToErase;
 
 			lastWordKnown = true;
 			currentWord = new Word(symbolReturn, valReturn);
@@ -95,9 +116,12 @@ Word* LexicalAnalyzer::GetCurrentWord(std::string & str)
 		}
 	}
 	// no matched rules:
-	std::cerr << "Lexer error : character "<<str[0]<<std::endl;
+	std::cerr << "Lexer error ("<< lineCount <<":"<< characterCount
+			  << ") : character "<<str[0]<<" unkown."<<std::endl;
+	characterCount += 1;
 	str.erase(str.begin(),str.begin()+1);
-	return 0;
+	currentWord = 0;
+	return currentWord;
 }
 
 void LexicalAnalyzer::Shift()
@@ -105,9 +129,24 @@ void LexicalAnalyzer::Shift()
 	lastWordKnown = false;
 }
 
-Word* LexicalAnalyzer::ReadNextWord(std::string & str)
+Word* LexicalAnalyzer::ReadNextWord()
 {
-	GetCurrentWord(str);
+	GetCurrentWord();
 	Shift();
 	return currentWord;	
+}
+
+bool LexicalAnalyzer::Eof() const 
+{
+	return !stream || stream->eof();
+}
+
+unsigned int LexicalAnalyzer::GetCurrentLine()
+{
+	return lineCount;
+}
+
+unsigned int LexicalAnalyzer::GetCurrentCharacter()
+{
+	return characterCount;
 }

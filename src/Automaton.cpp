@@ -27,52 +27,32 @@ Automaton::~Automaton()
 
 void Automaton::Read(std::istream &stream)
 {
-	std::string line;
+	analyzer.SetInputStream(&stream);
 	Word *w;
 	bool error = false;
 
-	while(stream && !error)
+	while(!analyzer.Eof())
 	{
-		std::getline(stream, line);
-		while(!line.empty() && !error)
-		{
-			w = analyzer.ReadNextWord(line);
-			Word::DebugWord(w);
-
-			switch(states.top()->Transition(this, w))
-			{
-				case SR_TRANSITION: // Ok
-					break;
-				case SR_ACCEPT: // Should not happen
-					break;
-				default:
-					std::cout << "Error within \""<< line << "\"" << std::endl;
-					error = true;
-					break;
-			}
-			delete w;
+		w = analyzer.ReadNextWord();
+		if(w == 0) {
+			continue;
 		}
-	}
-
-	if(!error) // EOF has been reached
-	{
-		UWordVal endVal = {0};
-		Word *endWord = new Word(SYM_end, endVal);
-		switch(states.top()->Transition(this, endWord))
+		Word::DebugWord(w);
+		
+		switch(states.top()->Transition(this, w))
 		{
-			case SR_TRANSITION: // Should not happen
+			case SR_TRANSITION: // Ok
 				break;
-			case SR_ACCEPT:
-				std::cout << "That's a nice program you have there, buddy! ;) " << std::endl;
-				break;
-			case SR_ERROR:
+			case SR_ACCEPT: // Should not happen
 				break;
 			default:
+				std::cerr << "Error at line " << analyzer.GetCurrentLine()
+						  << ":" << analyzer.GetCurrentCharacter() << std::endl;
+				error = true;
 				break;
 		}
-		delete endWord;
+		delete w;
 	}
-
 }
 
 void Automaton::Shift(Word *word, State *state)

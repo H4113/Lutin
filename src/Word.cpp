@@ -59,6 +59,7 @@ void Word::DebugWord(const Word *w)
 		case SYM_n: std::cout<<"Number "<<" ("<<*w->GetVal().number<<")"; break;
 		case SYM_pv: std::cout<<"Semicolon ";break;
 		case SYM_vg: std::cout<<"Colon ";break;
+		case SYM_end: std::cout<<"EOF";break;
 		default:std::cout<<"Token code ("<<(int)(w->GetSymbol())<<")";
 	}
 	std::cout<<std::endl;

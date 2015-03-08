@@ -16,22 +16,38 @@ class LexicalAnalyzer
 	public:
 		/** Constructor */
 		LexicalAnalyzer();
+
+		/** Set the stream to analyze */
+		void SetInputStream(std::istream *nstream);
+
 		/** Get the current word of str 
 		* if the current word is not known str will be modified
 		* else it only return the last current word, use shift
 		* afterward to get the next */
-		Word* GetCurrentWord(std::string & str);
+		Word* GetCurrentWord();
+
 		/** Set the position of the Lexer on the next word */
 		void Shift();
+
 		/** read (and return) the current word and then shift 
 		* str will be modified */
-		Word* ReadNextWord(std::string & str);
-		
+		Word* ReadNextWord();
+
+		/** Check if it's the end of the stream */
+		bool Eof() const;
+
+		unsigned int GetCurrentLine();
+		unsigned int GetCurrentCharacter();
+
 	protected:
 		
 	private: 
 		bool lastWordKnown;
 		Word* currentWord;
+		std::istream* stream;
+		std::string str;
+		unsigned int lineCount;			// for debug
+		unsigned int characterCount;	// for debug
 };
 
 #endif //_LEXICALANALYZER_H
