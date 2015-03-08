@@ -95,7 +95,7 @@ Word* LexicalAnalyzer::GetCurrentWord(std::string & str)
 		}
 	}
 	// no matched rules:
-	std::cout << "lexer error"<<std::endl;
+	std::cerr << "Lexer error : character "<<str[0]<<std::endl;
 	str.erase(str.begin(),str.begin()+1);
 	return 0;
 }
