@@ -27,6 +27,8 @@ class Word
 		Symbol GetSymbol(void) const;
 		UWordVal GetVal(void) const;
 
+		static void DebugWord(const Word *w);
+
 	private: 
 		Symbol symbol;
 

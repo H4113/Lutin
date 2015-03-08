@@ -51,14 +51,17 @@ const Symbol SYMBOLS[NB_RULES] = {
 };
 const std::regex REG_JUNK("^\\s+");
 
-LexicalAnalyzer::LexicalAnalyzer()
+LexicalAnalyzer::LexicalAnalyzer() :
+	lastWordKnown(false)
 {
 }
 
-Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
+Word* LexicalAnalyzer::GetCurrentWord(std::string & str)
 {
+	if(lastWordKnown) {
+		return currentWord;
+	}
 	std::smatch match;
-	
 	if(str.empty()) {
 		return 0;
 	}
@@ -82,11 +85,13 @@ Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
 					valReturn.number = new int(stot<int>(match[1].str()));
 				}
 				str.erase(str.begin(),str.begin()+match[1].length());
-			}else{
+			} else {
 				str.erase(str.begin(),str.begin()+match[0].length());
 			}
 
-			return new Word(symbolReturn, valReturn);
+			lastWordKnown = true;
+			currentWord = new Word(symbolReturn, valReturn);
+			return currentWord;
 		}
 	}
 	// no matched rules:
@@ -95,3 +100,14 @@ Word* LexicalAnalyzer::AnalyzeLine(std::string & str)
 	return 0;
 }
 
+void LexicalAnalyzer::Shift()
+{
+	lastWordKnown = false;
+}
+
+Word* LexicalAnalyzer::ReadNextWord(std::string & str)
+{
+	GetCurrentWord(str);
+	Shift();
+	return currentWord;	
+}
