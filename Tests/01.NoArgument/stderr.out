@@ -1,0 +1,7 @@
+Erreur, veuillez specifier des arguments
+  Utilisation :
+    ../lut [-p] [-a] [-e] [-o] source.lt
+      [-p] affiche le code source reconnu
+      [-a] analyse le programme de maniere statique
+      [-e] execute interactivement le programme
+      [-o] optimise les expressions et instructions
