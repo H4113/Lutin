@@ -3,8 +3,8 @@
 #include <string>
 #include <algorithm>
 
-//#include "Automaton.h"
-//#include "LexicalAnalyzer.h"
+#include "Automaton.h"
+#include "LexicalAnalyzer.h"
 
 struct Options
 {
@@ -64,7 +64,7 @@ int main(int argc, char** argv)
 
 	std::istringstream iss(code);
 
-	//Automaton automaton;
+	Automaton automaton;
 	//automaton.Read(iss);
 	if( opt.a )
 		std::cerr << "-a" << std::endl;
