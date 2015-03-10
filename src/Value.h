@@ -24,6 +24,13 @@ class Value: public Element
 		 *	@return the string created
 		 */
 		std::string ToString(void) const;
+
+		//Override
+		void GetVariables(std::set<const Variable*> &set) const
+		{
+			//Does nothing
+			(void)set;
+		};
 };
 
 #endif //_VALUE_H

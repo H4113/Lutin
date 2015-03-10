@@ -28,7 +28,7 @@ class Program
 		/*
 		* Does a static analysis of the program 
 		*/
-		void StaticAnalyzer(void);
+		void StaticAnalyser(void);
 
 		void CloseTestProgram(void);
 		

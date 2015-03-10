@@ -105,7 +105,9 @@ int main(int argc, char** argv)
 		Automaton automaton;
 		automaton.Read(buffer);
 		if( opt.a )
-			automaton.StaticAnalysis();
+			std::cout << "++++++++++++++++++++" << std::endl;
+			program.TestProgram();
+			program.StaticAnalyser();
 		if( opt.o )
 			automaton.Transform();
 		if( opt.p )
