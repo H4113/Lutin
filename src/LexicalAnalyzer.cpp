@@ -117,7 +117,7 @@ Word* LexicalAnalyzer::GetCurrentWord()
 	}
 	// no matched rules:
 	std::cerr << "Lexer error ("<< lineCount <<":"<< characterCount
-			  << ") : character "<<str[0]<<" unkown."<<std::endl;
+			  << ") : character "<<str[0]<<" unknown."<<std::endl;
 	characterCount += 1;
 	str.erase(str.begin(),str.begin()+1);
 	currentWord = 0;

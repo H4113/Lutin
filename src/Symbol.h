@@ -37,4 +37,9 @@ enum Symbol
 	SYM_E
 };
 
+/*
+*	Returns true if symbol is terminal. False if not. BITCH
+*/
+bool IsTerminal(Symbol s);
+
 #endif //_SYMBOL_H
