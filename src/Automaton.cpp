@@ -30,10 +30,11 @@ void Automaton::Read(std::istream &stream)
 	analyzer.SetInputStream(&stream);
 	Word *w;
 	bool error = false;
+	bool done = false;
 
-	while(!analyzer.Eof())
+	while(!done)
 	{
-		w = analyzer.ReadNextWord();
+		w = analyzer.GetCurrentWord();
 		if(w == 0) {
 			continue;
 		}
@@ -43,29 +44,44 @@ void Automaton::Read(std::istream &stream)
 		{
 			case SR_TRANSITION: // Ok
 				break;
-			case SR_ACCEPT: // Should not happen
+			case SR_ACCEPT:
+				done = true;
+				std::cout << "*-----PROGRAM ACCEPTED-----*" << std::endl;
 				break;
 			default:
 				std::cerr << "Error at line " << analyzer.GetCurrentLine()
 						  << ":" << analyzer.GetCurrentCharacter() << std::endl;
+				//Needed to avoid infinite loop
+				if(w->GetSymbol() == SYM_end)
+				{
+					done = true;
+				}
 				error = true;
 				break;
 		}
-		delete w;
+		//FIXME : where do we delete it ???
+		//delete w;
 	}
 }
 
 void Automaton::Shift(Word *word, State *state)
 {
-	std::cout << "Shift" << std::endl;
+	std::cout << "Shift" << std::endl;	
 	words.push(word);
 	states.push(state);
+
+	if(IsTerminal(word->GetSymbol())){
+		std::cout << "word consumed" << std::endl;
+		analyzer.Shift();
+	}
 }
 
 StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 {
 	const Rule &rule = RULES[ruleId];
 	State *currentState;
+	Symbol prevSymbol = word->GetSymbol();
+	StateResult result;
 
 	std::cout << "Reducing " << rule.rightPartCount << " states (r" << ruleId << ")" << std::endl;
 
@@ -78,11 +94,14 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 
 	currentState = states.top();
 
-	// Then, build the new world (ie. change the symbol)
+	// Then, build the new word (ie. change the symbol)
 	word->SetSymbol(rule.leftPart);
-
+	// Make the transition with the non-terminal symbol
+	result = currentState->Transition(this, word);
+	// Reset the word with the previous terminal symbol
+	word->SetSymbol(prevSymbol);
 	// Finally, evaluate the next state
-	return currentState->Transition(this, word);
+	return result;  
 }
 
 void Automaton::TestAutomaton(void) 

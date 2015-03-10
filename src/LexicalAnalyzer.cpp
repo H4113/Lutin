@@ -6,30 +6,36 @@
 #include "LexicalAnalyzer.h"
 #include "Utils.h"
 #include <iostream>
-#include <regex>
 
+#ifndef USE_BOOST
+#include <regex>
+using namespace std;
+#else
+#include <boost/regex.hpp>
+using namespace boost;
+#endif
  /**
  * LexicalAnalyzer implementation
  */
 
 const int NB_RULES = 16;
-const std::regex REG[NB_RULES] = {
-	std::regex("^var\\s"),
-	std::regex("^ecrire\\s"),
-	std::regex("^lire\\s"),
-	std::regex("^const\\s"),
-	std::regex("^:="),
-	std::regex("^;"),
-	std::regex("^,"),
-	std::regex("^\\+"),
-	std::regex("^\\-"),
-	std::regex("^\\*"),
-	std::regex("^/"),
-	std::regex("^="),
-	std::regex("^\\("),
-	std::regex("^\\)"),
-	std::regex("^([a-zA-Z][a-zA-Z0-9]*)[^a-zA-Z0-9]"),
-	std::regex("^([0-9]+)[^0-9]+")
+const regex REG[NB_RULES] = {
+	regex("^var\\s"),
+	regex("^ecrire\\s"),
+	regex("^lire\\s"),
+	regex("^const\\s"),
+	regex("^:="),
+	regex("^;"),
+	regex("^,"),
+	regex("^\\+"),
+	regex("^\\-"),
+	regex("^\\*"),
+	regex("^/"),
+	regex("^="),
+	regex("^\\("),
+	regex("^\\)"),
+	regex("^([a-zA-Z][a-zA-Z0-9]*)[^a-zA-Z0-9]"),
+	regex("^([0-9]+)[^0-9]+")
 };
 const Symbol SYMBOLS[NB_RULES] = {
 	SYM_v,
@@ -49,7 +55,7 @@ const Symbol SYMBOLS[NB_RULES] = {
 	SYM_id,
 	SYM_n
 };
-const std::regex REG_JUNK("^\\s+");
+const regex REG_JUNK("^\\s+");
 
 LexicalAnalyzer::LexicalAnalyzer() :
 	lastWordKnown(false), currentWord(0), stream(), str()
@@ -81,9 +87,9 @@ Word* LexicalAnalyzer::GetCurrentWord()
 		return currentWord;
 	}
 
-	std::smatch match;
+	smatch match;
 	// erase blank characters at the begining of the string
-	if(std::regex_search(str, match, REG_JUNK) ) {
+	if(regex_search(str, match, REG_JUNK) ) {
 		characterCount += match[0].length();
 		str.erase(str.begin(),str.begin()+match[0].length());
 	}
@@ -92,7 +98,7 @@ Word* LexicalAnalyzer::GetCurrentWord()
 	}
 	// test all the rules
 	for(int i=0; i<NB_RULES;++i) {
-		if(std::regex_search(str, match, REG[i]) ) {
+		if(regex_search(str, match, REG[i]) ) {
 			Symbol symbolReturn = SYMBOLS[i];
 
 			UWordVal valReturn; // to save the matched value
@@ -117,7 +123,7 @@ Word* LexicalAnalyzer::GetCurrentWord()
 	}
 	// no matched rules:
 	std::cerr << "Lexer error ("<< lineCount <<":"<< characterCount
-			  << ") : character "<<str[0]<<" unkown."<<std::endl;
+			  << ") : character "<<str[0]<<" unknown."<<std::endl;
 	characterCount += 1;
 	str.erase(str.begin(),str.begin()+1);
 	currentWord = 0;
