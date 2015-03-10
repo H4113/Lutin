@@ -9,7 +9,12 @@
 
  Element::Element() 
  {
- 	
+ 	pointer = new int();
+ }
+
+ Element::~Element()
+ {
+ 	delete pointer;
  }
 
 /**

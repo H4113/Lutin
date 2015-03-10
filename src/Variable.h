@@ -36,6 +36,12 @@ class Variable: public Element
 		 *	@return the string created
 		 */
 		std::string ToString(void) const;
+
+		/**
+		 *	Creates a string representing the declaration of the variable
+		 *	@return the string created
+		 */
+		std::string GetDeclaration(void) const;
 	protected: 
 		std::string name;
 	private: 

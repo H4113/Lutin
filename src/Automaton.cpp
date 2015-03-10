@@ -105,3 +105,26 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 	return result;  
 }
 
+
+void Automaton::Transform()
+{
+	std::cerr << "Transformation du programme" << std::endl;
+}
+void Automaton::StaticAnalysis()
+{
+	std::cerr << "Analyse statique du programme" << std::endl;
+}
+void Automaton::Execute()
+{
+	std::cerr << "Execution du programme" << std::endl;
+}
+void Automaton::Print()
+{
+	std::cerr << "Affichage du code" << std::endl;
+}
+
+void Automaton::TestAutomaton(void) 
+{
+	program.TestProgram();
+	program.DisplayCode();
+}
