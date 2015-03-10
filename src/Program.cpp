@@ -129,6 +129,55 @@ void Program::Build(const Word *word)
 				}
 			}
 			return;
+
+		case SYM_E:
+			if(container->size == 1)
+			{
+				Symbol symbol = container->words[0]->GetSymbol();
+				if(symbol == SYM_id) // E -> id
+				{
+					std::string *id = container->words[0]->GetVal().varid;
+					std::map<std::string, Variable*>::iterator it = variables.find(*id);
+
+					if(it == variables.end()) // Variable not found
+					{
+						// TODO
+					}
+					else
+					{
+						// TODO
+					}
+				}
+				else if(symbol == SYM_n) // E -> n
+				{
+					// TODO
+				}
+			}
+			else // Size should be 3
+			{
+				Symbol symbol = container->words[1]->GetSymbol();
+				if(symbol == SYM_E) // E -> ( E )
+				{
+					// TODO
+				}
+				else if(symbol == SYM_plus) // E -> E + E
+				{
+					// TODO
+				}
+				else if(symbol == SYM_times) // E -> E * E
+				{
+					// TODO
+				}
+				else if(symbol == SYM_minus) // E -> E - E
+				{
+					// TODO
+				}
+				else if(symbol == SYM_div) // E -> E / E
+				{
+					// TODO
+				}
+			}
+			return;
 		default:
 			std::cout << "WTF ("<< (int)word->GetSymbol() << ")" << std::endl;
 			return;
