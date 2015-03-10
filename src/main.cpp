@@ -34,7 +34,7 @@ struct Options
 
 void PrintHelp()
 {
-	std::cout << std::endl <<
+	std::cerr << std::endl <<
 		"||-----------------------------------------------------"<< std::endl<<
 		"||[AIDE] Appel du programme:"<< std::endl<<
 		"||-----------------------------------------------------"<< std::endl<<
