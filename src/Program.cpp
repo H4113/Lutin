@@ -3,7 +3,8 @@
  */
 
 #include <iostream>
- #include <algorithm>
+#include <algorithm>
+#include <cstring>
 
 #include "Program.h"
 #include "Assignment.h"
@@ -11,6 +12,11 @@
 #include "Operator.h"
 #include "Read.h"
 #include "Write.h"
+
+bool operator<(const std::string &s1, const std::string &s2)
+{
+	return strcmp(s1.c_str(), s2.c_str()) < 0;
+}
 
 static void DebugContainer(const Word *w)
 {
@@ -37,17 +43,19 @@ void Program::Build(const Word *word)
 	{
 		case SYM_P: // Program
 			std::cout << "Program with " << container->size << std::endl;
-			DebugContainer(word);
 			break;
 
 		case SYM_Pd:
 			std::cout << "Declaration part with " << container->size << std::endl;
-			DebugContainer(word);
-			break;
+			if(container->size) // Pd -> Pd D pv
+			{
+				Build(container->words[0]);
+				Build(container->words[1]);
+			}
+			return;
 
 		case SYM_D:
 			std::cout << "Decl with " << container->size << std::endl;
-			DebugContainer(word);
 			Build(container->words[1]);
 			return;
 
@@ -57,14 +65,14 @@ void Program::Build(const Word *word)
 				std::string *value = container->words[0]->GetVal().varid;
 				std::cout << "Variable with id " << *value << std::endl;
 
-				variables.push_back(new Variable(*value));
+				addVariable(new Variable(*value));
 			}
 			else if(container->size == 3) // Lval -> Lval vg id
 			{
 				std::string *value = container->words[2]->GetVal().varid;
 				std::cout << "Variable with id " << *value << std::endl;
 				
-				variables.push_back(new Variable(*value));
+				addVariable(new Variable(*value));
 				Build(container->words[0]);
 			}
 			else
@@ -84,7 +92,41 @@ void Program::Build(const Word *word)
 
 				std::cout << "Constant with id " << *name << " and value " << *value << std::endl;
 				
-				variables.push_back(new Constant(*name, *value));
+				addVariable(new Constant(*name, *value));
+			}
+			return;
+
+		case SYM_Pi:
+			if(container->size) // Pi -> Pi I pv
+			{
+				Build(container->words[0]);
+				Build(container->words[1]);
+			}
+			return;
+
+		case SYM_I:
+			if(container->size == 3) // I -> id aff E
+			{
+			}
+			else
+			{
+				Symbol firstSymbol = container->words[0]->GetSymbol();
+				if(firstSymbol == SYM_w) // I -> w E
+				{
+
+				}
+				else if(firstSymbol == SYM_r) // I -> r id
+				{
+					std::cout<<"skit!"<<std::endl;
+					std::string *id = container->words[1]->GetVal().varid;
+					std::map<std::string, Variable*>::iterator it = variables.find(*id);
+					if(it == variables.end()) // Variable does not exist
+					{
+						// TODO
+					}
+					else
+						instructions.push_back(new Read(it->second));
+				}
 			}
 			return;
 		default:
@@ -98,8 +140,8 @@ void Program::Build(const Word *word)
 
 void Program::DisplayCode(void) 
 {
-	for(std::vector<Variable*>::iterator itV = variables.begin(); itV != variables.end(); ++itV)
-		std::cout << (*itV)->GetDeclaration() << std::endl;
+	for(std::map<std::string, Variable*>::iterator itV = variables.begin(); itV != variables.end(); ++itV)
+		std::cout << itV->second->GetDeclaration() << std::endl;
 	for (std::vector<Instruction*>::iterator itI = instructions.begin() ; itI != instructions.end(); ++itI)
 		(*itI)->Display();
 }
@@ -109,9 +151,9 @@ void Program::TestProgram(void)
 	Constant* lauwl = new Constant("lauwl", 4);
 	Constant* prout = new Constant("prout", 40);
 	Variable* hey = new Variable("hey");
-	variables.push_back(lauwl);
-	variables.push_back(prout);
-	variables.push_back(hey);
+	addVariable(lauwl);
+	addVariable(prout);
+	addVariable(hey);
 
 	Operation* ex = new Operation(lauwl, OP_TIMES, prout, true);
 	Assignment* ass = new Assignment(hey, ex);
@@ -127,6 +169,8 @@ void Program::TestProgram(void)
 
 void Program::StaticAnalyser(void)
 {
+	std::vector<const Variable*> vecVar;
+	std::map<std::string, Variable*>::iterator itVar;
 	std::set<const Variable*> setVar;
 	std::vector<Instruction*>::iterator it;
 	std::set<const Variable*> diff;
@@ -134,12 +178,22 @@ void Program::StaticAnalyser(void)
 	for(it = instructions.begin(); it != instructions.end(); ++it) {
 		(*it)->GetVariables(setVar);
 	}
+
+	for(itVar = variables.begin(); itVar != variables.end(); ++itVar) {
+		vecVar.push_back(itVar->second);
+	}
+
 	//Inserts in set "diff" : setVar - variables 
-	std::set_difference(setVar.begin(), setVar.end(), variables.begin(), variables.end(), 
+	std::set_difference(setVar.begin(), setVar.end(), vecVar.begin(), vecVar.end(), 
                         std::inserter(diff, diff.begin()));
 	if(diff.empty())
 	{
 		std::cerr << "Variables used but not declared" << std::endl;
 	}
 
+}
+
+bool Program::addVariable(Variable *variable)
+{
+	return variables.insert(std::pair<std::string, Variable*>(variable->GetName(), variable)).second;
 }

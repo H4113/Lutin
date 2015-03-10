@@ -6,14 +6,16 @@
 #ifndef _PROGRAM_H
 #define _PROGRAM_H
 
+#include <string>
 #include <vector>
-#include <set>
-#include <iterator>
+#include <map>
 
 #include "Instruction.h"
 #include "Variable.h"
 #include "Constant.h"
 #include "Word.h"
+
+bool operator<(const std::string &s1, const std::string &s2);
 
 class Program 
 {
@@ -32,9 +34,11 @@ class Program
 
 		void CloseTestProgram(void);
 		
-	private: 
+	private:
+		bool addVariable(Variable *variable);
+
 		std::vector<Instruction*> instructions;
-		std::vector<Variable*> variables;
+		std::map<std::string, Variable*> variables;
 };
 
 #endif //_PROGRAM_H
