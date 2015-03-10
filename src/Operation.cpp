@@ -40,7 +40,7 @@ std::string Operation::ToString(void) const
 			oper = "+";
 			break;
 	}
-	return exp1->ToString() + oper + exp2->ToString();
+	return exp1->ToString() + " " + oper + " " + exp2->ToString();
 }
 
 int Operation::Execute(void) 

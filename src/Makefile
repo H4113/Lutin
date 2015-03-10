@@ -12,8 +12,8 @@ DEBUG=debug
 RELEASE=release
 
 GPP=clang++
-ADDFLAGS=-std=c++11 #-stdlib=libc++
-CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic -DUSE_BOOST
+ADDFLAGS=-std=c++11 -stdlib=libc++
+CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic 
 INCLUDE=-I"./"
 
 MAINFILE=main.cpp
@@ -32,7 +32,7 @@ BINRELEASE=$(addprefix $(RELEASEDIR)/,$(BIN))
 FLAGSDEBUG=-g -pg
 FLAGSRELEASE=-O2
 
-LIBS=-lboost_regex
+LIBS=
 
 $(DEBUG): $(OBJDEBUG)
 	$(GPP) $(ADDFLAGS) $(LIBS) -o $(BINDEBUG) $(OBJDEBUG)

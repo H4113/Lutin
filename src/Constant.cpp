@@ -26,5 +26,5 @@ void Constant::Display(void) const
 
 std::string Constant::GetDeclaration(void) const 
 {
-	return "const " + name + " = " + std::to_string(*pointer);
+	return "const " + name + " = " + std::to_string(*pointer) + ";";
 }

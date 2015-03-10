@@ -38,5 +38,5 @@ std::string Variable::ToString(void) const
 
 std::string Variable::GetDeclaration(void) const
 {
-	return "var" + name + ";";
+	return "var " + name + ";";
 }
