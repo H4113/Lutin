@@ -2,9 +2,12 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
+#include <fstream>
 
 #include "Automaton.h"
 //#include "LexicalAnalyzer.h"
+
+#include "user.h"
 
 struct Options
 {
@@ -46,47 +49,72 @@ void PrintHelp()
 		"||------------------------------------------------------"<< std::endl << std::endl;
 }
 
+void PrintError(const std::string& str)
+{
+	std::cerr << str << std::endl;
+}
+
 int main(int argc, char** argv)
 {
 
+#ifdef __STATIC_FILE__ // see user.h for custom build
+
+	std::cerr << "using user.h" << std::endl;
+	std::string file_path(STATIC_FILE_PATH);
+
+#else
+
+	// Check for arguments
 	if( argc < 2 )
 	{
-		std::cerr << "Erreur - Un argument est attendu" << std::endl;
+		PrintError("Erreur - Un argument est attendu");
 		PrintHelp();
 		return 1;
 	}
+
+
 	std::string file_path(argv[argc-1]);
 
-	Options opt;
+#endif
 
-	for( int i = 1; i < argc-1; ++i)
-	{
-		opt.AddOption(argv[i]);
-	}
+	std::ifstream file( file_path );
 
-	std::string code = 
-		"var x ;\n\
-		const n=42, n2=100 ;\n\
-		ecrire n+n2; \n\
-		x := n+n2 ;\n\
-		ecrire x+2 ;\n\
-		lire x; \n\
-		ecrire x prout; \n";
+	if ( file )
+    {
+		std::stringstream buffer;
 
-	std::istringstream iss(code);
+        buffer << file.rdbuf();
 
-	Automaton automaton;
-	automaton.Read(iss);
-	if( opt.a )
-		automaton.StaticAnalysis();
-	if( opt.o )
-		automaton.Transform();
-	if( opt.p )
-		automaton.Print();
-	if( opt.e )
-		automaton.Execute();
+        file.close();
 
-	automaton.TestAutomaton();
+        // File ok, looking for options
+
+        Options opt;
+
+		for( int i = 1; i < argc-1; ++i)
+		{
+			opt.AddOption(argv[i]);
+		}
+
+		Automaton automaton;
+		automaton.Read(buffer);
+		if( opt.a )
+			automaton.StaticAnalysis();
+		if( opt.o )
+			automaton.Transform();
+		if( opt.p )
+			automaton.Print();
+		if( opt.e )
+			automaton.Execute();
+
+		automaton.TestAutomaton();
+
+    } else {
+    	PrintError("Erreur a l'ouverture du fichier "+ file_path);
+    	return 1;
+    }
+
+	
 
 	return 0;
 }
