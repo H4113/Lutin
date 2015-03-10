@@ -16,6 +16,7 @@ class Element: public Expression
 {
 	public:
 		Element();
+		~Element();
 		/**
 		 * @param value
 		 */

@@ -73,8 +73,11 @@ int main(int argc, char** argv)
 		std::cerr << "-e" << std::endl;
 		//automaton.Execute();
 
+	automaton.TestAutomaton();
 
 	std::cout << "fin" << std::endl;
+
+
+	//automaton.Read(iss);
 	return 0;
 }
-

@@ -32,7 +32,7 @@ void Automaton::Read(std::istream &stream)
 	bool error = false;
 	bool done = false;
 
-	while(!error && !done)
+	while(!done)
 	{
 		w = analyzer.GetCurrentWord();
 		if(w == 0) {
@@ -46,13 +46,20 @@ void Automaton::Read(std::istream &stream)
 				break;
 			case SR_ACCEPT:
 				done = true;
+				std::cout << "*-----PROGRAM ACCEPTED-----*" << std::endl;
 				break;
 			default:
 				std::cerr << "Error at line " << analyzer.GetCurrentLine()
 						  << ":" << analyzer.GetCurrentCharacter() << std::endl;
+				//Needed to avoid infinite loop
+				if(w->GetSymbol() == SYM_end)
+				{
+					done = true;
+				}
 				error = true;
 				break;
 		}
+		//FIXME : where do we delete it ???
 		//delete w;
 	}
 }
@@ -97,6 +104,7 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 	return result;  
 }
 
+<<<<<<< HEAD
 void Automaton::Transform()
 {
 	std::cerr << "Transformation du programme" << std::endl;
@@ -112,4 +120,10 @@ void Automaton::Execute()
 void Automaton::Print()
 {
 	std::cerr << "Affichage du code" << std::endl;
+}
+
+void Automaton::TestAutomaton(void) 
+{
+	program.TestProgram();
+	program.DisplayCode();
 }

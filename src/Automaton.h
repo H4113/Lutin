@@ -29,10 +29,14 @@ class Automaton
 		void Shift(Word *word, State *state);
 		StateResult Reduce(Word *word, unsigned int ruleId);
 
+
 		void Transform();
 		void StaticAnalysis();
 		void Execute();
 		void Print();
+
+		void TestAutomaton(void);
+		void CloseTestProgram(void);
 
 	private:
 		Program program;
