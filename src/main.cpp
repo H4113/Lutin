@@ -126,6 +126,11 @@ int main(int argc, char** argv)
 	std::cout << std::endl << "################" << std::endl;
 	std::cout << "This is what Lutin understood:" << std::endl << std::endl;
 	program.DisplayCode();
+
+	std::cout << std::endl << "################" << std::endl;
+	std::cout << "Static Analysis:" << std::endl << std::endl;
+	program.StaticAnalysis();
+
 #endif // USE_ARGS
 
 	return 0;
