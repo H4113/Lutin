@@ -12,13 +12,13 @@ DEBUG=debug
 RELEASE=release
 
 GPP=clang++
-ADDFLAGS=-std=c++11 -stdlib=libc++
-CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic
+ADDFLAGS=-std=c++11 #-stdlib=libc++
+CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic -DUSE_BOOST
 INCLUDE=-I"./"
 
 MAINFILE=main.cpp
 
-CPPFILES=$(MAINFILE) Assignment.cpp Automaton.cpp ConcreteStates.cpp Constant.cpp Element.cpp Expression.cpp Instruction.cpp LexicalAnalyzer.cpp Operation.cpp Program.cpp Read.cpp Rules.cpp State.cpp Value.cpp Variable.cpp Word.cpp Write.cpp
+CPPFILES=$(MAINFILE) Assignment.cpp Automaton.cpp ConcreteStates.cpp Constant.cpp Element.cpp Expression.cpp Instruction.cpp LexicalAnalyzer.cpp Operation.cpp Program.cpp Read.cpp Rules.cpp State.cpp Symbol.cpp Value.cpp Variable.cpp Word.cpp Write.cpp
 
 OBJ=$(CPPFILES:.cpp=.o)
 OBJABS=$(addprefix $(OBJDIR)/,$(OBJ))
@@ -32,7 +32,7 @@ BINRELEASE=$(addprefix $(RELEASEDIR)/,$(BIN))
 FLAGSDEBUG=-g -pg
 FLAGSRELEASE=-O2
 
-LIBS=
+LIBS=-lboost_regex
 
 $(DEBUG): $(OBJDEBUG)
 	$(GPP) $(ADDFLAGS) $(LIBS) -o $(BINDEBUG) $(OBJDEBUG)

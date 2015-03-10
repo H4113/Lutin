@@ -55,7 +55,7 @@ int main(int argc, char** argv)
 
 	std::string code =
 		"var x ;\n";
-
+		
 	std::istringstream iss(code);
 
 	//Automaton automaton;
