@@ -4,7 +4,9 @@
 #include <algorithm>
 
 #include "Automaton.h"
-//#include "LexicalAnalyzer.h"
+#include "Program.h"
+
+//#define USE_ARGS
 
 struct Options
 {
@@ -48,34 +50,40 @@ void PrintHelp()
 
 int main(int argc, char** argv)
 {
+	std::string file_path;
+	Options opt;
+	
+	std::string code = 
+		"var x ;\n";
 
+	std::istringstream iss(code);
+
+	Program program;
+	Automaton automaton;
+	Word *p;
+
+#ifdef USE_ARGS
 	if( argc < 2 )
 	{
 		std::cerr << "Erreur - Un argument est attendu" << std::endl;
 		PrintHelp();
 		return 1;
 	}
-	std::string file_path(argv[argc-1]);
-
-	Options opt;
+	
+	file_path = argv[argc-1];
 
 	for( int i = 1; i < argc-1; ++i)
 	{
 		opt.AddOption(argv[i]);
 	}
+#endif
 
-	std::string code = 
-		"var x ;\n\
-		const n=42, n2=100 ;\n\
-		ecrire n+n2; \n\
-		x := n+n2 ;\n\
-		ecrire x+2 ;\n\
-		lire x; \n\
-		ecrire x prout; \n";
+	p = automaton.Read(iss);
 
-	std::istringstream iss(code);
-
-	Automaton automaton;
+	if(p)
+	{
+		program.Build(p);
+	}
 	automaton.Read(iss);
 	if( opt.a )
 		automaton.StaticAnalysis();
@@ -90,3 +98,4 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+
