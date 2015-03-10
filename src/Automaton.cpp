@@ -32,7 +32,7 @@ bool Automaton::Read(std::istream &stream)
 	bool error = false;
 	bool done = false;
 
-	while(!error && !done)
+	while(!done)
 	{
 		w = analyzer.GetCurrentWord();
 		if(w == 0) {
@@ -46,10 +46,16 @@ bool Automaton::Read(std::istream &stream)
 				break;
 			case SR_ACCEPT:
 				done = true;
+				std::cout << "*-----PROGRAM ACCEPTED-----*" << std::endl;
 				break;
 			default:
 				std::cerr << "Error at line " << analyzer.GetCurrentLine()
 						  << ":" << analyzer.GetCurrentCharacter() << std::endl;
+				//Needed to avoid infinite loop
+				if(w->GetSymbol() == SYM_end)
+				{
+					done = true;
+				}
 				error = true;
 				break;
 		}
