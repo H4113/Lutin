@@ -85,7 +85,6 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 {
 	const Rule &rule = RULES[ruleId];
 	State *currentState;
-	Symbol prevSymbol = word->GetSymbol();
 	StateResult result;
 	Word *newWord;
 	UWordVal val;
@@ -99,7 +98,6 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 		val.wordContainer->words = 0;
 	val.wordContainer->size = rule.rightPartCount; 
 	
-	pushWord(word);
 	// First pop all right value symbols
 	for(unsigned int i = 0; i < rule.rightPartCount; ++i)
 	{
@@ -116,17 +114,12 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 	newWord = new Word(rule.leftPart, val);
 	pushWord(newWord);
 
-	// Then, build the new word (ie. change the symbol)
-	//word->SetSymbol(rule.leftPart);
 	// Make the transition with the non-terminal symbol
 	result = currentState->Transition(this, newWord);
 		
 
 	Word::DebugWord(newWord);
 
-	// Reset the word with the previous terminal symbol
-	//word->SetSymbol(prevSymbol);
-	// Finally, evaluate the next state
 	return result;  
 }
 

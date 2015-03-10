@@ -30,16 +30,40 @@ Program::Program()
 
 void Program::Build(const Word *word)
 {
+	WordContainer *container = word->GetVal().wordContainer;
 	switch(word->GetSymbol())
 	{
 		case SYM_P: // Program
-			std::cout << "Program with " << word->GetVal().wordContainer->size << std::endl;
+			std::cout << "Program with " << container->size << std::endl;
 			DebugContainer(word);
 			break;
 
 		case SYM_Pd:
-			std::cout << "Declaration part with " << word->GetVal().wordContainer->size << std::endl;
+			std::cout << "Declaration part with " << container->size << std::endl;
+			DebugContainer(word);
 			break;
+
+		case SYM_D:
+			std::cout << "Decl with " << container->size << std::endl;
+			DebugContainer(word);
+			Build(container->words[1]);
+			return;
+
+		case SYM_Lval:
+			if(container->size == 1) // Lval -> id
+			{
+				std::string *value = container->words[0]->GetVal().varid;
+				std::cout << "Variable with id " << *value << std::endl;
+			}
+			else if(container->size == 3) // Lval -> Lval vg id
+			{
+				std::string *value = container->words[2]->GetVal().varid;
+				std::cout << "Variable with id " << *value << std::endl;
+				Build(container->words[0]);
+			}
+			else
+				std::cout << "Lval with " << container->size << std::endl;
+			return;
 		default:
 			std::cout << "WTF ("<< (int)word->GetSymbol() << ")" << std::endl;
 			return;
