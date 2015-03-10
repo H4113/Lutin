@@ -11,7 +11,7 @@
  */
 
 
-Variable::Variable(const std::string& n) : name(n) 
+Variable::Variable(const std::string& n, bool p) : Element(p), name(n)
 {
 
 }
@@ -23,7 +23,7 @@ std::string Variable::GetName(void) const
 
 void Variable::Display(void) const 
 {
-	std::cout << ToString() << ";" << std::endl;
+		std::cout << ToString() << ";" << std::endl;
 }
 
 bool Variable::GetInitialized(void) const 
@@ -33,5 +33,13 @@ bool Variable::GetInitialized(void) const
 
 std::string Variable::ToString(void) const 
 {
-	return "var " + name;
+	if(parenthesis)
+		return "(" + name + ")";
+	else
+		return name;
+}
+
+std::string Variable::GetDeclaration(void) const
+{
+	return "var " + name + ";";
 }

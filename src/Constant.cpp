@@ -14,7 +14,7 @@
 /**
  * @param value
  */
-Constant::Constant(const std::string& n, const int& value) : Variable(n) 
+Constant::Constant(const std::string& n, const int& value, bool p) : Variable(n, p) 
 {
 	*pointer = value;
 }
@@ -24,7 +24,7 @@ void Constant::Display(void) const
 	std::cout << ToString() << ";" << std::endl;
 }
 
-std::string Constant::ToString(void) const 
+std::string Constant::GetDeclaration(void) const 
 {
-	return "const " + name + " = " + std::to_string(*pointer);
+	return "const " + name + " = " + std::to_string(*pointer) + ";";
 }

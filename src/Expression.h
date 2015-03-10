@@ -9,8 +9,11 @@
 #include "Instruction.h"
 
 
-class Expression: public Instruction 
+class Expression : public Instruction
 {
+	protected:
+		Expression(bool p = false);
+		bool parenthesis;
 };
 
 #endif //_EXPRESSION_H

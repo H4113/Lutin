@@ -15,7 +15,8 @@
 class Element: public Expression 
 {
 	public:
-		Element();
+		Element(bool p = false);
+		~Element();
 		/**
 		 * @param value
 		 */

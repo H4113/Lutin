@@ -5,7 +5,7 @@ BINNAME=lutin
 BIN=$(BINDIR)/$(BINNAME)
 CLEAN=clean
 
-DEBUGDIR=Debug
+DEBUGDIR=Debug2
 RELEASEDIR=Release
 BOOSTDIR=Debug
 
@@ -14,7 +14,6 @@ RELEASE=release
 
 GPP=clang++
 ADDFLAGS=-std=c++11 -stdlib=libc++
-
 CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic
 INCLUDE=-I"./"
 
@@ -27,11 +26,10 @@ OBJABS=$(addprefix $(OBJDIR)/,$(OBJ))
 
 OBJDEBUG=$(addprefix $(DEBUGDIR)/,$(OBJABS))
 OBJRELEASE=$(addprefix $(RELEASEDIR)/,$(OBJABS))
+OBJBOOST=$(addprefix $(BOOSTDIR)/,$(OBJABS))
 
 BINDEBUG=$(addprefix $(DEBUGDIR)/,$(BIN))
 BINRELEASE=$(addprefix $(RELEASEDIR)/,$(BIN))
-
-OBJBOOST=$(addprefix $(BOOSTDIR)/,$(OBJABS))
 BINBOOST=$(addprefix $(BOOSTDIR)/,$(BIN))
 
 FLAGSDEBUG=-g -pg
@@ -51,7 +49,7 @@ $(RELEASE): $(OBJRELEASE)
 	$(GPP) $(ADDFLAGS) $(LIBS) -o $(BINRELEASE) $(OBJRELEASE)
 
 $(CLEAN):
-	rm -f $(BINDEBUG) $(BINRELEASE) $(OBJDEBUG) $(OBJRELEASE) $(OBJBOOST)
+	rm -f $(BINDEBUG) $(BINRELEASE) $(BINBOOST) $(OBJDEBUG) $(OBJRELEASE) $(OBJBOOST)
 
 $(DEBUGDIR)/$(OBJDIR)/%.o: %.cpp
 	$(GPP) $(ADDFLAGS) $(CFLAGS) $(FLAGSDEBUG) $(INCLUDE) -c -o $@ $<

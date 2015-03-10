@@ -9,10 +9,19 @@
 
 #include "Symbol.h"
 
+class Word;
+
+struct WordContainer
+{
+	Word **words;
+	unsigned int size;
+};
+
 union UWordVal
 {
 	std::string* varid;
 	int* number;
+	WordContainer *wordContainer;
 };
 
 class Word 
