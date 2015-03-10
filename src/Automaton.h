@@ -30,6 +30,10 @@ class Automaton
 		StateResult Reduce(Word *word, unsigned int ruleId);
 
 		void BuildProgram(void);
+		
+		void TestAutomaton(void);
+		void CloseTestProgram(void);
+
 	private:
 		Program program;
 		LexicalAnalyzer analyzer;

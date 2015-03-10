@@ -33,5 +33,10 @@ bool Variable::GetInitialized(void) const
 
 std::string Variable::ToString(void) const 
 {
-	return "var " + name;
+	return name;
+}
+
+std::string Variable::GetDeclaration(void) const
+{
+	return "var" + name + ";";
 }

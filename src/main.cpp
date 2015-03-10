@@ -10,6 +10,8 @@
 */
 
 int main(int argc, char** argv) {
+	std::cout << argc << std::endl;
+
 	std::string code = 
 		"var x ;\n\
 		const n=42, n2=100 ;\n\
@@ -21,8 +23,8 @@ int main(int argc, char** argv) {
 	std::istringstream iss(code);
 
 	Automaton automaton;
+	automaton.TestAutomaton();
 
-	automaton.Read(iss);
+	//automaton.Read(iss);
 	return 0;
 }
-

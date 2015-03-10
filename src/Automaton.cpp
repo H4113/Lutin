@@ -109,3 +109,9 @@ void Automaton::BuildProgram(void)
 	
 }
 
+void Automaton::TestAutomaton(void) 
+{
+	program.TestProgram();
+	program.DisplayCode();
+}
+

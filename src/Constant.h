@@ -29,10 +29,10 @@ class Constant: public Variable
 		void Display(void) const;
 
 		/**
-		 *	Creates a string representing the constant
+		 *	Creates a string representing the declaration of the constant
 		 *	@return the string created
 		 */
-		std::string ToString(void) const;
+		std::string GetDeclaration(void) const;
 };
 
 #endif //_CONSTANT_H
