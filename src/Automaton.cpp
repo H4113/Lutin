@@ -70,11 +70,13 @@ Word *Automaton::Read(std::istream &stream)
 void Automaton::Shift(Word *word, State *state)
 {
 	std::cout << "Shift" << std::endl;	
-	states.push(state);
+	
+	if(word->GetSymbol() != SYM_end)
+		states.push(state);
 
 	if(IsTerminal(word->GetSymbol())){
 		std::cout << "word consumed" << std::endl;
-		words.push(word);
+		pushWord(word);
 		analyzer.Shift();
 	}
 }
@@ -97,7 +99,7 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 		val.wordContainer->words = 0;
 	val.wordContainer->size = rule.rightPartCount; 
 	
-	words.push(word);
+	pushWord(word);
 	// First pop all right value symbols
 	for(unsigned int i = 0; i < rule.rightPartCount; ++i)
 	{
@@ -112,7 +114,7 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 	currentState = states.top();
 
 	newWord = new Word(rule.leftPart, val);
-	words.push(newWord);
+	pushWord(newWord);
 
 	// Then, build the new word (ie. change the symbol)
 	//word->SetSymbol(rule.leftPart);
@@ -150,5 +152,12 @@ void Automaton::TestAutomaton(void)
 {
 	//program.TestProgram();
 	//program.DisplayCode();
+}
+
+
+void Automaton::pushWord(Word *word)
+{
+	if(word->GetSymbol() != SYM_end)
+		words.push(word);
 }
 

@@ -42,7 +42,6 @@ void Program::Build(const Word *word)
 			break;
 		default:
 			std::cout << "WTF ("<< (int)word->GetSymbol() << ")" << std::endl;
-			DebugContainer(word);
 			return;
 	}
 
