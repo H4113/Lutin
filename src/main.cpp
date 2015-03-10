@@ -36,12 +36,27 @@ struct Options
 	}
 };
 
+void PrintHelp()
+{
+	std::cout << std::endl <<
+		"||-----------------------------------------------------"<< std::endl<<
+		"||[AIDE] Appel du programme:"<< std::endl<<
+		"||-----------------------------------------------------"<< std::endl<<
+    	"||../lutin [-p] [-a] [-e] [-o] source.lt"<< std::endl<<
+    	"||\t[-p] affiche le code source reconnu"<< std::endl<<
+    	"||\t[-a] analyse le programme de maniere statique"<< std::endl<<
+    	"||\t[-e] execute interactivement le programme"<< std::endl<<
+    	"||\t[-o] optimise les expressions et instructions" << std::endl<<
+		"||------------------------------------------------------"<< std::endl << std::endl;
+}
+
 int main(int argc, char** argv)
 {
 
 	if( argc < 2 )
 	{
 		std::cerr << "Erreur - Un argument est attendu" << std::endl;
+		PrintHelp();
 		return 1;
 	}
 	std::string file_path(argv[argc-1]);
@@ -70,8 +85,6 @@ int main(int argc, char** argv)
 		automaton.Execute();
 
 	automaton.TestAutomaton();
-
-	std::cout << "fin" << std::endl;
 
 	return 0;
 }
