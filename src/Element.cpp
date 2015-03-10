@@ -7,7 +7,7 @@
  * Element implementation
  */
 
- Element::Element(bool p) : Expression(p)
+ Element::Element() : Expression()
  {
  	pointer = new int();
  }

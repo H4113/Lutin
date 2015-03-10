@@ -9,8 +9,8 @@
  * Operation implementation
  */
 
-Operation::Operation(Expression* e1, Operator o, Expression* e2, bool p) :
-	Expression(p), exp1(e1), exp2(e2), op(o)
+Operation::Operation(Expression* e1, Operator o, Expression* e2) :
+	Expression(), exp1(e1), exp2(e2), op(o)
 {
 
 }
@@ -40,10 +40,7 @@ std::string Operation::ToString(void) const
 			oper = "+";
 			break;
 	}
-	if(parenthesis)
-		return "(" + exp1->ToString() + " " + oper + " " + exp2->ToString() + ")";
-	else
-		return exp1->ToString() + " " + oper + " " + exp2->ToString();
+	return exp1->ToString() + " " + oper + " " + exp2->ToString();
 }
 
 int Operation::Execute(void) 

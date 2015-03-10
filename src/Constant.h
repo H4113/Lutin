@@ -21,7 +21,7 @@ class Constant: public Variable
 		/**
 		 * @param value used to initilize the constant
 		 */
-		Constant(const std::string&, const int& value, bool parenthesis = false);
+		Constant(const std::string&, const int& value);
 
 		/**
 		 *	Display the code corresponding to the constant.

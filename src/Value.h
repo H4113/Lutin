@@ -12,7 +12,7 @@
 class Value: public Element 
 {
 	public:
-		Value(bool p = false);
+		Value();
 		
 		/**
 		 *	Display the code corresponding to the constant.

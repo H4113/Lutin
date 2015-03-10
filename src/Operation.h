@@ -14,7 +14,7 @@
 class Operation: public Expression 
 {
 	public:
-		Operation(Expression*, Operator, Expression*, bool parenthesis = false);
+		Operation(Expression*, Operator, Expression*);
 		/**
 		 *	Display the code corresponding to the operation instruction.
 		 */ 

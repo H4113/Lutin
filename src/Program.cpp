@@ -166,7 +166,7 @@ void Program::TestProgram(void)
 	addVariable(prout);
 	addVariable(hey);
 
-	Operation* ex = new Operation(lauwl, OP_TIMES, prout, true);
+	Operation* ex = new Operation(lauwl, OP_TIMES, prout);
 	Assignment* ass = new Assignment(hey, ex);
 	instructions.push_back(ass);
 
@@ -259,7 +259,8 @@ Expression *Program::buildExpression(const Word *w)
 		Symbol symbol = container->words[1]->GetSymbol();
 		if(symbol == SYM_E) // E -> ( E )
 		{
-			// TODO
+			Expression *e = buildExpression(container->words[1]);
+			return new NestedExpression(e);
 		}
 		else // E -> E op E
 		{

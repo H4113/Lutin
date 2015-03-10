@@ -14,7 +14,7 @@
 /**
  * @param value
  */
-Constant::Constant(const std::string& n, const int& value, bool p) : Variable(n, p) 
+Constant::Constant(const std::string& n, const int& value) : Variable(n) 
 {
 	*pointer = value;
 }

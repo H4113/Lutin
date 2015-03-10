@@ -14,6 +14,7 @@
 #include "Variable.h"
 #include "Constant.h"
 #include "Word.h"
+#include "NestedExpression.h"
 
 bool operator<(const std::string &s1, const std::string &s2);
 
