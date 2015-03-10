@@ -98,7 +98,9 @@ int main(int argc, char** argv)
 		program.Build(p);
 		
 		if( opt.a )
-			automaton.StaticAnalysis();
+			std::cout << "++++++++++++++++++++" << std::endl;
+			program.TestProgram();
+			program.StaticAnalyser();
 		if( opt.o )
 			automaton.Transform();
 		if( opt.p )

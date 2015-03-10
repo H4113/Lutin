@@ -3,6 +3,8 @@
  */
 
 #include <iostream>
+ #include <algorithm>
+
 #include "Program.h"
 #include "Assignment.h"
 #include "Operation.h"
@@ -102,11 +104,21 @@ void Program::TestProgram(void)
 	(new Write(ex))->Display();
 }
 
-void Program::StaticAnalyzer(void)
+void Program::StaticAnalyser(void)
 {
 	std::set<const Variable*> setVar;
 	std::vector<Instruction*>::iterator it;
+	std::set<const Variable*> diff;
+
 	for(it = instructions.begin(); it != instructions.end(); ++it) {
-		(*it)->GetVariables(setVar);	
+		(*it)->GetVariables(setVar);
 	}
+	//Inserts in set "diff" : setVar - variables 
+	std::set_difference(setVar.begin(), setVar.end(), variables.begin(), variables.end(), 
+                        std::inserter(diff, diff.begin()));
+	if(diff.empty())
+	{
+		std::cerr << "Variables used but not declared" << std::endl;
+	}
+
 }

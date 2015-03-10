@@ -33,7 +33,6 @@ class Constant: public Variable
 		 *	@return the string created
 		 */
 		std::string GetDeclaration(void) const;
-
 };
 
 #endif //_CONSTANT_H
