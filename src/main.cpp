@@ -11,7 +11,7 @@
 
 int main(int argc, char** argv) {
 	std::string code = 
-		"var x ;\n";
+		"var x ;\nx := 42 ;\n";
 	std::istringstream iss(code);
 
 	Automaton automaton;
