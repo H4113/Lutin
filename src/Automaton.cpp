@@ -25,7 +25,7 @@ Automaton::~Automaton()
 	}
 }
 
-void Automaton::Read(std::istream &stream)
+bool Automaton::Read(std::istream &stream)
 {
 	analyzer.SetInputStream(&stream);
 	Word *w;
@@ -53,8 +53,9 @@ void Automaton::Read(std::istream &stream)
 				error = true;
 				break;
 		}
-		//delete w;
 	}
+
+	return done;
 }
 
 void Automaton::Shift(Word *word, State *state)
@@ -95,5 +96,10 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 	word->SetSymbol(prevSymbol);
 	// Finally, evaluate the next state
 	return result;  
+}
+
+void Automaton::BuildProgram(void)
+{
+	
 }
 

@@ -24,11 +24,12 @@ class Automaton
 		Automaton();
 		virtual ~Automaton();
 
-		void Read(std::istream &stream);
+		bool Read(std::istream &stream);
 
 		void Shift(Word *word, State *state);
 		StateResult Reduce(Word *word, unsigned int ruleId);
 
+		void BuildProgram(void);
 	private:
 		Program program;
 		LexicalAnalyzer analyzer;
