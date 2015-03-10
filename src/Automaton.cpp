@@ -104,7 +104,7 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 	return result;  
 }
 
-<<<<<<< HEAD
+
 void Automaton::Transform()
 {
 	std::cerr << "Transformation du programme" << std::endl;
