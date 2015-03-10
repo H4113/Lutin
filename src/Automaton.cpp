@@ -70,11 +70,11 @@ Word *Automaton::Read(std::istream &stream)
 void Automaton::Shift(Word *word, State *state)
 {
 	std::cout << "Shift" << std::endl;	
-	words.push(word);
 	states.push(state);
 
 	if(IsTerminal(word->GetSymbol())){
 		std::cout << "word consumed" << std::endl;
+		words.push(word);
 		analyzer.Shift();
 	}
 }
@@ -97,6 +97,7 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 		val.wordContainer->words = 0;
 	val.wordContainer->size = rule.rightPartCount; 
 	
+	words.push(word);
 	// First pop all right value symbols
 	for(unsigned int i = 0; i < rule.rightPartCount; ++i)
 	{
@@ -104,6 +105,7 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 		states.pop();
 
 		val.wordContainer->words[rule.rightPartCount-1-i] = words.top();
+		std::cout << "Symbol:" << (int)words.top()->GetSymbol()<<" " << words.top() << std::endl;
 		words.pop();
 	}
 

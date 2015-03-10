@@ -24,7 +24,7 @@ enum Symbol
 	SYM_div,	// /
 	SYM_op_par,	// (
 	SYM_cl_par,	// )
-	SYM_end,	// 
+	SYM_end,	// $
 
 	SYM_Pprim,
 	SYM_P,
