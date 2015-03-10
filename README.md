@@ -6,12 +6,13 @@ cd src/
 make
 
 # Usage
+```
 ./lutin [-p] [-a] [-e] [-o] source.lt
       [-p] print the recognized source code
       [-a] static analysis of the program
       [-e] execute the program 
       [-o] program optimization
-
+```
 
 ```
                            ,`-.
