@@ -25,7 +25,7 @@ Automaton::~Automaton()
 	}
 }
 
-bool Automaton::Read(std::istream &stream)
+Word *Automaton::Read(std::istream &stream)
 {
 	analyzer.SetInputStream(&stream);
 	Word *w;
@@ -61,7 +61,9 @@ bool Automaton::Read(std::istream &stream)
 		}
 	}
 
-	return done;
+	if(done)
+		return words.top();
+	return 0;
 }
 
 void Automaton::Shift(Word *word, State *state)
@@ -82,36 +84,50 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 	State *currentState;
 	Symbol prevSymbol = word->GetSymbol();
 	StateResult result;
+	Word *newWord;
+	UWordVal val;
 
 	std::cout << "Reducing " << rule.rightPartCount << " states (r" << ruleId << ")" << std::endl;
 
+	val.wordContainer = new WordContainer;
+	if(rule.rightPartCount > 0)
+		val.wordContainer->words = new Word*[rule.rightPartCount];
+	else
+		val.wordContainer->words = 0;
+	val.wordContainer->size = rule.rightPartCount; 
+	
 	// First pop all right value symbols
 	for(unsigned int i = 0; i < rule.rightPartCount; ++i)
 	{
 		delete states.top();
 		states.pop();
+
+		val.wordContainer->words[rule.rightPartCount-1-i] = words.top();
+		words.pop();
 	}
 
 	currentState = states.top();
 
+	newWord = new Word(rule.leftPart, val);
+	words.push(newWord);
+
 	// Then, build the new word (ie. change the symbol)
-	word->SetSymbol(rule.leftPart);
+	//word->SetSymbol(rule.leftPart);
 	// Make the transition with the non-terminal symbol
-	result = currentState->Transition(this, word);
+	result = currentState->Transition(this, newWord);
+		
+
+	Word::DebugWord(newWord);
+
 	// Reset the word with the previous terminal symbol
-	word->SetSymbol(prevSymbol);
+	//word->SetSymbol(prevSymbol);
 	// Finally, evaluate the next state
 	return result;  
 }
 
-void Automaton::BuildProgram(void)
-{
-	
-}
-
 void Automaton::TestAutomaton(void) 
 {
-	program.TestProgram();
-	program.DisplayCode();
+	//program.TestProgram();
+	//program.DisplayCode();
 }
 

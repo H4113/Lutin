@@ -16,6 +16,27 @@ Program::Program()
 {
 }
 
+void Program::Build(const Word *word)
+{
+	switch(word->GetSymbol())
+	{
+		case SYM_P: // Program
+			std::cout << "Program with " << word->GetVal().wordContainer->size << std::endl;
+			break;
+
+		case SYM_Pd:
+			std::cout << "Declaration part with " << word->GetVal().wordContainer->size << std::endl;
+			break;
+		default:
+			std::cout << "WTF ("<< (int)word->GetSymbol() << ")" << std::endl;
+			std::cout << word << std::endl;
+			return;
+	}
+
+	for(unsigned int i = 0; i < word->GetVal().wordContainer->size; ++i)
+		Build(word->GetVal().wordContainer->words[i]); 
+}
+
 void Program::DisplayCode(void) 
 {
 	for(std::vector<Variable*>::iterator itV = variables.begin(); itV != variables.end(); ++itV)

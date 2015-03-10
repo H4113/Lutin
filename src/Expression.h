@@ -9,7 +9,7 @@
 #include "Instruction.h"
 
 
-class Expression: public Instruction 
+class Expression : public Instruction
 {
 };
 
