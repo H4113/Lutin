@@ -6,7 +6,10 @@
 #ifndef _INSTRUCTION_H
 #define _INSTRUCTION_H
 
- #include <string>
+#include <string>
+#include <set>
+
+class Variable;
 
 class Instruction 
 {
@@ -17,6 +20,8 @@ class Instruction
 		virtual void Display(void) const = 0;
 
 		virtual std::string ToString(void) const = 0;
+
+		virtual void GetVariables(std::set<const Variable*> &set) const = 0;
 };
 
 #endif //_INSTRUCTION_H

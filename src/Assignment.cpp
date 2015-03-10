@@ -15,7 +15,7 @@ Assignment::Assignment(Variable* v, Expression* e) : var(v), exp(e)
 
 std::string Assignment::ToString(void) const 
 {
-	return var->ToString() + " := " + exp->ToString();
+	return var->ToString() + " := " + exp->ToString() + ";";
 }
 
 void Assignment::Display(void) const 
@@ -26,4 +26,9 @@ void Assignment::Display(void) const
 int Assignment::Execute(void) 
 {
 	return exp->Execute();
+}
+
+void Assignment::GetVariables(std::set<const Variable*> &set) const
+{
+	set.insert(var);
 }

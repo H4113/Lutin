@@ -5,7 +5,9 @@
 #include <fstream>
 
 #include "Automaton.h"
-//#include "LexicalAnalyzer.h"
+#include "Program.h"
+
+//#define USE_ARGS
 
 #include "user.h"
 
@@ -56,6 +58,10 @@ void PrintError(const std::string& str)
 
 int main(int argc, char** argv)
 {
+	Options opt;
+	Program program;
+	Automaton automaton;
+	Word *p;
 
 #ifdef __STATIC_FILE__ // see user.h for custom build
 
@@ -114,7 +120,8 @@ int main(int argc, char** argv)
     	return 1;
     }
 
-	
+
 
 	return 0;
 }
+

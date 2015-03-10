@@ -21,7 +21,7 @@ class Constant: public Variable
 		/**
 		 * @param value used to initilize the constant
 		 */
-		Constant(const std::string&, const int& value);
+		Constant(const std::string&, const int& value, bool parenthesis = false);
 
 		/**
 		 *	Display the code corresponding to the constant.
@@ -33,6 +33,7 @@ class Constant: public Variable
 		 *	@return the string created
 		 */
 		std::string GetDeclaration(void) const;
+
 };
 
 #endif //_CONSTANT_H

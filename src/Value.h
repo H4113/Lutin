@@ -12,10 +12,12 @@
 class Value: public Element 
 {
 	public:
+		Value(bool p = false);
+		
 		/**
 		 *	Display the code corresponding to the constant.
 		 */ 
-		void Display(void) const;
+		void Display() const;
 
 		/**
 		 *	Creates a string representing the value

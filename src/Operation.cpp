@@ -9,8 +9,8 @@
  * Operation implementation
  */
 
-Operation::Operation(Expression* e1, Operator o, Expression* e2) :
-	exp1(e1), exp2(e2), op(o)
+Operation::Operation(Expression* e1, Operator o, Expression* e2, bool p) :
+	Expression(p), exp1(e1), exp2(e2), op(o)
 {
 
 }
@@ -40,7 +40,10 @@ std::string Operation::ToString(void) const
 			oper = "+";
 			break;
 	}
-	return exp1->ToString() + oper + exp2->ToString();
+	if(parenthesis)
+		return "(" + exp1->ToString() + " " + oper + " " + exp2->ToString() + ")";
+	else
+		return exp1->ToString() + " " + oper + " " + exp2->ToString();
 }
 
 int Operation::Execute(void) 
@@ -63,4 +66,10 @@ int Operation::Execute(void)
 			return exp1->Execute() + exp2->Execute();
 			break;
 	}
+}
+
+void Operation::GetVariables(std::set<const Variable*> &set) const
+{
+	exp1->GetVariables(set);
+	exp2->GetVariables(set);
 }

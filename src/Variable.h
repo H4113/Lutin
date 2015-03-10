@@ -14,7 +14,7 @@
 class Variable: public Element 
 {
 	public: 
-		Variable(const std::string&);
+		Variable(const std::string&, bool p = false);
 
 		/**
 		 *	@return name
@@ -24,7 +24,7 @@ class Variable: public Element
 		/**
 		 *	Display the code corresponding to the variable.
 		 */ 
-		void Display(void) const;
+		virtual void Display(void) const;
 
 		/**
 		 *	@return initialized
@@ -35,13 +35,16 @@ class Variable: public Element
 		 *	Creates a string representing the variable
 		 *	@return the string created
 		 */
-		std::string ToString(void) const;
+		virtual std::string ToString(void) const;
 
 		/**
 		 *	Creates a string representing the declaration of the variable
 		 *	@return the string created
 		 */
-		std::string GetDeclaration(void) const;
+		virtual std::string GetDeclaration(void) const;
+
+		//Override
+		void GetVariables(std::set<const Variable*> &set) const;
 	protected: 
 		std::string name;
 	private: 

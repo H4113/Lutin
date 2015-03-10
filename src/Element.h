@@ -15,7 +15,7 @@
 class Element: public Expression 
 {
 	public:
-		Element();
+		Element(bool p = false);
 		~Element();
 		/**
 		 * @param value
@@ -28,6 +28,9 @@ class Element: public Expression
 		 *	@return the int value of the constant
 		 */
 		int Execute(void);
+
+		//Override
+		virtual void GetVariables(std::set<const Variable*> &set) const = 0;
 	protected:
 		// The value
 		int* pointer;
