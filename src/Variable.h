@@ -14,7 +14,7 @@
 class Variable: public Element 
 {
 	public: 
-		Variable(const std::string&);
+		Variable(const std::string&, bool p = false);
 
 		/**
 		 *	@return name

@@ -11,7 +11,7 @@ with open("%s%s.h"%(DIR,FILENAME), "w") as headerfile:
 
 	for x in range(STATES_NUM):
 		classname = "State%02d"%x
-		headerfile.write("class %s : public State {\n"%classname)
+		headerfile.write("class %s : public State \n{\n"%classname)
 		headerfile.write("\tpublic:\n")
 		headerfile.write("\t\t%s();\n"%classname)
 		headerfile.write("\t\tvirtual ~%s();\n\n"%classname)
@@ -27,8 +27,8 @@ with open("%s%s.cpp"%(DIR,FILENAME), "w") as cppfile:
 	for x in range(STATES_NUM):
 		classname = "State%02d"%x
 		cppfile.write("%s::%s() :\n\tState()\n{\n}\n\n"%(classname, classname))
-		cppfile.write("%s::~%s() {\n}\n\n"%((classname, classname)))
-		cppfile.write("StateResult %s::Transition(Automaton* automaton, Word *word) {\n"%classname)
+		cppfile.write("%s::~%s() \n{\n}\n\n"%((classname, classname)))
+		cppfile.write("StateResult %s::Transition(Automaton* automaton, Word *word) \n{\n"%classname)
 		cppfile.write("\treturn SR_ERROR;\n")
 		cppfile.write("}\n\n")
 		if x != STATES_NUM-1:

@@ -35,7 +35,7 @@ void Program::TestProgram(void)
 	variables.push_back(prout);
 	variables.push_back(hey);
 
-	Operation* ex = new Operation(lauwl, OP_TIMES, prout);
+	Operation* ex = new Operation(lauwl, OP_TIMES, prout, true);
 	Assignment* ass = new Assignment(hey, ex);
 	instructions.push_back(ass);
 
