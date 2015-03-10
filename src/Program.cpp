@@ -10,6 +10,16 @@
 #include "Read.h"
 #include "Write.h"
 
+static void DebugContainer(const Word *w)
+{
+	std::cout << w << ":"<<std::endl;
+	for(unsigned int i = 0; i < w->GetVal().wordContainer->size; ++i)
+	{
+		Word *tmp = w->GetVal().wordContainer->words[i];
+		std::cout << "  (" << (int)tmp->GetSymbol() << ") " << tmp << std::endl;
+	}	
+}
+
 /**
  * Program implementation
  */
@@ -24,6 +34,7 @@ void Program::Build(const Word *word)
 	{
 		case SYM_P: // Program
 			std::cout << "Program with " << word->GetVal().wordContainer->size << std::endl;
+			DebugContainer(word);
 			break;
 
 		case SYM_Pd:
@@ -31,7 +42,7 @@ void Program::Build(const Word *word)
 			break;
 		default:
 			std::cout << "WTF ("<< (int)word->GetSymbol() << ")" << std::endl;
-			std::cout << word << std::endl;
+			DebugContainer(word);
 			return;
 	}
 
