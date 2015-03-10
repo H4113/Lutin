@@ -107,17 +107,17 @@ void Program::Build(const Word *word)
 		case SYM_I:
 			if(container->size == 3) // I -> id aff E
 			{
+				// TODO
 			}
 			else
 			{
 				Symbol firstSymbol = container->words[0]->GetSymbol();
 				if(firstSymbol == SYM_w) // I -> w E
 				{
-
+					// TODO
 				}
 				else if(firstSymbol == SYM_r) // I -> r id
 				{
-					std::cout<<"skit!"<<std::endl;
 					std::string *id = container->words[1]->GetVal().varid;
 					std::map<std::string, Variable*>::iterator it = variables.find(*id);
 					if(it == variables.end()) // Variable does not exist
@@ -167,28 +167,47 @@ void Program::TestProgram(void)
 	(new Write(ex))->Display();
 }
 
-void Program::StaticAnalyser(void)
+void Program::StaticAnalysis(void)
 {
 	std::vector<const Variable*> vecVar;
 	std::map<std::string, Variable*>::iterator itVar;
-	std::set<const Variable*> setVar;
+	std::set<const Variable*> varInstr;
 	std::vector<Instruction*>::iterator it;
 	std::set<const Variable*> diff;
+	std::set<const Variable*>::iterator itDiff;
 
-	for(it = instructions.begin(); it != instructions.end(); ++it) {
-		(*it)->GetVariables(setVar);
+	for(it = instructions.begin(); it != instructions.end(); ++it) 
+	{
+		(*it)->GetVariables(varInstr);
 	}
 
-	for(itVar = variables.begin(); itVar != variables.end(); ++itVar) {
+	for(itVar = variables.begin(); itVar != variables.end(); ++itVar)
+	{
 		vecVar.push_back(itVar->second);
 	}
 
-	//Inserts in set "diff" : setVar - variables 
-	std::set_difference(setVar.begin(), setVar.end(), vecVar.begin(), vecVar.end(), 
+	//Inserts in set "diff" : varInstr - variables 
+	std::set_difference(varInstr.begin(), varInstr.end(), vecVar.begin(), vecVar.end(), 
                         std::inserter(diff, diff.begin()));
-	if(diff.empty())
+	if(!diff.empty())
 	{
-		std::cerr << "Variables used but not declared" << std::endl;
+		for(itDiff = diff.begin(); itDiff != diff.end(); ++itDiff) 
+		{
+			std::cerr << "ERROR : Variable "+ (*itDiff)->GetName() +" used but not declared." << std::endl;
+		}
+	}
+
+	diff.clear();
+
+	//Inserts in set "diff" : variables - varInstr
+	std::set_difference(vecVar.begin(), vecVar.end(), varInstr.begin(), varInstr.end(), 
+                        std::inserter(diff, diff.begin()));
+	if(!diff.empty())
+	{
+		for(itDiff = diff.begin(); itDiff != diff.end(); ++itDiff)
+		{
+			std::cerr << "WARNING : Variable "+ (*itDiff)->GetName() +" not used." << std::endl;
+		}
 	}
 
 }

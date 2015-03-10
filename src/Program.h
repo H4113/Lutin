@@ -30,7 +30,7 @@ class Program
 		/*
 		* Does a static analysis of the program 
 		*/
-		void StaticAnalyser(void);
+		void StaticAnalysis(void);
 
 		void CloseTestProgram(void);
 		
