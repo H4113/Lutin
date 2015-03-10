@@ -60,6 +60,15 @@ void Word::DebugWord(const Word *w)
 		case SYM_pv: std::cout<<"Semicolon ";break;
 		case SYM_vg: std::cout<<"Colon ";break;
 		case SYM_end: std::cout<<"EOF";break;
+		case SYM_Pprim: std::cout<<"P'";break;
+		case SYM_P: std::cout<<"P (Program)";break;
+		case SYM_Pd: std::cout<<"Pd (Program declaration)";break;
+		case SYM_Pi: std::cout<<"Pi (Program instructions)";break;
+		case SYM_D: std::cout<<"D (Declaration)";break;
+		case SYM_Lval: std::cout<<"Lval";break;
+		case SYM_Lconst: std::cout<<"Lconst";break;
+		case SYM_I: std::cout<<"I (Instruction)";break;
+		case SYM_E: std::cout<<"E (Expression)";break;
 		default:std::cout<<"Token code ("<<(int)(w->GetSymbol())<<")";
 	}
 	std::cout<<std::endl;

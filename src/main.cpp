@@ -59,17 +59,14 @@ void PrintError(const std::string& str)
 int main(int argc, char** argv)
 {
 	Options opt;
+	std::string filepath;
+	std::ifstream file;
+
 	Program program;
 	Automaton automaton;
 	Word *p;
 
-#ifdef __STATIC_FILE__ // see user.h for custom build
-
-	std::cerr << "using user.h" << std::endl;
-	std::string file_path(STATIC_FILE_PATH);
-
-#else
-
+#ifdef USE_ARGS
 	// Check for arguments
 	if( argc < 2 )
 	{
@@ -77,33 +74,29 @@ int main(int argc, char** argv)
 		PrintHelp();
 		return 1;
 	}
-
-
-	std::string file_path(argv[argc-1]);
-
-#endif
-
-	std::ifstream file( file_path );
-
-	if ( file )
-    {
-		std::stringstream buffer;
-
-        buffer << file.rdbuf();
-
-        file.close();
-
-        // File ok, looking for options
-
-        Options opt;
-
+	else
+	{
 		for( int i = 1; i < argc-1; ++i)
 		{
 			opt.AddOption(argv[i]);
 		}
+#ifdef __STATIC_FILE__ // see user.h for custom build
 
-		Automaton automaton;
-		automaton.Read(buffer);
+		std::cout << "using user.h" << std::endl;
+		filepath = STATIC_FILE_PATH;
+
+#else
+		filepath = argv[argc-1];
+#endif // __STATIC_FILE__
+	}
+
+	file.open(filepath.c_str());
+
+	if ( file )
+    {
+		p = automaton.Read(file);
+		program.Build(p);
+		
 		if( opt.a )
 			std::cout << "++++++++++++++++++++" << std::endl;
 			program.TestProgram();
@@ -117,12 +110,19 @@ int main(int argc, char** argv)
 
 		automaton.TestAutomaton();
 
+        file.close();
     } else {
-    	PrintError("Erreur a l'ouverture du fichier "+ file_path);
+    	PrintError("Erreur a l'ouverture du fichier "+ filepath);
     	return 1;
     }
 
+#else
+	std::string code = "var x ; \n";
+	std::istringstream iss(code);
 
+	p = automaton.Read(iss);
+	program.Build(p);
+#endif // USE_ARGS
 
 	return 0;
 }
