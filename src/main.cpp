@@ -3,7 +3,7 @@
 #include <string>
 #include <algorithm>
 
-//#include "Automaton.h"
+#include "Automaton.h"
 //#include "LexicalAnalyzer.h"
 
 /* Test strings :
@@ -58,26 +58,20 @@ int main(int argc, char** argv)
 		
 	std::istringstream iss(code);
 
-	//Automaton automaton;
-	//automaton.Read(iss);
+	Automaton automaton;
+	automaton.Read(iss);
 	if( opt.a )
-		std::cerr << "-a" << std::endl;
-		//automaton.StaticAnalysis();
+		automaton.StaticAnalysis();
 	if( opt.o )
-		std::cerr << "-o" << std::endl;
-		//automaton.Transform();
+		automaton.Transform();
 	if( opt.p )
-		std::cerr << "-p" << std::endl;
-		//automaton.Print();
+		automaton.Print();
 	if( opt.e )
-		std::cerr << "-e" << std::endl;
-		//automaton.Execute();
+		automaton.Execute();
 
 	automaton.TestAutomaton();
 
 	std::cout << "fin" << std::endl;
 
-
-	//automaton.Read(iss);
 	return 0;
 }
