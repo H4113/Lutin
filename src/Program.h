@@ -22,7 +22,7 @@ class Program
 	public:
 		Program();
 
-		void Build(const Word *p);
+		void Build(const Word *word);
 		void DisplayCode(void);
 
 		void TestProgram(void);
@@ -36,6 +36,7 @@ class Program
 		
 	private:
 		bool addVariable(Variable *variable);
+		Expression *buildExpression(const Word *w);
 
 		std::vector<Instruction*> instructions;
 		std::map<std::string, Variable*> variables;

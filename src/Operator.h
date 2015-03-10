@@ -9,7 +9,7 @@
 enum Operator {
 	OP_PLUS,
 	OP_MINUS,
-	OP_DIVIDED,
+	OP_DIVIDE,
 	OP_TIMES
 };
 

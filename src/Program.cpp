@@ -12,6 +12,7 @@
 #include "Operator.h"
 #include "Read.h"
 #include "Write.h"
+#include "Value.h"
 
 bool operator<(const std::string &s1, const std::string &s2)
 {
@@ -107,7 +108,17 @@ void Program::Build(const Word *word)
 		case SYM_I:
 			if(container->size == 3) // I -> id aff E
 			{
-				// TODO
+				std::string *id = container->words[0]->GetVal().varid;
+				std::map<std::string, Variable*>::iterator it = variables.find(*id);
+				if(it == variables.end()) // Variable not found
+				{
+					// TODO
+				}
+				else
+				{
+					Expression *e = buildExpression(container->words[2]);
+					instructions.push_back(new Assignment(it->second, e));
+				}
 			}
 			else
 			{
@@ -126,55 +137,6 @@ void Program::Build(const Word *word)
 					}
 					else
 						instructions.push_back(new Read(it->second));
-				}
-			}
-			return;
-
-		case SYM_E:
-			if(container->size == 1)
-			{
-				Symbol symbol = container->words[0]->GetSymbol();
-				if(symbol == SYM_id) // E -> id
-				{
-					std::string *id = container->words[0]->GetVal().varid;
-					std::map<std::string, Variable*>::iterator it = variables.find(*id);
-
-					if(it == variables.end()) // Variable not found
-					{
-						// TODO
-					}
-					else
-					{
-						// TODO
-					}
-				}
-				else if(symbol == SYM_n) // E -> n
-				{
-					// TODO
-				}
-			}
-			else // Size should be 3
-			{
-				Symbol symbol = container->words[1]->GetSymbol();
-				if(symbol == SYM_E) // E -> ( E )
-				{
-					// TODO
-				}
-				else if(symbol == SYM_plus) // E -> E + E
-				{
-					// TODO
-				}
-				else if(symbol == SYM_times) // E -> E * E
-				{
-					// TODO
-				}
-				else if(symbol == SYM_minus) // E -> E - E
-				{
-					// TODO
-				}
-				else if(symbol == SYM_div) // E -> E / E
-				{
-					// TODO
 				}
 			}
 			return;
@@ -265,3 +227,64 @@ bool Program::addVariable(Variable *variable)
 {
 	return variables.insert(std::pair<std::string, Variable*>(variable->GetName(), variable)).second;
 }
+
+Expression *Program::buildExpression(const Word *w)
+{
+	WordContainer *container = w->GetVal().wordContainer;
+
+	if(container->size == 1)
+	{
+		Symbol symbol = container->words[0]->GetSymbol();
+		if(symbol == SYM_id) // E -> id
+		{
+			std::string *id = container->words[0]->GetVal().varid;
+			std::map<std::string, Variable*>::iterator it = variables.find(*id);
+
+			if(it == variables.end()) // Variable not found
+			{
+				// TODO
+			}
+			else
+				return it->second;
+		}
+		else if(symbol == SYM_n) // E -> n
+		{
+			Value *value = new Value();
+			value->Set(*(container->words[0]->GetVal().number));
+			return value;
+		}
+	}
+	else // Size should be 3
+	{
+		Symbol symbol = container->words[1]->GetSymbol();
+		if(symbol == SYM_E) // E -> ( E )
+		{
+			// TODO
+		}
+		else // E -> E op E
+		{
+			Expression *e1 = buildExpression(container->words[0]);
+			Expression *e2 = buildExpression(container->words[2]);
+			
+			if(symbol == SYM_plus) // E -> E + E
+			{
+				return new Operation(e1, OP_PLUS, e2);
+			}
+			else if(symbol == SYM_times) // E -> E * E
+			{
+				return new Operation(e1, OP_TIMES, e2);
+			}
+			else if(symbol == SYM_minus) // E -> E - E
+			{
+				return new Operation(e1, OP_MINUS, e2);
+			}
+			else if(symbol == SYM_div) // E -> E / E
+			{
+				return new Operation(e1, OP_DIVIDE, e2);
+			}
+		}
+	}
+
+	return 0;
+}
+

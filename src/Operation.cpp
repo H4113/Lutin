@@ -30,7 +30,7 @@ std::string Operation::ToString(void) const
 		case OP_MINUS:
 			oper = "-";
 			break;
-		case OP_DIVIDED:
+		case OP_DIVIDE:
 			oper = "/";
 			break;
 		case OP_TIMES:
@@ -56,7 +56,7 @@ int Operation::Execute(void)
 		case OP_MINUS:
 			return exp1->Execute() - exp2->Execute();
 			break;
-		case OP_DIVIDED:
+		case OP_DIVIDE:
 			return exp1->Execute() / exp2->Execute();
 			break;
 		case OP_TIMES:
