@@ -38,6 +38,8 @@ class Automaton
 		void CloseTestProgram(void);
 
 	private:
+		void pushWord(Word *word);
+
 		LexicalAnalyzer analyzer;
 		std::stack<Word*> words;
 		std::stack<State*> states;
