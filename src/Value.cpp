@@ -10,12 +10,20 @@
  * Value implementation
  */
 
-void Value::Display(void) const 
+Value::Value(bool p) : Element(p)
+{
+
+}
+
+void Value::Display() const 
 {
  	std::cout << ToString() << ";" << std::endl;
 }
 
 std::string Value::ToString(void) const 
 {
-	return std::to_string(*pointer);
+	if(parenthesis)
+		return "(" + std::to_string(*pointer) + ")";
+	else 
+		return std::to_string(*pointer);
 }

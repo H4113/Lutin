@@ -8,3 +8,8 @@
 /**
  * Expression implementation
  */
+
+Expression::Expression(bool p) : parenthesis(p)
+{
+	
+}
