@@ -7,6 +7,8 @@
 #define _PROGRAM_H
 
 #include <vector>
+#include <set>
+#include <iterator>
 
 #include "Instruction.h"
 #include "Variable.h"
@@ -21,6 +23,11 @@ class Program
 		void DisplayCode(void);
 
 		void TestProgram(void);
+
+		/*
+		* Does a static analysis of the program 
+		*/
+		void StaticAnalyzer(void);
 
 		void CloseTestProgram(void);
 		

@@ -64,3 +64,9 @@ int Operation::Execute(void)
 			break;
 	}
 }
+
+void Operation::GetVariables(std::set<const Variable*> &set) const
+{
+	exp1->GetVariables(set);
+	exp2->GetVariables(set);
+}

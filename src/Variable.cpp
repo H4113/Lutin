@@ -40,3 +40,8 @@ std::string Variable::GetDeclaration(void) const
 {
 	return "var" + name + ";";
 }
+
+void Variable::GetVariables(std::set<const Variable*> &set) const
+{
+	set.insert(this);
+}

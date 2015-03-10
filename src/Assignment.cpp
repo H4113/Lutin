@@ -27,3 +27,8 @@ int Assignment::Execute(void)
 {
 	return exp->Execute();
 }
+
+void Assignment::GetVariables(std::set<const Variable*> &set) const
+{
+	set.insert(var);
+}

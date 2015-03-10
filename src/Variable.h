@@ -42,6 +42,9 @@ class Variable: public Element
 		 *	@return the string created
 		 */
 		std::string GetDeclaration(void) const;
+
+		//Override
+		void GetVariables(std::set<const Variable*> &set) const;
 	protected: 
 		std::string name;
 	private: 

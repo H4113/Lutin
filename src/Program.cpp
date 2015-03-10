@@ -37,3 +37,12 @@ void Program::TestProgram(void)
 	Assignment* ass = new Assignment(hey, ex);
 	instructions.push_back(ass);
 }
+
+void Program::StaticAnalyzer(void)
+{
+	std::set<const Variable*> setVar;
+	std::vector<Instruction*>::iterator it;
+	for(it = instructions.begin(); it != instructions.end(); ++it) {
+		(*it)->GetVariables(setVar);	
+	}
+}
