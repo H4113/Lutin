@@ -12,7 +12,7 @@ DEBUG=debug
 RELEASE=release
 
 GPP=clang++
-ADDFLAGS=-std=c++11 #-stdlib=libc++
+ADDFLAGS=-std=c++11
 CFLAGS=-Wall -Wextra -Wmissing-braces -pedantic -DUSE_BOOST
 INCLUDE=-I"./"
 
