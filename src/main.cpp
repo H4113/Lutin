@@ -117,11 +117,15 @@ int main(int argc, char** argv)
     }
 
 #else
-	std::string code = "var x ; \n";
+	std::string code = "var x , y,tamere; \n";
 	std::istringstream iss(code);
 
 	p = automaton.Read(iss);
 	program.Build(p);
+
+	std::cout << std::endl << "################" << std::endl;
+	std::cout << "This is what Lutin understood:" << std::endl << std::endl;
+	program.DisplayCode();
 #endif // USE_ARGS
 
 	return 0;

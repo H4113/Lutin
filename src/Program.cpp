@@ -56,16 +56,24 @@ void Program::Build(const Word *word)
 			{
 				std::string *value = container->words[0]->GetVal().varid;
 				std::cout << "Variable with id " << *value << std::endl;
+
+				variables.push_back(new Variable(*value));
 			}
 			else if(container->size == 3) // Lval -> Lval vg id
 			{
 				std::string *value = container->words[2]->GetVal().varid;
 				std::cout << "Variable with id " << *value << std::endl;
+				
+				variables.push_back(new Variable(*value));
 				Build(container->words[0]);
 			}
 			else
 				std::cout << "Lval with " << container->size << std::endl;
 			return;
+
+		case SYM_Lconst:
+			
+			break;
 		default:
 			std::cout << "WTF ("<< (int)word->GetSymbol() << ")" << std::endl;
 			return;
