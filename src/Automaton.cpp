@@ -85,3 +85,8 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 	return currentState->Transition(this, word);
 }
 
+void Automaton::TestAutomaton(void) 
+{
+	program.TestProgram();
+	program.DisplayCode();
+}

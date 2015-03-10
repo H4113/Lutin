@@ -7,10 +7,10 @@
 #define _OPERATOR_H
 
 enum Operator {
-	PLUS,
-	MINUS,
-	DIVIDED,
-	TIMES
+	OP_PLUS,
+	OP_MINUS,
+	OP_DIVIDED,
+	OP_TIMES
 };
 
 #endif //_OPERATOR_H

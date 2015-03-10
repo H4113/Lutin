@@ -10,6 +10,7 @@
 
 #include "Instruction.h"
 #include "Variable.h"
+#include "Constant.h"
 
 
 class Program 
@@ -18,10 +19,14 @@ class Program
 		Program();
 
 		void DisplayCode(void);
+
+		void TestProgram(void);
+
+		void CloseTestProgram(void);
 		
 	private: 
-		std::vector<Instruction> instructions;
-		std::vector<Variable> variables;
+		std::vector<Instruction*> instructions;
+		std::vector<Variable*> variables;
 };
 
 #endif //_PROGRAM_H
