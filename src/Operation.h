@@ -31,6 +31,9 @@ class Operation: public Expression
 		 *	@return the string created
 		 */
 		std::string ToString(void) const;
+
+		//Override
+		void GetVariables(std::set<const Variable*> &set) const;
 	private: 
 		Expression* exp1;
 		Expression* exp2;

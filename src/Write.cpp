@@ -31,3 +31,8 @@ std::string Write::ToString(void) const
 {
 	return "ecrire " + expression->ToString();
 }
+
+void Write::GetVariables(std::set<const Variable*> &set) const
+{
+	expression->GetVariables(set);
+}
