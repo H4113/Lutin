@@ -72,8 +72,21 @@ void Program::Build(const Word *word)
 			return;
 
 		case SYM_Lconst:
-			
-			break;
+			if(container->words[0]->GetSymbol() == SYM_Lconst) // Lconst -> Lconst vg Lconst
+			{
+				Build(container->words[0]);
+				Build(container->words[2]);
+			}
+			else // Lconst -> id = n
+			{
+				std::string *name = container->words[0]->GetVal().varid;
+				int *value = container->words[2]->GetVal().number;
+
+				std::cout << "Constant with id " << *name << " and value " << *value << std::endl;
+				
+				variables.push_back(new Constant(*name, *value));
+			}
+			return;
 		default:
 			std::cout << "WTF ("<< (int)word->GetSymbol() << ")" << std::endl;
 			return;
