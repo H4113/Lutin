@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 		x := n+n2 ;\n\
 		ecrire x+2 ;\n\
 		lire x; \n\
-		ecrire x; \n";
+		ecrire x prout; \n";
 	std::istringstream iss(code);
 
 	Automaton automaton;

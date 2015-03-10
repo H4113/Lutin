@@ -57,6 +57,7 @@ void Automaton::Read(std::istream &stream)
 					done = true;
 				}
 				error = true;
+				analyzer.Shift();
 				break;
 		}
 		//FIXME : where do we delete it ???
