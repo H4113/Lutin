@@ -43,11 +43,9 @@ void Program::Build(const Word *word)
 	switch(word->GetSymbol())
 	{
 		case SYM_P: // Program
-			std::cout << "Program with " << container->size << std::endl;
 			break;
 
 		case SYM_Pd:
-			std::cout << "Declaration part with " << container->size << std::endl;
 			if(container->size) // Pd -> Pd D pv
 			{
 				Build(container->words[0]);
@@ -56,7 +54,6 @@ void Program::Build(const Word *word)
 			return;
 
 		case SYM_D:
-			std::cout << "Decl with " << container->size << std::endl;
 			Build(container->words[1]);
 			return;
 
@@ -64,20 +61,16 @@ void Program::Build(const Word *word)
 			if(container->size == 1) // Lval -> id
 			{
 				std::string *value = container->words[0]->GetVal().varid;
-				std::cout << "Variable with id " << *value << std::endl;
 
 				addVariable(new Variable(*value));
 			}
 			else if(container->size == 3) // Lval -> Lval vg id
 			{
 				std::string *value = container->words[2]->GetVal().varid;
-				std::cout << "Variable with id " << *value << std::endl;
 				
 				addVariable(new Variable(*value));
 				Build(container->words[0]);
 			}
-			else
-				std::cout << "Lval with " << container->size << std::endl;
 			return;
 
 		case SYM_Lconst:
@@ -91,8 +84,6 @@ void Program::Build(const Word *word)
 				std::string *name = container->words[0]->GetVal().varid;
 				int *value = container->words[2]->GetVal().number;
 
-				std::cout << "Constant with id " << *name << " and value " << *value << std::endl;
-				
 				addVariable(new Constant(*name, *value));
 			}
 			return;
@@ -180,7 +171,7 @@ void Program::TestProgram(void)
 
 void Program::StaticAnalysis(void)
 {
-	std::vector<const Variable*> vecVar;
+	std::set<const Variable*> setVar;
 	std::map<std::string, Variable*>::iterator itVar;
 	std::set<const Variable*> varInstr;
 	std::vector<Instruction*>::iterator it;
@@ -194,11 +185,11 @@ void Program::StaticAnalysis(void)
 
 	for(itVar = variables.begin(); itVar != variables.end(); ++itVar)
 	{
-		vecVar.push_back(itVar->second);
+		setVar.insert(itVar->second);
 	}
 
 	//Inserts in set "diff" : varInstr - variables 
-	std::set_difference(varInstr.begin(), varInstr.end(), vecVar.begin(), vecVar.end(), 
+	std::set_difference(varInstr.begin(), varInstr.end(), setVar.begin(), setVar.end(), 
                         std::inserter(diff, diff.begin()));
 	if(!diff.empty())
 	{
@@ -211,7 +202,7 @@ void Program::StaticAnalysis(void)
 	diff.clear();
 
 	//Inserts in set "diff" : variables - varInstr
-	std::set_difference(vecVar.begin(), vecVar.end(), varInstr.begin(), varInstr.end(), 
+	std::set_difference(setVar.begin(), setVar.end(), varInstr.begin(), varInstr.end(), 
                         std::inserter(diff, diff.begin()));
 	if(!diff.empty())
 	{
