@@ -19,16 +19,6 @@ bool operator<(const std::string &s1, const std::string &s2)
 	return strcmp(s1.c_str(), s2.c_str()) < 0;
 }
 
-static void DebugContainer(const Word *w)
-{
-	std::cout << w << ":"<<std::endl;
-	for(unsigned int i = 0; i < w->GetVal().wordContainer->size; ++i)
-	{
-		Word *tmp = w->GetVal().wordContainer->words[i];
-		std::cout << "  (" << (int)tmp->GetSymbol() << ") " << tmp << std::endl;
-	}	
-}
-
 /**
  * Program implementation
  */
