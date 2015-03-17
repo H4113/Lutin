@@ -14,6 +14,7 @@ class Expression : public Instruction
 	public:
 		//Override
 		virtual void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const = 0;
+
 	protected:
 		Expression();
 };

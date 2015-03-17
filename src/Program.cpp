@@ -200,8 +200,9 @@ void Program::StaticAnalysis(void)
 				}
 				if(!affected)
 				{
-					std::cerr << "ERROR : Variable "+ (*itDiff)->GetName() 
-					+ " used without being affected before." << std::endl;
+					std::cerr << "une valeur dans l'expression ";
+					if((*it))
+					std::cerr << " n'est pas connue." << std::endl;
 				}
 			}
 		}
