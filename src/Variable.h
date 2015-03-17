@@ -51,7 +51,6 @@ class Variable: public Element
 
 		//Override
 		void GetVariables(std::set<const Variable*> &set) const;
-		Variable* GetModifiedVariable(void) const;
 	protected: 
 		std::string name;
 	private: 

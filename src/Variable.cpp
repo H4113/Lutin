@@ -50,8 +50,3 @@ void Variable::GetVariables(std::set<const Variable*> &set) const
 {
 	set.insert(this);
 }
-
-Variable* Variable::GetModifiedVariable(void) const
-{
-	return this;
-}
