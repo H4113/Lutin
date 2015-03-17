@@ -101,9 +101,7 @@ int main(int argc, char** argv)
 		}
 		if( opt.e )
 		{
-			std::debug << "++++++++ Execute +++++++" << std::endl;
-			//automaton.Execute();
-
+			program.Execute();
 		}
 
 		//automaton.TestAutomaton();
