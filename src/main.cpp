@@ -14,7 +14,7 @@
 
 void PrintHelp()
 {
-	std::cout << std::endl <<
+	std::cerr << std::endl <<
 		"||-----------------------------------------------------"<< std::endl<<
 		"||[AIDE] Appel du programme:"<< std::endl<<
 		"||-----------------------------------------------------"<< std::endl<<
@@ -74,8 +74,8 @@ int main(int argc, char** argv)
 		
 		if( opt.a )
 			std::cout << "++++++++++++++++++++" << std::endl;
-			program.TestProgram();
-			program.StaticAnalyser();
+			//program.TestProgram();
+			program.StaticAnalysis();
 		if( opt.o )
 			automaton.Transform();
 		if( opt.p )
@@ -83,7 +83,7 @@ int main(int argc, char** argv)
 		if( opt.e )
 			automaton.Execute();
 
-		automaton.TestAutomaton();
+		//automaton.TestAutomaton();
 
         file.close();
     } else {
