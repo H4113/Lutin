@@ -34,6 +34,13 @@ class Operation: public Expression
 
 		//Override
 		void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const;
+
+		//@Override
+		InstruType GetInstructionType(void) const;
+
+		Expression* GetExp1(void) const;
+
+		Expression* GetExp2(void) const;
 	private: 
 		Expression* exp1;
 		Expression* exp2;

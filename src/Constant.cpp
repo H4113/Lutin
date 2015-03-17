@@ -33,3 +33,8 @@ std::string Constant::GetDeclaration(void) const
 {
 	return "const " + name + " = " + std::to_string(*pointer) + ";";
 }
+
+InstruType Constant::GetInstructionType(void) const
+{
+	return IT_CON;
+}

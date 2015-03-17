@@ -14,7 +14,12 @@
 //#define USE_ARGS
 
 namespace std {
-	Logger debug("debug",DEBUG);
+#ifdef DEBUG
+	Logger debug("debug",true);
+#else
+	
+	Logger debug("debug",false);
+#endif	
 }
 
 void PrintHelp(std::ostream &stream)
@@ -96,9 +101,7 @@ int main(int argc, char** argv)
 		}
 		if( opt.e )
 		{
-			std::debug << "++++++++ Execute +++++++" << std::endl;
-			//automaton.Execute();
-
+			program.Execute();
 		}
 
 		//automaton.TestAutomaton();

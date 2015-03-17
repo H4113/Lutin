@@ -20,6 +20,9 @@ class NestedExpression : public Expression
 		virtual std::string ToString(void) const;
 
 		virtual void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const;
+
+		//@Override
+		InstruType GetInstructionType(void) const;
 	protected:
 		Expression *expression;
 };

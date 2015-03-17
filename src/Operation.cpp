@@ -75,3 +75,18 @@ void Operation::GetVariables(std::set<const Variable*> &set, bool) const
 	exp1->GetVariables(set);
 	exp2->GetVariables(set);
 }
+
+InstruType Operation::GetInstructionType(void) const
+{
+	return IT_OPE;
+}
+
+Expression* Operation::GetExp1(void) const
+{
+	return exp1;
+}
+
+Expression* Operation::GetExp2(void) const
+{
+	return exp2;
+}

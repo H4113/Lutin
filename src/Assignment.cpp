@@ -38,6 +38,10 @@ void Assignment::GetVariables(std::set<const Variable*> &set, bool onlyUsed) con
 	exp->GetVariables(set);
 }
 
+InstruType Assignment::GetInstructionType(void) const 
+{
+	return IT_ASS;
+}
 
 Variable* Assignment::GetAssignedVar() const
 {

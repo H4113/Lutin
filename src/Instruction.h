@@ -11,6 +11,18 @@
 
 class Variable;
 
+enum InstruType
+{
+	IT_OPE,
+	IT_ASS,
+	IT_VAR,
+	IT_CON,
+	IT_VAL,
+	IT_NES, // NESTED
+	IT_REA,
+	IT_WRI
+};
+
 class Instruction 
 {
 	public: 
@@ -20,6 +32,8 @@ class Instruction
 		virtual void Display(void) const = 0;
 
 		virtual std::string ToString(void) const = 0;
+
+		virtual InstruType GetInstructionType() const = 0;
 
 		/*
 		* Add all the variables in the instruction to the set passed in parameters 

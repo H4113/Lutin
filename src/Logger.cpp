@@ -11,7 +11,7 @@ Logger::~Logger()
 }
 
 Logger::LogBuf::LogBuf(const std::string& fprefix, bool fprint)
-	: prefix(fprefix),print(fprint)
+	: print(fprint),prefix(fprefix)
 {
 }
 

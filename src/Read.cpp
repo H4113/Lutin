@@ -45,3 +45,8 @@ Variable* Read::GetModifiedVariable(void) const
 {
 	return var;
 }
+
+InstruType Read::GetInstructionType(void) const
+{
+	return IT_REA;
+}

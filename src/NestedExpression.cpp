@@ -27,3 +27,7 @@ void NestedExpression::GetVariables(std::set<const Variable*> &set, bool) const
 	expression->GetVariables(set);
 }
 
+InstruType NestedExpression::GetInstructionType(void) const 
+{
+	return IT_NES;
+}

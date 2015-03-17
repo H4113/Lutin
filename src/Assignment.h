@@ -37,7 +37,9 @@ class Assignment: public Instruction
 		 */
 		std::string ToString(void) const;
 
-		//Override
+		//@Override
+		InstruType GetInstructionType(void) const;
+		
 		void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const;
 
 		//Override
