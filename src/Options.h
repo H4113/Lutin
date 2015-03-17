@@ -16,16 +16,16 @@ struct Options
 		std::string str(o);
 		std::transform(str.begin(), str.end(), str.begin(), ::tolower);
 		
-		if( str.compare("-a") )
+		if( str.compare("-a") == 0 )
 		{
 			this->a = true;
-		} else if( str.compare("-e") )
+		} else if( str.compare("-e") == 0 )
 		{
 			this->e = true;
-		} else if( str.compare("-p") )
+		} else if( str.compare("-p") == 0 )
 		{
 			this->p = true;
-		} else if( str.compare("-o") )
+		} else if( str.compare("-o") == 0 )
 		{
 			this->o = true;
 		}

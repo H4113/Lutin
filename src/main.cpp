@@ -12,9 +12,9 @@
 
 #include "user.h"
 
-void PrintHelp()
+void PrintHelp(std::ostream &stream)
 {
-	std::cout << std::endl <<
+	stream << std::endl <<
 		"||-----------------------------------------------------"<< std::endl<<
 		"||[AIDE] Appel du programme:"<< std::endl<<
 		"||-----------------------------------------------------"<< std::endl<<
@@ -46,7 +46,7 @@ int main(int argc, char** argv)
 	if( argc < 2 )
 	{
 		PrintError("Erreur - Un argument est attendu");
-		PrintHelp();
+		PrintHelp(std::cerr);
 		return 1;
 	}
 	else
@@ -55,14 +55,15 @@ int main(int argc, char** argv)
 		{
 			opt.AddOption(argv[i]);
 		}
-#ifdef __STATIC_FILE__ // see user.h for custom build
+		#ifdef __STATIC_FILE__ // see user.h for custom build
 
-		std::cout << "using user.h" << std::endl;
-		filepath = STATIC_FILE_PATH;
+			std::cout << "using user.h" << std::endl;
+			filepath = STATIC_FILE_PATH;
 
-#else
-		filepath = argv[argc-1];
-#endif // __STATIC_FILE__
+		#else
+			filepath = argv[argc-1];
+
+		#endif // __STATIC_FILE__
 	}
 
 	file.open(filepath.c_str());
@@ -73,17 +74,28 @@ int main(int argc, char** argv)
 		program.Build(p);
 		
 		if( opt.a )
-			std::cout << "++++++++++++++++++++" << std::endl;
+		{
+			std::cout << "++++++++ Static Analysis +++++++" << std::endl;
 			//program.TestProgram();
-			//program.StaticAnalyser();
+			program.StaticAnalysis();
+		}
 		if( opt.o )
+		{
+			std::cout << "++++++++ Transform +++++++" << std::endl;
 			//automaton.Transform();
+		}
 		if( opt.p )
-			//automaton.Print();
+		{
+			std::cout << "++++++++ Display Code +++++++" << std::endl;
+			program.DisplayCode();
+		}
 		if( opt.e )
+		{
+			std::cout << "++++++++ Execute +++++++" << std::endl;
 			//automaton.Execute();
+		}
 
-		automaton.TestAutomaton();
+		//automaton.TestAutomaton();
 
         file.close();
     } else {
@@ -99,7 +111,9 @@ int main(int argc, char** argv)
 					    y := 1;\n\
 					    x := 3;\n\
 						jambon:=((2+y)*x)+4;\n\
-						optimizeThis := 4*(5+8);";
+						optimizeThis := 4*(5+8);
+						kitty := 4;\n\
+						ecrire y;";
 	std::istringstream iss(code);
 
 	p = automaton.Read(iss);

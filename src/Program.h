@@ -41,6 +41,7 @@ class Program
 		
 	private:
 		bool addVariable(Variable *variable);
+		Variable *getGrammarVariable(const std::string &id);
 		Expression *buildExpression(const Word *w);
 
 		std::vector<Instruction*> instructions;
