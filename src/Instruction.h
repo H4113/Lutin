@@ -22,6 +22,8 @@ class Instruction
 		virtual std::string ToString(void) const = 0;
 
 		virtual void GetVariables(std::set<const Variable*> &set) const = 0;
+
+		virtual Variable* GetModifiedVariable(void) const;
 };
 
 #endif //_INSTRUCTION_H

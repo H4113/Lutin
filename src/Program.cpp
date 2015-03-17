@@ -170,11 +170,27 @@ void Program::StaticAnalysis(void)
 		}
 	}
 
+	//Checks if assigned or read variables aren't constant
+	for(it = instructions.begin(); it != instructions.end(); ++it) 
+	{
+		if((*it)->GetModifiedVariable() != 0 && (*it)->GetModifiedVariable()->IsConstant())
+		{
+			std::cerr << "ERROR : Constant " + ((*it)->GetModifiedVariable()->GetName()) + " cannot be modified." << std::endl;
+		}
+	}
+
 }
 
 bool Program::addVariable(Variable *variable)
 {
-	return variables.insert(std::pair<std::string, Variable*>(variable->GetName(), variable)).second;
+	bool newVar = variables.insert(std::pair<std::string, Variable*>(variable->GetName(), variable)).second;
+
+	if(!newVar)
+	{
+		std::cerr << "la variable " << variable->GetName() << " est deja declaree" << std::endl;
+	}
+
+	return newVar;
 }
 
 Variable *Program::getGrammarVariable(const std::string &id)
@@ -251,3 +267,4 @@ void Program::Execute(void)
 		(*itI)->Execute();
 	}
 }
+
