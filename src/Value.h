@@ -31,6 +31,9 @@ class Value: public Element
 			//Does nothing
 			(void)set;
 		};
+
+		//@Override
+		InstruType GetInstructionType(void) const;
 };
 
 #endif //_VALUE_H

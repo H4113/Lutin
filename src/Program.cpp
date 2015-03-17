@@ -241,7 +241,37 @@ Expression *Program::buildExpression(const Word *w)
 
 void Program::Optimize(void) 
 {
+	for(std::vector<Instruction*>::iterator it = instructions.begin(); it != instructions.end(); ++it)
+	{
+		Optimize(*it);
+	}
+}
 
+void Program::Optimize(Instruction* inst)
+{
+	switch(inst->GetInstructionType())
+	{
+		case IT_OPE:
+			{
+				Operation* op = static_cast<Operation*>(inst);
+				//InstruType it1 = op->
+			}
+			break;
+		case IT_VAR:
+			break;
+		case IT_CON:
+			break;
+		case IT_VAL:
+			break;
+		case IT_NES:
+			break;
+		case IT_REA:
+			break;
+		case IT_WRI:
+			break;
+		default:
+			break;
+	}
 }
 
 int Program::Execute(void) 

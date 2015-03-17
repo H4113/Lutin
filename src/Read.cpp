@@ -37,3 +37,8 @@ void Read::GetVariables(std::set<const Variable*> &set) const
 {
 	set.insert(var);
 }
+
+InstruType Read::GetInstructionType(void) const
+{
+	return IT_REA;
+}

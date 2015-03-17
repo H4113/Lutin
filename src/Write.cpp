@@ -36,3 +36,8 @@ void Write::GetVariables(std::set<const Variable*> &set) const
 {
 	expression->GetVariables(set);
 }
+
+InstruType Write::GetInstructionType(void) const
+{
+	return IT_WRI;
+}

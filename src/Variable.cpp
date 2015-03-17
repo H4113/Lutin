@@ -45,3 +45,8 @@ void Variable::GetVariables(std::set<const Variable*> &set) const
 {
 	set.insert(this);
 }
+
+InstruType Variable::GetInstructionType(void) const
+{
+	return IT_VAR;
+}

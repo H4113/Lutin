@@ -39,6 +39,9 @@ class Assignment: public Instruction
 
 		//Override
 		void GetVariables(std::set<const Variable*> &set) const;
+
+		//@Override
+		InstruType GetInstructionType(void) const;
 	private:
 		// The variable to be assigned
 		Variable* var;

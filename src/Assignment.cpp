@@ -34,3 +34,8 @@ void Assignment::GetVariables(std::set<const Variable*> &set) const
 	set.insert(var);
 	exp->GetVariables(set);
 }
+
+InstruType Assignment::GetInstructionType(void) const 
+{
+	return IT_ASS;
+}

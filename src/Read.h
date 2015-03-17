@@ -34,6 +34,9 @@ class Read: public Instruction
 
 		//Override
 		void GetVariables(std::set<const Variable*> &set) const;
+
+		//@Override
+		InstruType GetInstructionType(void) const;
 	private: 
 		Variable* var;
 };

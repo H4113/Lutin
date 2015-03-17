@@ -45,6 +45,9 @@ class Variable: public Element
 
 		//Override
 		void GetVariables(std::set<const Variable*> &set) const;
+
+		//@Override
+		InstruType GetInstructionType(void) const;
 	protected: 
 		std::string name;
 	private: 

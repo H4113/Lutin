@@ -33,6 +33,9 @@ class Constant: public Variable
 		 *	@return the string created
 		 */
 		std::string GetDeclaration(void) const;
+
+		//@Override
+		InstruType GetInstructionType() const;
 };
 
 #endif //_CONSTANT_H
