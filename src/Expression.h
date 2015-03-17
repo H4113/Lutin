@@ -13,7 +13,7 @@ class Expression : public Instruction
 {
 	public:
 		//Override
-		virtual void GetVariables(std::set<const Variable*> &set) const = 0;
+		virtual void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const = 0;
 	protected:
 		Expression();
 };

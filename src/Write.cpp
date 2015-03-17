@@ -32,7 +32,7 @@ std::string Write::ToString(void) const
 	return "ecrire " + expression->ToString();
 }
 
-void Write::GetVariables(std::set<const Variable*> &set) const
+void Write::GetVariables(std::set<const Variable*> &set, bool) const
 {
 	expression->GetVariables(set);
 }

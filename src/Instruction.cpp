@@ -13,3 +13,7 @@ Instruction::Instruction()
 {
 }
 
+Variable* Instruction::GetAssignedVar() const
+{
+	return 0;
+}
