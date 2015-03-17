@@ -4,17 +4,23 @@
 #include <algorithm>
 #include <fstream>
 
+#include "user.h"
+
 #include "Automaton.h"
 #include "Program.h"
 #include "Options.h"
+#include "Utils.h"
 
 //#define USE_ARGS
 
-#include "user.h"
 
-void PrintHelp()
+namespace std {
+	Logger debug;
+}
+
+void PrintHelp(std::ostream &stream)
 {
-	std::cout << std::endl <<
+	stream << std::endl <<
 		"||-----------------------------------------------------"<< std::endl<<
 		"||[AIDE] Appel du programme:"<< std::endl<<
 		"||-----------------------------------------------------"<< std::endl<<
@@ -46,7 +52,7 @@ int main(int argc, char** argv)
 	if( argc < 2 )
 	{
 		PrintError("Erreur - Un argument est attendu");
-		PrintHelp();
+		PrintHelp(std::cerr);
 		return 1;
 	}
 	else
@@ -55,14 +61,15 @@ int main(int argc, char** argv)
 		{
 			opt.AddOption(argv[i]);
 		}
-#ifdef __STATIC_FILE__ // see user.h for custom build
+		#ifdef __STATIC_FILE__ // see user.h for custom build
 
-		std::cout << "using user.h" << std::endl;
-		filepath = STATIC_FILE_PATH;
+			std::debug << "using user.h" << endl;
+			filepath = STATIC_FILE_PATH;
 
-#else
-		filepath = argv[argc-1];
-#endif // __STATIC_FILE__
+		#else
+			filepath = argv[argc-1];
+
+		#endif // __STATIC_FILE__
 	}
 
 	file.open(filepath.c_str());
@@ -73,17 +80,29 @@ int main(int argc, char** argv)
 		program.Build(p);
 		
 		if( opt.a )
-			std::cout << "++++++++++++++++++++" << std::endl;
-			program.TestProgram();
-			program.StaticAnalyser();
+		{
+			std::debug << "++++++++ Static Analysis +++++++" << std::endl;
+			//program.TestProgram();
+			program.StaticAnalysis();
+		}
 		if( opt.o )
-			automaton.Transform();
+		{
+			std::debug << "++++++++ Transform +++++++" << std::endl;
+			//automaton.Transform();
+		}
 		if( opt.p )
-			automaton.Print();
+		{
+			std::debug << "++++++++ Display Code +++++++" << std::endl;
+			program.DisplayCode();
+		}
 		if( opt.e )
-			automaton.Execute();
+		{
+			std::debug << "++++++++ Execute +++++++" << std::endl;
+			//automaton.Execute();
 
-		automaton.TestAutomaton();
+		}
+
+		//automaton.TestAutomaton();
 
         file.close();
     } else {
@@ -96,26 +115,30 @@ int main(int argc, char** argv)
 					    const salade=28, pate = 42 ;\n\
 					    ecrire sample ;\n\
 					    lire x;\n\n\
-					    y := 4;\n\
-					    x := 3*8;\n\
-						jambon:=((42+y)*x)+4;\n\
+					    y := 1;\n\
+					    x := 3;\n\
+						jambon:=((2+y)*x)+4;\n\
 						optimizeThis := 4*(5+8);\n\
-						kitty := 3;\n";
+						kitty := 4;\n\
+						ecrire y;";
 	std::istringstream iss(code);
 
 	p = automaton.Read(iss);
 	program.Build(p);
 
-	std::cout << std::endl << "################" << std::endl;
-	std::cout << "This is what Lutin understood:" << std::endl << std::endl;
+	std::debug << std::endl << "################" << std::endl;
+	std::debug << "This is what Lutin understood:" << std::endl << std::endl;
 	program.DisplayCode();
 
-	std::cout << std::endl << "################" << std::endl;
-	std::cout << "Static Analysis:" << std::endl << std::endl;
+
+	std::debug << program.Execute() << std::endl;
+
+	std::debug << std::endl << "################" << std::endl;
+	std::debug << "Static Analysis:" << std::endl << std::endl;
+
 	program.StaticAnalysis();
 
 #endif // USE_ARGS
 
 	return 0;
 }
-
