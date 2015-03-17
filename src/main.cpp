@@ -8,13 +8,13 @@
 #include "Program.h"
 #include "Options.h"
 
-//#define USE_ARGS
+#define USE_ARGS
 
 #include "user.h"
 
-void PrintHelp()
+void PrintHelp(std::ostream &stream)
 {
-	std::cout << std::endl <<
+	stream << std::endl <<
 		"||-----------------------------------------------------"<< std::endl<<
 		"||[AIDE] Appel du programme:"<< std::endl<<
 		"||-----------------------------------------------------"<< std::endl<<
@@ -46,7 +46,7 @@ int main(int argc, char** argv)
 	if( argc < 2 )
 	{
 		PrintError("Erreur - Un argument est attendu");
-		PrintHelp();
+		PrintHelp(std::cerr);
 		return 1;
 	}
 	else
@@ -73,9 +73,11 @@ int main(int argc, char** argv)
 		program.Build(p);
 		
 		if( opt.a )
+		{
 			std::cout << "++++++++++++++++++++" << std::endl;
 			program.TestProgram();
-			program.StaticAnalyser();
+			program.StaticAnalysis();
+		}
 		if( opt.o )
 			automaton.Transform();
 		if( opt.p )
