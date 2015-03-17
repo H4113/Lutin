@@ -30,7 +30,7 @@ class Element: public Expression
 		int Execute(void);
 
 		//Override
-		virtual void GetVariables(std::set<const Variable*> &set) const = 0;
+		virtual void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const = 0;
 	protected:
 		// The value
 		int* pointer;

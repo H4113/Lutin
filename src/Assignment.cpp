@@ -29,13 +29,22 @@ int Assignment::Execute(void)
 	return var->Get();
 }
 
-void Assignment::GetVariables(std::set<const Variable*> &set) const
+void Assignment::GetVariables(std::set<const Variable*> &set, bool onlyUsed) const
 {
-	set.insert(var);
+	if(!onlyUsed)
+	{
+		set.insert(var);
+	}
 	exp->GetVariables(set);
+}
+
+
+Variable* Assignment::GetAssignedVar() const
+{
+	return var;
 }
 
 Variable* Assignment::GetModifiedVariable(void) const
 {
-	return var;
+	return GetAssignedVar();
 }

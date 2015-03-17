@@ -70,7 +70,7 @@ int Operation::Execute(void)
 	}
 }
 
-void Operation::GetVariables(std::set<const Variable*> &set) const
+void Operation::GetVariables(std::set<const Variable*> &set, bool) const
 {
 	exp1->GetVariables(set);
 	exp2->GetVariables(set);

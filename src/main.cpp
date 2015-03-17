@@ -13,9 +13,8 @@
 
 //#define USE_ARGS
 
-
 namespace std {
-	Logger debug;
+	Logger debug("debug",DEBUG);
 }
 
 void PrintHelp(std::ostream &stream)
@@ -111,7 +110,7 @@ int main(int argc, char** argv)
     }
 
 #else
-	std::string code = "var x , y,jambon, optimizeThis; \n\
+	std::string code = "var x , y, jambon, optimizeThis; \n\
 					    const salade=28, pate = 42 ;\n\
 					    ecrire sample ;\n\
 					    lire x;\n\n\
@@ -142,4 +141,3 @@ int main(int argc, char** argv)
 
 	return 0;
 }
-

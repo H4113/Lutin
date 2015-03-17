@@ -133,6 +133,7 @@ void Program::StaticAnalysis(void)
 	std::map<std::string, Variable*>::iterator itVar;
 	std::set<const Variable*> varInstr;
 	std::vector<Instruction*>::iterator it;
+	std::vector<Instruction*>::iterator itBis;
 	std::set<const Variable*> diff;
 	std::set<const Variable*>::iterator itDiff;
 
@@ -146,6 +147,7 @@ void Program::StaticAnalysis(void)
 		setVar.insert(itVar->second);
 	}
 
+	//Var used but not declared
 	//Inserts in set "diff" : varInstr - variables 
 	std::set_difference(varInstr.begin(), varInstr.end(), setVar.begin(), setVar.end(), 
                         std::inserter(diff, diff.begin()));
@@ -159,6 +161,7 @@ void Program::StaticAnalysis(void)
 
 	diff.clear();
 
+	//Var declared but not used
 	//Inserts in set "diff" : variables - varInstr
 	std::set_difference(setVar.begin(), setVar.end(), varInstr.begin(), varInstr.end(), 
                         std::inserter(diff, diff.begin()));
@@ -170,12 +173,49 @@ void Program::StaticAnalysis(void)
 		}
 	}
 
+	//Var used but not affected
+	varInstr.clear();
+
+	Variable* var;
+
+	for(it = instructions.begin(); it != instructions.end(); ++it) 
+	{
+		(*it)->GetVariables(varInstr, true);
+
+		for(itDiff = varInstr.begin(); itDiff != varInstr.end(); ++itDiff)
+		{
+			if((*itDiff) != 0 && !(*itDiff)->IsConstant())
+			{
+				bool affected = false;
+				Variable* assignedVar;
+
+				for(itBis = instructions.begin(); itBis != it; ++itBis)
+				{
+					assignedVar = (*itBis)->GetAssignedVar();
+					if(assignedVar == (*itDiff))
+					{
+						affected = true;
+						break;
+					}
+				}
+				if(!affected)
+				{
+					std::cerr << "ERROR : Variable "+ (*itDiff)->GetName() 
+					+ " used without being affected before." << std::endl;
+				}
+			}
+		}
+		varInstr.clear();
+	}
+
 	//Checks if assigned or read variables aren't constant
 	for(it = instructions.begin(); it != instructions.end(); ++it) 
 	{
-		if((*it)->GetModifiedVariable() != 0 && (*it)->GetModifiedVariable()->IsConstant())
+		var = (*it)->GetModifiedVariable();
+
+		if(var != 0 && var->IsConstant())
 		{
-			std::cerr << "ERROR : Constant " + ((*it)->GetModifiedVariable()->GetName()) + " cannot be modified." << std::endl;
+			std::cerr << "ERROR : Constant " + (var->GetName()) + " cannot be modified." << std::endl;
 		}
 	}
 
@@ -267,4 +307,3 @@ void Program::Execute(void)
 		(*itI)->Execute();
 	}
 }
-

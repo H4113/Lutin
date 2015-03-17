@@ -26,7 +26,7 @@ class Value: public Element
 		std::string ToString(void) const;
 
 		//Override
-		void GetVariables(std::set<const Variable*> &set) const
+		void GetVariables(std::set<const Variable*> &set, bool) const
 		{
 			//Does nothing
 			(void)set;

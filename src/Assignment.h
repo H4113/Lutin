@@ -38,7 +38,11 @@ class Assignment: public Instruction
 		std::string ToString(void) const;
 
 		//Override
-		void GetVariables(std::set<const Variable*> &set) const;
+		void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const;
+
+		//Override
+		Variable* GetAssignedVar() const;
+
 		Variable* GetModifiedVariable(void) const;
 	private:
 		// The variable to be assigned

@@ -50,10 +50,11 @@ class Variable: public Element
 		virtual bool IsConstant(void) const;
 
 		//Override
-		void GetVariables(std::set<const Variable*> &set) const;
+		void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const;
 	protected: 
 		std::string name;
-	private: 
+	private:
+		//May be unused 
 		bool initialized;
 };
 
