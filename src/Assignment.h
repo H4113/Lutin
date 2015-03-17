@@ -42,6 +42,8 @@ class Assignment: public Instruction
 
 		//Override
 		Variable* GetAssignedVar() const;
+
+		Variable* GetModifiedVariable(void) const;
 	private:
 		// The variable to be assigned
 		Variable* var;

@@ -29,6 +29,12 @@ class Constant: public Variable
 		void Display(void) const;
 
 		/**
+		 *	Indicates if the variable is a constant
+		 *	@return true
+		 */
+		bool IsConstant(void) const;
+
+		/**
 		 *	Creates a string representing the declaration of the constant
 		 *	@return the string created
 		 */

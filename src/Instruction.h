@@ -32,6 +32,8 @@ class Instruction
 		* Returns a variable if the instruction was an assignment
 		*/
 		virtual Variable* GetAssignedVar() const;
+
+		virtual Variable* GetModifiedVariable(void) const;
 };
 
 #endif //_INSTRUCTION_H

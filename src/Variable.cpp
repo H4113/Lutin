@@ -45,3 +45,8 @@ void Variable::GetVariables(std::set<const Variable*> &set, bool) const
 {
 	set.insert(this);
 }
+
+bool Variable::IsConstant(void) const
+{
+	return false;
+}

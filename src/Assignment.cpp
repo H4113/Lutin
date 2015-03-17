@@ -38,7 +38,13 @@ void Assignment::GetVariables(std::set<const Variable*> &set, bool onlyUsed) con
 	exp->GetVariables(set);
 }
 
+
 Variable* Assignment::GetAssignedVar() const
 {
 	return var;
+}
+
+Variable* Assignment::GetModifiedVariable(void) const
+{
+	return GetAssignedVar();
 }

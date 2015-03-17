@@ -40,3 +40,8 @@ void Read::GetVariables(std::set<const Variable*> &set, bool onlyUsed) const
 		set.insert(var);
 	}
 }
+
+Variable* Read::GetModifiedVariable(void) const
+{
+	return var;
+}
