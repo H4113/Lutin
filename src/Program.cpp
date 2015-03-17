@@ -170,6 +170,15 @@ void Program::StaticAnalysis(void)
 		}
 	}
 
+	//Checks if assigned or read variables aren't constant
+	for(it = instructions.begin(); it != instructions.end(); ++it) 
+	{
+		if((*it)->GetModifiedVariable() != 0 && (*it)->GetModifiedVariable()->IsConstant())
+		{
+			std::cerr << "ERROR : Constant " + ((*it)->GetModifiedVariable()->GetName()) + " cannot be modified." << std::endl;
+		}
+	}
+
 }
 
 bool Program::addVariable(Variable *variable)
@@ -251,7 +260,7 @@ void Program::Optimize(void)
 
 }
 
-int Program::Execute(void) 
+void Program::Execute(void) 
 {
 	for(std::vector<Instruction*>::iterator itI = instructions.begin(); itI != instructions.end(); ++itI)
 	{

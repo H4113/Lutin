@@ -13,3 +13,8 @@ Instruction::Instruction()
 {
 }
 
+Variable* Instruction::GetModifiedVariable(void) const
+{
+	return 0;
+}
+
