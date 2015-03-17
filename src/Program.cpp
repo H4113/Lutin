@@ -299,7 +299,7 @@ void Program::Optimize(void)
 
 }
 
-int Program::Execute(void) 
+void Program::Execute(void) 
 {
 	for(std::vector<Instruction*>::iterator itI = instructions.begin(); itI != instructions.end(); ++itI)
 	{
