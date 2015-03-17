@@ -13,9 +13,8 @@
 
 //#define USE_ARGS
 
-
 namespace std {
-	Logger debug;
+	Logger debug("debug",DEBUG);
 }
 
 void PrintHelp(std::ostream &stream)

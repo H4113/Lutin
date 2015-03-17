@@ -19,7 +19,7 @@ INCLUDE=-I"./"
 
 MAINFILE=main.cpp
 
-CPPFILES=$(MAINFILE) Assignment.cpp Automaton.cpp ConcreteStates.cpp Constant.cpp Element.cpp Expression.cpp Instruction.cpp LexicalAnalyzer.cpp NestedExpression.cpp Operation.cpp Program.cpp Read.cpp Rules.cpp State.cpp Symbol.cpp Value.cpp Variable.cpp Word.cpp Write.cpp
+CPPFILES=$(MAINFILE) Assignment.cpp Automaton.cpp ConcreteStates.cpp Constant.cpp Element.cpp Expression.cpp Instruction.cpp LexicalAnalyzer.cpp Logger.cpp NestedExpression.cpp Operation.cpp Program.cpp Read.cpp Rules.cpp State.cpp Symbol.cpp Value.cpp Variable.cpp Word.cpp Write.cpp
 
 OBJ=$(CPPFILES:.cpp=.o)
 OBJABS=$(addprefix $(OBJDIR)/,$(OBJ))
