@@ -4,13 +4,19 @@
 #include <algorithm>
 #include <fstream>
 
+#include "user.h"
+
 #include "Automaton.h"
 #include "Program.h"
 #include "Options.h"
+#include "Utils.h"
 
 //#define USE_ARGS
 
-#include "user.h"
+
+namespace std {
+	Logger debug;
+}
 
 void PrintHelp()
 {
@@ -57,7 +63,7 @@ int main(int argc, char** argv)
 		}
 		#ifdef __STATIC_FILE__ // see user.h for custom build
 
-			std::cout << "using user.h" << std::endl;
+			std::debug << "using user.h" << endl;
 			filepath = STATIC_FILE_PATH;
 
 		#else
@@ -75,23 +81,23 @@ int main(int argc, char** argv)
 		
 		if( opt.a )
 		{
-			std::cout << "++++++++ Static Analysis +++++++" << std::endl;
+			std::debug << "++++++++ Static Analysis +++++++" << std::endl;
 			//program.TestProgram();
 			program.StaticAnalysis();
 		}
 		if( opt.o )
 		{
-			std::cout << "++++++++ Transform +++++++" << std::endl;
+			std::debug << "++++++++ Transform +++++++" << std::endl;
 			automaton.Transform();
 		}
 		if( opt.p )
 		{
-			std::cout << "++++++++ Display Code +++++++" << std::endl;
+			std::debug << "++++++++ Display Code +++++++" << std::endl;
 			program.DisplayCode();
 		}
 		if( opt.e )
 		{
-			std::cout << "++++++++ Execute +++++++" << std::endl;
+			std::debug << "++++++++ Execute +++++++" << std::endl;
 			automaton.Execute();
 		}
 
@@ -117,12 +123,12 @@ int main(int argc, char** argv)
 	p = automaton.Read(iss);
 	program.Build(p);
 
-	std::cout << std::endl << "################" << std::endl;
-	std::cout << "This is what Lutin understood:" << std::endl << std::endl;
+	std::debug << std::endl << "################" << std::endl;
+	std::debug << "This is what Lutin understood:" << std::endl << std::endl;
 	program.DisplayCode();
 
-	std::cout << std::endl << "################" << std::endl;
-	std::cout << "Static Analysis:" << std::endl << std::endl;
+	std::debug << std::endl << "################" << std::endl;
+	std::debug << "Static Analysis:" << std::endl << std::endl;
 	program.StaticAnalysis();
 
 #endif // USE_ARGS
