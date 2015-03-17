@@ -269,6 +269,6 @@ int Program::Execute(void)
 {
 	for(std::vector<Instruction*>::iterator itI = instructions.begin(); itI != instructions.end(); ++itI)
 	{
-		std::cout << (*itI)->Execute() << std::endl;
+		(*itI)->Execute();
 	}
 }
