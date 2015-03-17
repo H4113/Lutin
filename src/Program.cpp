@@ -50,15 +50,15 @@ void Program::Build(const Word *word)
 		case SYM_Lval:
 			if(container->size == 1) // Lval -> id
 			{
-				std::string *value = container->words[0]->GetVal().varid;
+				std::string *id = container->words[0]->GetVal().varid;
 
-				addVariable(new Variable(*value));
+				addVariable(new Variable(*id));
 			}
 			else if(container->size == 3) // Lval -> Lval vg id
 			{
-				std::string *value = container->words[2]->GetVal().varid;
+				std::string *id = container->words[2]->GetVal().varid;
 				
-				addVariable(new Variable(*value));
+				addVariable(new Variable(*id));
 				Build(container->words[0]);
 			}
 			return;
@@ -90,34 +90,23 @@ void Program::Build(const Word *word)
 			if(container->size == 3) // I -> id aff E
 			{
 				std::string *id = container->words[0]->GetVal().varid;
-				std::map<std::string, Variable*>::iterator it = variables.find(*id);
-				if(it == variables.end()) // Variable not found
-				{
-					// TODO
-				}
-				else
-				{
-					Expression *e = buildExpression(container->words[2]);
-					instructions.push_back(new Assignment(it->second, e));
-				}
+				Variable *var = getGrammarVariable(*id);
+				Expression *e = buildExpression(container->words[2]);
+				instructions.push_back(new Assignment(var, e));
 			}
 			else
 			{
 				Symbol firstSymbol = container->words[0]->GetSymbol();
 				if(firstSymbol == SYM_w) // I -> w E
 				{
-					// TODO
+					Expression *e = buildExpression(container->words[1]);
+					instructions.push_back(new Write(e));
 				}
 				else if(firstSymbol == SYM_r) // I -> r id
 				{
 					std::string *id = container->words[1]->GetVal().varid;
-					std::map<std::string, Variable*>::iterator it = variables.find(*id);
-					if(it == variables.end()) // Variable does not exist
-					{
-						// TODO
-					}
-					else
-						instructions.push_back(new Read(it->second));
+					Variable *var = getGrammarVariable(*id);
+					instructions.push_back(new Read(var));
 				}
 			}
 			return;
@@ -209,6 +198,14 @@ bool Program::addVariable(Variable *variable)
 	return variables.insert(std::pair<std::string, Variable*>(variable->GetName(), variable)).second;
 }
 
+Variable *Program::getGrammarVariable(const std::string &id)
+{
+	std::map<std::string, Variable*>::iterator it = variables.find(id);
+	if(it != variables.end())
+		return it->second;
+	return new Variable(id);
+}
+
 Expression *Program::buildExpression(const Word *w)
 {
 	WordContainer *container = w->GetVal().wordContainer;
@@ -219,14 +216,7 @@ Expression *Program::buildExpression(const Word *w)
 		if(symbol == SYM_id) // E -> id
 		{
 			std::string *id = container->words[0]->GetVal().varid;
-			std::map<std::string, Variable*>::iterator it = variables.find(*id);
-
-			if(it == variables.end()) // Variable not found
-			{
-				// TODO
-			}
-			else
-				return it->second;
+			return getGrammarVariable(*id);
 		}
 		else if(symbol == SYM_n) // E -> n
 		{

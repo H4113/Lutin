@@ -8,7 +8,7 @@
 #include "Program.h"
 #include "Options.h"
 
-#define USE_ARGS
+//#define USE_ARGS
 
 #include "user.h"
 
@@ -101,7 +101,9 @@ int main(int argc, char** argv)
 					    y := 4;\n\
 					    x := 3*8;\n\
 						jambon:=((42+y)*x)+4;\n\
-						optimizeThis := 4*(5+8);\n";
+						optimizeThis := 4*(5+8);\n\
+						kitty := 4;\n\
+						ecrire y;";
 	std::istringstream iss(code);
 
 	p = automaton.Read(iss);
