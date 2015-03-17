@@ -81,7 +81,7 @@ Word* LexicalAnalyzer::GetCurrentWord()
 		std::getline(*stream, str);
 	}
 	// EOF case
-	if(stream->eof()){
+	if(str.empty() && stream->eof()){
 		UWordVal endVal = {0};
 		currentWord = new Word(SYM_end, endVal);
 		return currentWord;
