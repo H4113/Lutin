@@ -270,3 +270,15 @@ Expression *Program::buildExpression(const Word *w)
 	return 0;
 }
 
+void Program::Optimize(void) 
+{
+
+}
+
+int Program::Execute(void) 
+{
+	for(std::vector<Instruction*>::iterator itI = instructions.begin(); itI != instructions.end(); ++itI)
+	{
+		std::cout << (*itI)->Execute() << std::endl;
+	}
+}

@@ -34,6 +34,10 @@ class Program
 		void StaticAnalysis(void);
 
 		void CloseTestProgram(void);
+
+		void Optimize(void);
+
+		int Execute(void);
 		
 	private:
 		bool addVariable(Variable *variable);
