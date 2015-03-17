@@ -23,9 +23,10 @@ void Assignment::Display(void) const
 	std::cout << ToString() << std::endl;
 }
 
-int Assignment::Execute(void) 
+int Assignment::Execute(void)
 {
-	return exp->Execute();
+	var->Set(exp->Execute());
+	return var->Get();
 }
 
 void Assignment::GetVariables(std::set<const Variable*> &set) const

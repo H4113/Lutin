@@ -82,7 +82,7 @@ int main(int argc, char** argv)
 		if( opt.o )
 		{
 			std::cout << "++++++++ Transform +++++++" << std::endl;
-			automaton.Transform();
+			//automaton.Transform();
 		}
 		if( opt.p )
 		{
@@ -92,7 +92,7 @@ int main(int argc, char** argv)
 		if( opt.e )
 		{
 			std::cout << "++++++++ Execute +++++++" << std::endl;
-			automaton.Execute();
+			//automaton.Execute();
 		}
 
 		//automaton.TestAutomaton();
@@ -108,10 +108,10 @@ int main(int argc, char** argv)
 					    const salade=28, pate = 42 ;\n\
 					    ecrire sample ;\n\
 					    lire x;\n\n\
-					    y := 4;\n\
-					    x := 3*8;\n\
-						jambon:=((42+y)*x)+4;\n\
-						optimizeThis := 4*(5+8);\n\
+					    y := 1;\n\
+					    x := 3;\n\
+						jambon:=((2+y)*x)+4;\n\
+						optimizeThis := 4*(5+8);
 						kitty := 4;\n\
 						ecrire y;";
 	std::istringstream iss(code);
@@ -122,6 +122,8 @@ int main(int argc, char** argv)
 	std::cout << std::endl << "################" << std::endl;
 	std::cout << "This is what Lutin understood:" << std::endl << std::endl;
 	program.DisplayCode();
+
+	std::cout << program.Execute() << std::endl;
 
 	std::cout << std::endl << "################" << std::endl;
 	std::cout << "Static Analysis:" << std::endl << std::endl;
