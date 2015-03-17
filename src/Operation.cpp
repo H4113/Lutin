@@ -37,7 +37,7 @@ std::string Operation::ToString(void) const
 			oper = "*";
 			break;
 		default: // dead code
-			oper = "+";
+			oper = "?";
 			break;
 	}
 	return exp1->ToString() + " " + oper + " " + exp2->ToString();
@@ -65,7 +65,7 @@ int Operation::Execute(void)
 			return exp1->Execute() * exp2->Execute();
 			break;
 		default: // dead code
-			return exp1->Execute() + exp2->Execute();
+			return 0;
 			break;
 	}
 }
