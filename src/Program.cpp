@@ -174,7 +174,14 @@ void Program::StaticAnalysis(void)
 
 bool Program::addVariable(Variable *variable)
 {
-	return variables.insert(std::pair<std::string, Variable*>(variable->GetName(), variable)).second;
+	bool newVar = variables.insert(std::pair<std::string, Variable*>(variable->GetName(), variable)).second;
+
+	if(!newVar)
+	{
+		std::cerr << "la variable " << variable->GetName() << " est deja declaree" << std::endl;
+	}
+
+	return newVar;
 }
 
 Variable *Program::getGrammarVariable(const std::string &id)
@@ -251,3 +258,4 @@ int Program::Execute(void)
 		(*itI)->Execute();
 	}
 }
+
