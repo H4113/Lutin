@@ -205,6 +205,7 @@ void Program::StaticAnalysis(void)
 				}
 			}
 		}
+		varInstr.clear();
 	}
 
 	//Checks if assigned or read variables aren't constant

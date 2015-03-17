@@ -58,4 +58,4 @@ $(RELEASEDIR)/$(OBJDIR)/%.o: %.cpp
 	$(GPP) $(ADDFLAGS) $(CFLAGS) $(FLAGSRELEASE) $(INCLUDE) -c -o $@ $<
 	
 $(BOOSTDIR)/$(OBJDIR)/%.o: %.cpp
-	$(GPP) $(CFLAGS) $(FLAGSBOOST) $(INCLUDE) -c -o $@ $<
+	$(GPP) $(CFLAGS) $(FLAGSBOOST) $(FLAGSDEBUG) $(INCLUDE) -c -o $@ $<
