@@ -6,6 +6,8 @@
 #ifndef _SYMBOL_H
 #define _SYMBOL_H
 
+#include <string>
+
 enum Symbol 
 {
 	SYM_pv,		// ;
@@ -41,5 +43,7 @@ enum Symbol
 *	Returns true if symbol is terminal. False if not. BITCH
 */
 bool IsTerminal(Symbol s);
+
+std::string SymbolToString(Symbol s);
 
 #endif //_SYMBOL_H

@@ -8,6 +8,12 @@
 State00::State00() :
 	State()
 {
+	expectedTerminals.push_back(SYM_v);
+	expectedTerminals.push_back(SYM_c);
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_w);
+	expectedTerminals.push_back(SYM_r);
+	expectedTerminals.push_back(SYM_end);
 }
 
 State00::~State00() 
@@ -45,6 +51,7 @@ StateResult State00::Transition(Automaton* automaton, Word *word)
 State01::State01() :
 	State()
 {
+	expectedTerminals.push_back(SYM_end);
 }
 
 State01::~State01() 
@@ -69,6 +76,12 @@ StateResult State01::Transition(Automaton*, Word *word)
 State02::State02() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_w);
+	expectedTerminals.push_back(SYM_r);
+	expectedTerminals.push_back(SYM_end);
+	expectedTerminals.push_back(SYM_v);
+	expectedTerminals.push_back(SYM_c);
 }
 
 State02::~State02() 
@@ -112,6 +125,7 @@ StateResult State02::Transition(Automaton* automaton, Word *word)
 State03::State03() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
 }
 
 State03::~State03() 
@@ -137,6 +151,10 @@ StateResult State03::Transition(Automaton* automaton, Word *word)
 State04::State04() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_w);
+	expectedTerminals.push_back(SYM_r);
+	expectedTerminals.push_back(SYM_end);
 }
 
 State04::~State04() 
@@ -177,6 +195,7 @@ StateResult State04::Transition(Automaton* automaton, Word *word)
 State05::State05() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
 }
 
 State05::~State05() 
@@ -206,6 +225,7 @@ StateResult State05::Transition(Automaton* automaton, Word *word)
 State06::State06() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
 }
 
 State06::~State06() 
@@ -239,8 +259,13 @@ State07::State07() :
 
 State07::~State07() 
 {
+	expectedTerminals.push_back(SYM_v);
+	expectedTerminals.push_back(SYM_c);
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_w);
+	expectedTerminals.push_back(SYM_r);
+	expectedTerminals.push_back(SYM_end);
 }
-
 StateResult State07::Transition(Automaton* automaton, Word *word) 
 {
 	switch(word->GetSymbol()) 
@@ -264,6 +289,7 @@ StateResult State07::Transition(Automaton* automaton, Word *word)
 State08::State08() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
 }
 
 State08::~State08() 
@@ -289,6 +315,7 @@ StateResult State08::Transition(Automaton* automaton, Word *word)
 State09::State09() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
 }
 
 State09::~State09() 
@@ -314,6 +341,7 @@ StateResult State09::Transition(Automaton* automaton, Word *word)
 State10::State10() :
 	State()
 {
+	expectedTerminals.push_back(SYM_aff);
 }
 
 State10::~State10() 
@@ -339,6 +367,9 @@ StateResult State10::Transition(Automaton* automaton, Word *word)
 State11::State11() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_n);
+	expectedTerminals.push_back(SYM_op_par);
 }
 
 State11::~State11() 
@@ -376,6 +407,7 @@ StateResult State11::Transition(Automaton* automaton, Word *word)
 State12::State12() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
 }
 
 State12::~State12() 
@@ -400,6 +432,8 @@ StateResult State12::Transition(Automaton* automaton, Word *word)
 State13::State13() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_vg);
 }
 
 State13::~State13() 
@@ -428,6 +462,7 @@ StateResult State13::Transition(Automaton* automaton, Word *word)
 State14::State14() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
 }
 
 State14::~State14() 
@@ -485,6 +520,8 @@ StateResult State15::Transition(Automaton* automaton, Word *word)
 State16::State16() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_vg);
 }
 
 State16::~State16() 
@@ -510,6 +547,10 @@ StateResult State16::Transition(Automaton* automaton, Word *word)
 State17::State17() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_w);
+	expectedTerminals.push_back(SYM_r);
+	expectedTerminals.push_back(SYM_end);
 }
 
 State17::~State17() 
@@ -537,6 +578,7 @@ StateResult State17::Transition(Automaton* automaton, Word *word)
 State18::State18() :
 	State()
 {
+	expectedTerminals.push_back(SYM_eq);
 }
 
 State18::~State18() 
@@ -562,6 +604,7 @@ StateResult State18::Transition(Automaton* automaton, Word *word)
 State19::State19() :
 	State()
 {
+	expectedTerminals.push_back(SYM_n);
 }
 
 State19::~State19() 
@@ -587,6 +630,8 @@ StateResult State19::Transition(Automaton* automaton, Word *word)
 State20::State20() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_vg);
 }
 
 State20::~State20() 
@@ -612,12 +657,12 @@ StateResult State20::Transition(Automaton* automaton, Word *word)
 State21::State21() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_vg);
 }
 
 State21::~State21() 
 {
-	expectedTerminals.push_back(SYM_pv);
-	expectedTerminals.push_back(SYM_vg);
 }
 
 StateResult State21::Transition(Automaton* automaton, Word *word) 
@@ -642,6 +687,7 @@ StateResult State21::Transition(Automaton* automaton, Word *word)
 State22::State22() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
 }
 
 State22::~State22() 
@@ -667,6 +713,8 @@ StateResult State22::Transition(Automaton* automaton, Word *word)
 State23::State23() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_vg);
 }
 
 State23::~State23() 
@@ -692,6 +740,11 @@ StateResult State23::Transition(Automaton* automaton, Word *word)
 State24::State24() :
 	State()
 {
+	expectedTerminals.push_back(SYM_plus);
+	expectedTerminals.push_back(SYM_times);
+	expectedTerminals.push_back(SYM_minus);
+	expectedTerminals.push_back(SYM_div);
+	expectedTerminals.push_back(SYM_pv);
 }
 
 State24::~State24() 
@@ -732,6 +785,12 @@ StateResult State24::Transition(Automaton* automaton, Word *word)
 State25::State25() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_plus);
+	expectedTerminals.push_back(SYM_times);
+	expectedTerminals.push_back(SYM_minus);
+	expectedTerminals.push_back(SYM_div);
+	expectedTerminals.push_back(SYM_cl_par);
 }
 
 State25::~State25() 
@@ -761,6 +820,12 @@ StateResult State25::Transition(Automaton* automaton, Word *word)
 State26::State26() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_plus);
+	expectedTerminals.push_back(SYM_times);
+	expectedTerminals.push_back(SYM_minus);
+	expectedTerminals.push_back(SYM_div);
+	expectedTerminals.push_back(SYM_cl_par);
 }
 
 State26::~State26() 
@@ -790,6 +855,9 @@ StateResult State26::Transition(Automaton* automaton, Word *word)
 State27::State27() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_n);
+	expectedTerminals.push_back(SYM_op_par);
 }
 
 State27::~State27() 
@@ -827,6 +895,9 @@ StateResult State27::Transition(Automaton* automaton, Word *word)
 State28::State28() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_n);
+	expectedTerminals.push_back(SYM_op_par);
 }
 
 State28::~State28() 
@@ -864,6 +935,12 @@ StateResult State28::Transition(Automaton* automaton, Word *word)
 State29::State29() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_plus);
+	expectedTerminals.push_back(SYM_times);
+	expectedTerminals.push_back(SYM_minus);
+	expectedTerminals.push_back(SYM_div);
+	expectedTerminals.push_back(SYM_cl_par);
 }
 
 State29::~State29() 
@@ -903,6 +980,11 @@ State30::State30() :
 
 State30::~State30() 
 {
+	expectedTerminals.push_back(SYM_plus);
+	expectedTerminals.push_back(SYM_times);
+	expectedTerminals.push_back(SYM_minus);
+	expectedTerminals.push_back(SYM_div);
+	expectedTerminals.push_back(SYM_cl_par);
 }
 
 StateResult State30::Transition(Automaton* automaton, Word *word) 
@@ -944,6 +1026,12 @@ State31::State31() :
 
 State31::~State31() 
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_plus);
+	expectedTerminals.push_back(SYM_times);
+	expectedTerminals.push_back(SYM_minus);
+	expectedTerminals.push_back(SYM_div);
+	expectedTerminals.push_back(SYM_cl_par);
 }
 
 StateResult State31::Transition(Automaton* automaton, Word *word) 
@@ -969,6 +1057,9 @@ StateResult State31::Transition(Automaton* automaton, Word *word)
 State32::State32() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_n);
+	expectedTerminals.push_back(SYM_op_par);
 }
 
 State32::~State32() 
@@ -1006,6 +1097,12 @@ StateResult State32::Transition(Automaton* automaton, Word *word)
 State33::State33() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_plus);
+	expectedTerminals.push_back(SYM_times);
+	expectedTerminals.push_back(SYM_minus);
+	expectedTerminals.push_back(SYM_div);
+	expectedTerminals.push_back(SYM_cl_par);
 }
 
 State33::~State33() 
@@ -1041,6 +1138,9 @@ StateResult State33::Transition(Automaton* automaton, Word *word)
 State34::State34() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_n);
+	expectedTerminals.push_back(SYM_op_par);
 }
 
 State34::~State34() 
@@ -1078,6 +1178,12 @@ StateResult State34::Transition(Automaton* automaton, Word *word)
 State35::State35() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_plus);
+	expectedTerminals.push_back(SYM_times);
+	expectedTerminals.push_back(SYM_minus);
+	expectedTerminals.push_back(SYM_div);
+	expectedTerminals.push_back(SYM_cl_par);
 }
 
 State35::~State35() 
@@ -1107,6 +1213,9 @@ StateResult State35::Transition(Automaton* automaton, Word *word)
 State36::State36() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_n);
+	expectedTerminals.push_back(SYM_op_par);
 }
 
 State36::~State36() 
@@ -1144,6 +1253,12 @@ StateResult State36::Transition(Automaton* automaton, Word *word)
 State37::State37() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_plus);
+	expectedTerminals.push_back(SYM_times);
+	expectedTerminals.push_back(SYM_minus);
+	expectedTerminals.push_back(SYM_div);
+	expectedTerminals.push_back(SYM_cl_par);
 }
 
 State37::~State37() 
@@ -1173,6 +1288,9 @@ StateResult State37::Transition(Automaton* automaton, Word *word)
 State38::State38() :
 	State()
 {
+	expectedTerminals.push_back(SYM_id);
+	expectedTerminals.push_back(SYM_n);
+	expectedTerminals.push_back(SYM_op_par);
 }
 
 State38::~State38() 
@@ -1210,6 +1328,11 @@ StateResult State38::Transition(Automaton* automaton, Word *word)
 State39::State39() :
 	State()
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_plus);
+	expectedTerminals.push_back(SYM_times);
+	expectedTerminals.push_back(SYM_minus);
+	expectedTerminals.push_back(SYM_div);
 }
 
 State39::~State39() 

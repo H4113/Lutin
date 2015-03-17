@@ -64,15 +64,17 @@ Word *Automaton::Read(std::istream &stream)
 				{
 					const std::vector<Symbol> &expected = states.top()->GetExpectedTerminals(); 
 					Word::DebugWord(w);
-					std::cerr << "Erreur syntaxique " << analyzer.GetCurrentLine()
-							  << ":" << analyzer.GetCurrentCharacter() << std::endl;
+					std::cerr << "Syntax error (" << analyzer.GetCurrentLine()
+							  << ":" << analyzer.GetCurrentCharacter() << ") ";
 					
-					std::cerr << "Expected terminals: " << std::endl;
 					for(unsigned int i = 0; i < expected.size(); ++i)
 					{
-						std::cerr << (int)(expected[i]) << std::endl;
-					}					
-					std::cerr << std::endl;
+						std::string name = SymbolToString(expected[i]);
+						std::cerr << name;
+						if(i+1 != expected.size())
+							std::cerr << " or ";
+					}
+					std::cerr << " expected" << std::endl;
 					error = true;
 					analyzer.Shift();
 				}
