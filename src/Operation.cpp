@@ -45,18 +45,23 @@ std::string Operation::ToString(void) const
 
 int Operation::Execute(void) 
 {
+	//std::cout << ToString() << " | ";
 	switch(op) 
 	{
 		case OP_PLUS:
+			//std::cout << exp1->Execute() << "+" << exp2->Execute() << std::endl;
 			return exp1->Execute() + exp2->Execute();
 			break;
 		case OP_MINUS:
+			//std::cout << exp1->Execute() << "-" << exp2->Execute() << std::endl;
 			return exp1->Execute() - exp2->Execute();
 			break;
 		case OP_DIVIDE:
+			//std::cout << exp1->Execute() << "/" << exp2->Execute() << std::endl;
 			return exp1->Execute() / exp2->Execute();
 			break;
 		case OP_TIMES:
+			//std::cout << exp1->Execute() << "*" << exp2->Execute() << std::endl;
 			return exp1->Execute() * exp2->Execute();
 			break;
 		default: // dead code
