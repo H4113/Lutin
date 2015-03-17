@@ -201,7 +201,20 @@ void Program::StaticAnalysis(void)
 				if(!affected)
 				{
 					std::cerr << "une valeur dans l'expression ";
-					if((*it))
+					switch ((*it)->GetInstructionType())
+					{
+						case IT_ASS:
+							//TODO Get expression
+							//((Assignment*) (*it))->ToString();
+							break;
+						case IT_WRI: 
+							//TODO Get expression
+							//((Write*) (*it))->ToString();
+							break;
+						default:
+							std::cerr <<"ERREUR";
+							break;
+					}
 					std::cerr << " n'est pas connue." << std::endl;
 				}
 			}
