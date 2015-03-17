@@ -31,6 +31,10 @@ class Program
 		*/
 		void StaticAnalysis(void);
 
+		void Optimize(void);
+
+		int Execute(void);
+		
 	private:
 		bool addVariable(Variable *variable);
 		Variable *getGrammarVariable(const std::string &id);
