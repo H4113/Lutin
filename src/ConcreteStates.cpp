@@ -616,6 +616,8 @@ State21::State21() :
 
 State21::~State21() 
 {
+	expectedTerminals.push_back(SYM_pv);
+	expectedTerminals.push_back(SYM_vg);
 }
 
 StateResult State21::Transition(Automaton* automaton, Word *word) 

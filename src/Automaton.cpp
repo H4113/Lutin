@@ -62,9 +62,17 @@ Word *Automaton::Read(std::istream &stream)
 				}
 				else
 				{
+					const std::vector<Symbol> &expected = states.top()->GetExpectedTerminals(); 
 					Word::DebugWord(w);
 					std::cerr << "Erreur syntaxique " << analyzer.GetCurrentLine()
 							  << ":" << analyzer.GetCurrentCharacter() << std::endl;
+					
+					std::cerr << "Expected terminals: " << std::endl;
+					for(unsigned int i = 0; i < expected.size(); ++i)
+					{
+						std::cerr << (int)(expected[i]) << std::endl;
+					}					
+					std::cerr << std::endl;
 					error = true;
 					analyzer.Shift();
 				}
