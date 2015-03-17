@@ -86,7 +86,6 @@ int main(int argc, char** argv)
 		}
 		if( opt.p )
 		{
-			std::cout << "++++++++ Display Code +++++++" << std::endl;
 			program.DisplayCode();
 		}
 		if( opt.e )

@@ -6,6 +6,7 @@
 #include "Automaton.h"
 #include "Rules.h"
 #include "ConcreteStates.h"
+#include "user.h"
 
 /**
  * Automaton implementation
@@ -38,15 +39,20 @@ Word *Automaton::Read(std::istream &stream)
 		if(w == 0) {
 			continue;
 		}
+#ifdef DEBUG
 		Word::DebugWord(w);
-		
+#endif
+	
 		switch(states.top()->Transition(this, w))
 		{
 			case SR_TRANSITION: // Ok
 				break;
 			case SR_ACCEPT:
 				done = true;
+#ifdef DEBUG
 				std::cout << "*-----PROGRAM ACCEPTED-----*" << std::endl;
+#endif
+
 				break;
 			default:
 				std::cerr << "Error at line " << analyzer.GetCurrentLine()
@@ -69,13 +75,15 @@ Word *Automaton::Read(std::istream &stream)
 
 void Automaton::Shift(Word *word, State *state)
 {
+#ifdef DEBUG
 	std::cout << "Shift" << std::endl;	
-	
+#endif	
+
 	if(word->GetSymbol() != SYM_end)
 		states.push(state);
 
-	if(IsTerminal(word->GetSymbol())){
-		std::cout << "word consumed" << std::endl;
+	if(IsTerminal(word->GetSymbol()))
+	{
 		pushWord(word);
 		analyzer.Shift();
 	}
@@ -89,7 +97,9 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 	Word *newWord;
 	UWordVal val;
 
+#ifdef DEBUG
 	std::cout << "Reducing " << rule.rightPartCount << " states (r" << ruleId << ")" << std::endl;
+#endif
 
 	val.wordContainer = new WordContainer;
 	if(rule.rightPartCount > 0)
@@ -105,7 +115,6 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 		states.pop();
 
 		val.wordContainer->words[rule.rightPartCount-1-i] = words.top();
-		std::cout << "Symbol:" << (int)words.top()->GetSymbol()<<" " << words.top() << std::endl;
 		words.pop();
 	}
 
@@ -117,9 +126,6 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 	// Make the transition with the non-terminal symbol
 	result = currentState->Transition(this, newWord);
 		
-
-	Word::DebugWord(newWord);
-
 	return result;  
 }
 
