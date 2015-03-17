@@ -46,6 +46,8 @@ class Assignment: public Instruction
 		Variable* GetAssignedVar() const;
 
 		Variable* GetModifiedVariable(void) const;
+
+		Expression* GetExpression() const;
 	private:
 		// The variable to be assigned
 		Variable* var;

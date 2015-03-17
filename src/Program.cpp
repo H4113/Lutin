@@ -176,8 +176,6 @@ void Program::StaticAnalysis(void)
 	//Var used but not affected
 	varInstr.clear();
 
-	Variable* var;
-
 	for(it = instructions.begin(); it != instructions.end(); ++it) 
 	{
 		(*it)->GetVariables(varInstr, true);
@@ -200,29 +198,29 @@ void Program::StaticAnalysis(void)
 				}
 				if(!affected)
 				{
-					std::cerr << "une valeur dans l'expression ";
+					std::cerr << "ERROR : Variable " + (*itDiff)->GetName() + " in the expression ";
 					switch ((*it)->GetInstructionType())
 					{
 						case IT_ASS:
-							//TODO Get expression
-							//((Assignment*) (*it))->ToString();
+							std::cerr << ((Assignment*) (*it))->GetExpression()->ToString();
 							break;
-						case IT_WRI: 
-							//TODO Get expression
-							//((Write*) (*it))->ToString();
+						case IT_WRI:
+							std::cerr << ((Write*) (*it))->GetExpression()->ToString();
 							break;
 						default:
-							std::cerr <<"ERREUR";
+							std::cerr <<"**ERROR**";
 							break;
 					}
-					std::cerr << " n'est pas connue." << std::endl;
+					std::cerr << " isn't initialized." << std::endl;
 				}
 			}
 		}
 		varInstr.clear();
 	}
-
+	
 	//Checks if assigned or read variables aren't constant
+	Variable* var;
+
 	for(it = instructions.begin(); it != instructions.end(); ++it) 
 	{
 		var = (*it)->GetModifiedVariable();

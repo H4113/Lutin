@@ -41,3 +41,8 @@ InstruType Write::GetInstructionType(void) const
 {
 	return IT_WRI;
 }
+
+Expression* Write::GetExpression() const
+{
+	return expression;
+}
