@@ -55,14 +55,15 @@ int main(int argc, char** argv)
 		{
 			opt.AddOption(argv[i]);
 		}
-#ifdef __STATIC_FILE__ // see user.h for custom build
+		#ifdef __STATIC_FILE__ // see user.h for custom build
 
-		std::cout << "using user.h" << std::endl;
-		filepath = STATIC_FILE_PATH;
+			std::cout << "using user.h" << std::endl;
+			filepath = STATIC_FILE_PATH;
 
-#else
-		filepath = argv[argc-1];
-#endif // __STATIC_FILE__
+		#else
+			filepath = argv[argc-1];
+
+		#endif // __STATIC_FILE__
 	}
 
 	file.open(filepath.c_str());
@@ -74,18 +75,27 @@ int main(int argc, char** argv)
 		
 		if( opt.a )
 		{
-			std::cout << "++++++++++++++++++++" << std::endl;
-			program.TestProgram();
+			std::cout << "++++++++ Static Analysis +++++++" << std::endl;
+			//program.TestProgram();
 			program.StaticAnalysis();
 		}
 		if( opt.o )
+		{
+			std::cout << "++++++++ Transform +++++++" << std::endl;
 			automaton.Transform();
+		}
 		if( opt.p )
-			automaton.Print();
+		{
+			std::cout << "++++++++ Display Code +++++++" << std::endl;
+			program.DisplayCode();
+		}
 		if( opt.e )
+		{
+			std::cout << "++++++++ Execute +++++++" << std::endl;
 			automaton.Execute();
+		}
 
-		automaton.TestAutomaton();
+		//automaton.TestAutomaton();
 
         file.close();
     } else {
