@@ -26,14 +26,10 @@ class Program
 		void Build(const Word *word);
 		void DisplayCode(void);
 
-		void TestProgram(void);
-
 		/*
 		* Does a static analysis of the program 
 		*/
 		void StaticAnalysis(void);
-
-		void CloseTestProgram(void);
 
 		void Optimize(void);
 

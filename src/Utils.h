@@ -7,6 +7,14 @@
 
 #include <string>
 #include <sstream>
+#include <iostream>
+
+#include "Logger.h"
+
+namespace std
+{
+	extern Logger debug;
+};
 
 template<typename T>
 std::string ttos( T t )

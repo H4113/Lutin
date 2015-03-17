@@ -127,27 +127,6 @@ void Program::DisplayCode(void)
 		(*itI)->Display();
 }
 
-void Program::TestProgram(void) 
-{
-	Constant* lauwl = new Constant("lauwl", 4);
-	Constant* prout = new Constant("prout", 40);
-	Variable* hey = new Variable("hey");
-	addVariable(lauwl);
-	addVariable(prout);
-	addVariable(hey);
-
-	Operation* ex = new Operation(lauwl, OP_TIMES, prout);
-	Assignment* ass = new Assignment(hey, ex);
-	instructions.push_back(ass);
-
-	std::cout << ex->Execute() << std::endl;
-	std::cout << (new Read(hey))->Execute() << std::endl;
-	(new Write(ex))->Execute();
-
-	(new Read(hey))->Display();
-	(new Write(ex))->Display();
-}
-
 void Program::StaticAnalysis(void)
 {
 	std::set<const Variable*> setVar;
@@ -204,7 +183,14 @@ void Program::StaticAnalysis(void)
 
 bool Program::addVariable(Variable *variable)
 {
-	return variables.insert(std::pair<std::string, Variable*>(variable->GetName(), variable)).second;
+	bool newVar = variables.insert(std::pair<std::string, Variable*>(variable->GetName(), variable)).second;
+
+	if(!newVar)
+	{
+		std::cerr << "la variable " << variable->GetName() << " est deja declaree" << std::endl;
+	}
+
+	return newVar;
 }
 
 Variable *Program::getGrammarVariable(const std::string &id)
@@ -278,6 +264,7 @@ int Program::Execute(void)
 {
 	for(std::vector<Instruction*>::iterator itI = instructions.begin(); itI != instructions.end(); ++itI)
 	{
-		std::cout << (*itI)->Execute() << std::endl;
+		(*itI)->Execute();
 	}
 }
+
