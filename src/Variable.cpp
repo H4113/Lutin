@@ -41,7 +41,17 @@ std::string Variable::GetDeclaration(void) const
 	return "var " + name + ";";
 }
 
+bool Variable::IsConstant(void) const
+{
+	return false;
+}
+
 void Variable::GetVariables(std::set<const Variable*> &set) const
 {
 	set.insert(this);
+}
+
+Variable* Variable::GetModifiedVariable(void) const
+{
+	return this;
 }
