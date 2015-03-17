@@ -111,7 +111,7 @@ int main(int argc, char** argv)
 					    y := 1;\n\
 					    x := 3;\n\
 						jambon:=((2+y)*x)+4;\n\
-						optimizeThis := 4*(5+8);
+						optimizeThis := 4*(5+8);\n\
 						kitty := 4;\n\
 						ecrire y;";
 	std::istringstream iss(code);
