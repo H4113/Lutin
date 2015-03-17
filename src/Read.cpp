@@ -33,9 +33,17 @@ std::string Read::ToString(void) const
 	return "lire " + var->GetName();
 }
 
-void Read::GetVariables(std::set<const Variable*> &set) const
+void Read::GetVariables(std::set<const Variable*> &set, bool onlyUsed) const
 {
-	set.insert(var);
+	if(!onlyUsed)
+	{
+		set.insert(var);
+	}
+}
+
+Variable* Read::GetModifiedVariable(void) const
+{
+	return var;
 }
 
 InstruType Read::GetInstructionType(void) const

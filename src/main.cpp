@@ -13,9 +13,13 @@
 
 //#define USE_ARGS
 
-
 namespace std {
-	Logger debug;
+#ifdef DEBUG
+	Logger debug("debug",true);
+#else
+	
+	Logger debug("debug",false);
+#endif	
 }
 
 void PrintHelp(std::ostream &stream)
@@ -97,9 +101,7 @@ int main(int argc, char** argv)
 		}
 		if( opt.e )
 		{
-			std::debug << "++++++++ Execute +++++++" << std::endl;
-			//automaton.Execute();
-
+			program.Execute();
 		}
 
 		//automaton.TestAutomaton();
@@ -111,7 +113,7 @@ int main(int argc, char** argv)
     }
 
 #else
-	std::string code = "var x , y,jambon, optimizeThis; \n\
+	std::string code = "var x , y, jambon, optimizeThis; \n\
 					    const salade=28, pate = 42 ;\n\
 					    ecrire sample ;\n\
 					    lire x;\n\n\
@@ -131,7 +133,7 @@ int main(int argc, char** argv)
 	program.DisplayCode();
 
 
-	std::debug << program.Execute() << std::endl;
+	program.Execute();
 
 	std::debug << std::endl << "################" << std::endl;
 	std::debug << "Static Analysis:" << std::endl << std::endl;
@@ -142,4 +144,3 @@ int main(int argc, char** argv)
 
 	return 0;
 }
-

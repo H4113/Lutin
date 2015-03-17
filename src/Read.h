@@ -33,12 +33,14 @@ class Read: public Instruction
 		std::string ToString(void) const;
 
 		//Override
-		void GetVariables(std::set<const Variable*> &set) const;
+		void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const;
 
 		//@Override
 		InstruType GetInstructionType(void) const;
+
+		Variable* GetModifiedVariable(void) const;
 	private: 
 		Variable* var;
 };
 
-#endif //_READ_Hvi
+#endif //_READ_H

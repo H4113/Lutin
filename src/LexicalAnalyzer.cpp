@@ -77,7 +77,7 @@ Word* LexicalAnalyzer::GetCurrentWord()
 	// get the new line 
 	if(str.empty()) {
 		++lineCount;
-		characterCount = 0;
+		characterCount = 1;
 		std::getline(*stream, str);
 	}
 	// EOF case
@@ -122,8 +122,8 @@ Word* LexicalAnalyzer::GetCurrentWord()
 		}
 	}
 	// no matched rules:
-	std::cerr << "Lexer error ("<< lineCount <<":"<< characterCount
-			  << ") : character "<<str[0]<<" unknown."<<std::endl;
+	std::cerr << "Erreur lexicale ("<< lineCount <<":"<< characterCount
+			  << ") caractere "<<str[0]<<std::endl;
 	characterCount += 1;
 	str.erase(str.begin(),str.begin()+1);
 	currentWord = 0;

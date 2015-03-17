@@ -55,15 +55,19 @@ Word *Automaton::Read(std::istream &stream)
 
 				break;
 			default:
-				std::cerr << "Error at line " << analyzer.GetCurrentLine()
-						  << ":" << analyzer.GetCurrentCharacter() << std::endl;
 				//Needed to avoid infinite loop
 				if(w->GetSymbol() == SYM_end)
 				{
 					done = true;
 				}
-				error = true;
-				analyzer.Shift();
+				else
+				{
+					Word::DebugWord(w);
+					std::cerr << "Erreur syntaxique " << analyzer.GetCurrentLine()
+							  << ":" << analyzer.GetCurrentCharacter() << std::endl;
+					error = true;
+					analyzer.Shift();
+				}
 				break;
 		}
 	}

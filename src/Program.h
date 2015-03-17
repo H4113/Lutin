@@ -33,7 +33,7 @@ class Program
 
 		void Optimize(void);
 
-		int Execute(void);
+		void Execute(void);
 		
 	private:
 		bool addVariable(Variable *variable);

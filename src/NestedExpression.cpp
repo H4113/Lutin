@@ -22,7 +22,7 @@ std::string NestedExpression::ToString(void) const
 	return std::string("(") + expression->ToString() + std::string(")");
 }
 
-void NestedExpression::GetVariables(std::set<const Variable*> &set) const
+void NestedExpression::GetVariables(std::set<const Variable*> &set, bool) const
 {
 	expression->GetVariables(set);
 }

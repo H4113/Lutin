@@ -41,7 +41,7 @@ std::string Variable::GetDeclaration(void) const
 	return "var " + name + ";";
 }
 
-void Variable::GetVariables(std::set<const Variable*> &set) const
+void Variable::GetVariables(std::set<const Variable*> &set, bool) const
 {
 	set.insert(this);
 }
@@ -49,4 +49,9 @@ void Variable::GetVariables(std::set<const Variable*> &set) const
 InstruType Variable::GetInstructionType(void) const
 {
 	return IT_VAR;
+}
+
+bool Variable::IsConstant(void) const
+{
+	return false;
 }

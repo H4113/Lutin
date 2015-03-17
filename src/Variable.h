@@ -43,14 +43,21 @@ class Variable: public Element
 		 */
 		virtual std::string GetDeclaration(void) const;
 
+		/**
+		 *	Indicates if the variable is a constant
+		 *	@return false
+		 */
+		virtual bool IsConstant(void) const;
+
 		//Override
-		void GetVariables(std::set<const Variable*> &set) const;
+		void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const;
 
 		//@Override
 		InstruType GetInstructionType(void) const;
 	protected: 
 		std::string name;
-	private: 
+	private:
+		//May be unused 
 		bool initialized;
 };
 

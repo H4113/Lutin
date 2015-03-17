@@ -37,7 +37,7 @@ std::string Operation::ToString(void) const
 			oper = "*";
 			break;
 		default: // dead code
-			oper = "+";
+			oper = "?";
 			break;
 	}
 	return exp1->ToString() + " " + oper + " " + exp2->ToString();
@@ -65,12 +65,12 @@ int Operation::Execute(void)
 			return exp1->Execute() * exp2->Execute();
 			break;
 		default: // dead code
-			return exp1->Execute() + exp2->Execute();
+			return 0;
 			break;
 	}
 }
 
-void Operation::GetVariables(std::set<const Variable*> &set) const
+void Operation::GetVariables(std::set<const Variable*> &set, bool) const
 {
 	exp1->GetVariables(set);
 	exp2->GetVariables(set);

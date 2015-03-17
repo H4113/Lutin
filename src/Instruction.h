@@ -33,9 +33,21 @@ class Instruction
 
 		virtual std::string ToString(void) const = 0;
 
-		virtual void GetVariables(std::set<const Variable*> &set) const = 0;
-
 		virtual InstruType GetInstructionType() const = 0;
+
+		/*
+		* Add all the variables in the instruction to the set passed in parameters 
+		* @param set<Variable*> : set that will be filled 
+		* @param onlyUsed : true if you only want assigment and write variables
+		*/
+		virtual void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const = 0;
+
+		/*
+		* Returns a variable if the instruction was an assignment
+		*/
+		virtual Variable* GetAssignedVar() const;
+
+		virtual Variable* GetModifiedVariable(void) const;
 };
 
 #endif //_INSTRUCTION_H
