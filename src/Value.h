@@ -13,6 +13,8 @@ class Value: public Element
 {
 	public:
 		Value();
+
+		Value(int);
 		
 		/**
 		 *	Display the code corresponding to the constant.

@@ -21,10 +21,12 @@ class NestedExpression : public Expression
 
 		virtual void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const;
 
+		Expression** GetExpression(void);
+
 		//@Override
 		InstruType GetInstructionType(void) const;
 	protected:
-		Expression *expression;
+		Expression* expression;
 };
 
 #endif //_NESTEDEXPRESSION_H

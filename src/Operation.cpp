@@ -81,12 +81,12 @@ InstruType Operation::GetInstructionType(void) const
 	return IT_OPE;
 }
 
-Expression* Operation::GetExp1(void) const
+Expression** Operation::GetExp1(void)
 {
-	return exp1;
+	return &exp1;
 }
 
-Expression* Operation::GetExp2(void) const
+Expression** Operation::GetExp2(void)
 {
-	return exp2;
+	return &exp2;
 }

@@ -135,6 +135,12 @@ int main(int argc, char** argv)
 
 	program.Execute();
 
+	std::cout << std::endl << "################" << std::endl;
+	std::cout << "Optimization:" << std::endl << std::endl;	
+	program.Optimize();
+	std::cout << std::endl << "################" << std::endl;
+	program.DisplayCode();
+
 	std::debug << std::endl << "################" << std::endl;
 	std::debug << "Static Analysis:" << std::endl << std::endl;
 

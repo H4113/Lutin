@@ -31,3 +31,8 @@ InstruType NestedExpression::GetInstructionType(void) const
 {
 	return IT_NES;
 }
+
+Expression** NestedExpression::GetExpression(void)
+{
+	return &expression;
+}

@@ -15,6 +15,11 @@ Value::Value() : Element()
 
 }
 
+Value::Value(int val) : Element()
+{
+	*pointer = val;
+}
+
 void Value::Display() const 
 {
  	std::cout << ToString() << ";" << std::endl;

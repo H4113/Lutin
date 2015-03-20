@@ -38,9 +38,9 @@ class Operation: public Expression
 		//@Override
 		InstruType GetInstructionType(void) const;
 
-		Expression* GetExp1(void) const;
+		Expression** GetExp1(void);
 
-		Expression* GetExp2(void) const;
+		Expression** GetExp2(void);
 	private: 
 		Expression* exp1;
 		Expression* exp2;
