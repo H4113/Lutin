@@ -22,14 +22,8 @@ Variable* Instruction::GetAssignedVar() const
 	return 0;
 }
 
-Variable* Instruction::GetModifiedVariable(void) const
-{
-	return 0;
-}
-
 bool Instruction::MayBeDeleted(void) const
 {
 	InstruType t = GetInstructionType();
 	return t != IT_VAR && t != IT_CON;
 }
-

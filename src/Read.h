@@ -39,7 +39,9 @@ class Read: public Instruction
 		//@Override
 		InstruType GetInstructionType(void) const;
 
-		Variable* GetModifiedVariable(void) const;
+		//Override
+		Variable* GetAssignedVar(void) const;
+
 	private: 
 		Variable* var;
 };
