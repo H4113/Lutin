@@ -12,7 +12,6 @@ class NestedExpression : public Expression
 {
 	public:
 		NestedExpression(Expression *e);
-
 		virtual ~NestedExpression();
 
 		virtual int Execute(void);

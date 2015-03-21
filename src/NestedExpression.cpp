@@ -9,7 +9,8 @@ NestedExpression::NestedExpression(Expression *e):
 
 NestedExpression::~NestedExpression()
 {
-
+	if(expression->MayBeDeleted())
+		delete expression;
 }
 
 int NestedExpression::Execute(void)
