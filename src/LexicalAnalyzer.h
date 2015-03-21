@@ -47,6 +47,7 @@ class LexicalAnalyzer
 		std::istream* stream;
 		std::string str;
 		unsigned int lineCount;			// for debug
+		unsigned int oldCharacterCount;
 		unsigned int characterCount;	// for debug
 };
 

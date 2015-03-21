@@ -81,30 +81,35 @@ int main(int argc, char** argv)
 	if ( file )
     {
 		p = automaton.Read(file);
-		program.Build(p);
-		
-		if( opt.a )
+		if(p != 0) // p is a valid program
 		{
-			std::debug << "++++++++ Static Analysis +++++++" << std::endl;
-			//program.TestProgram();
-			program.StaticAnalysis();
+			program.Build(p);
+			
+			if( opt.a )
+			{
+				std::debug << "++++++++ Static Analysis +++++++" << std::endl;
+				//program.TestProgram();
+				program.StaticAnalysis();
+			}
+			if( opt.o )
+			{
+				std::debug << "++++++++ Transform +++++++" << std::endl;
+				//automaton.Transform();
+			}
+			if( opt.p )
+			{
+				std::debug << "++++++++ Display Code +++++++" << std::endl;
+				program.DisplayCode();
+			}
+			if( opt.e )
+			{
+				program.Execute();
+			}
 		}
-		if( opt.o )
+		else
 		{
-			std::debug << "++++++++ Transform +++++++" << std::endl;
-			//automaton.Transform();
+			std::cerr << "ERROR: Fix the code and try again later ;)" << std::endl;
 		}
-		if( opt.p )
-		{
-			std::debug << "++++++++ Display Code +++++++" << std::endl;
-			program.DisplayCode();
-		}
-		if( opt.e )
-		{
-			program.Execute();
-		}
-
-		//automaton.TestAutomaton();
 
         file.close();
     } else {
@@ -126,19 +131,23 @@ int main(int argc, char** argv)
 	std::istringstream iss(code);
 
 	p = automaton.Read(iss);
-	program.Build(p);
 
-	std::debug << std::endl << "################" << std::endl;
-	std::debug << "This is what Lutin understood:" << std::endl << std::endl;
-	program.DisplayCode();
+	if(p != 0) // p is a valid program
+	{
+		program.Build(p);
+
+		std::debug << std::endl << "################" << std::endl;
+		std::debug << "This is what Lutin understood:" << std::endl << std::endl;
+		program.DisplayCode();
 
 
-	program.Execute();
+		program.Execute();
 
-	std::debug << std::endl << "################" << std::endl;
-	std::debug << "Static Analysis:" << std::endl << std::endl;
+		std::debug << std::endl << "################" << std::endl;
+		std::debug << "Static Analysis:" << std::endl << std::endl;
 
-	program.StaticAnalysis();
+		program.StaticAnalysis();
+	}
 
 #endif // USE_ARGS
 
