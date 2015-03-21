@@ -85,6 +85,9 @@ Word *Automaton::Read(std::istream &stream)
 				error = true;
 				break;
 		}
+
+		if(w->GetSymbol() == SYM_end)
+			delete w;
 	}
 
 	if(!error)

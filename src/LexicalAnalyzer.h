@@ -16,6 +16,7 @@ class LexicalAnalyzer
 	public:
 		/** Constructor */
 		LexicalAnalyzer();
+		virtual ~LexicalAnalyzer();
 
 		/** Set the stream to analyze */
 		void SetInputStream(std::istream *nstream);

@@ -63,6 +63,10 @@ LexicalAnalyzer::LexicalAnalyzer() :
 {
 }
 
+LexicalAnalyzer::~LexicalAnalyzer()
+{
+}
+
 void LexicalAnalyzer::SetInputStream(std::istream *nstream)
 {
 	stream = nstream;
