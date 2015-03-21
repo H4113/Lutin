@@ -67,7 +67,7 @@ int main(int argc, char** argv)
 		}
 		#ifdef __STATIC_FILE__ // see user.h for custom build
 
-			std::debug << "using user.h" << endl;
+			std::debug << "using user.h" << std::endl;
 			filepath = STATIC_FILE_PATH;
 
 		#else
