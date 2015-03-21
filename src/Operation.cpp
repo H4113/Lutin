@@ -95,3 +95,8 @@ Expression** Operation::GetExp2(void)
 {
 	return &exp2;
 }
+
+Operator Operation::GetOperator(void) const
+{
+	return op;
+}

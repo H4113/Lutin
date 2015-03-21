@@ -15,6 +15,7 @@
 #include "Value.h"
 #include "NestedExpression.h"
 #include "Utils.h"
+#include "Operator.h"
 
 bool operator<(const std::string &s1, const std::string &s2)
 {
@@ -313,28 +314,79 @@ void Program::Optimize(void)
 {
 	for(std::vector<Instruction*>::iterator it = instructions.begin(); it != instructions.end(); ++it)
 	{
+		//(*it)->Display();
 		Optimize(&(*it));
+		//(*it)->Display();
 	}
 }
 
 void Program::Optimize(Instruction** inst)
 {
+	//std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
 	switch((*inst)->GetInstructionType())
 	{
 		case IT_OPE:
 			{
 				Operation* op = static_cast<Operation*>(*inst);
-				InstruType it1 = (*(op->GetExp1()))->GetInstructionType();
-				InstruType it2 = (*(op->GetExp2()))->GetInstructionType();
 
 				Optimize(op->GetExp1());
 				Optimize(op->GetExp2());
+
+				InstruType it1 = (*(op->GetExp1()))->GetInstructionType();
+				InstruType it2 = (*(op->GetExp2()))->GetInstructionType();
 
 				if((it1 == IT_VAL && it2 == IT_VAL) || (it1 == IT_VAL && it2 == IT_CON) || (it1 == IT_CON && it2 == IT_VAL)
 					|| (it1 == IT_CON && it2 == IT_CON))
 				{
 					*inst = new Value(op->Execute());
 					delete op;
+				}
+				else
+				{
+					Operator o = op->GetOperator();
+					switch(o)
+					{
+						case OP_PLUS:
+							if((*(op->GetExp1()))->Execute() == 0 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
+							{
+								*inst = *(op->GetExp2());
+								delete op;
+							}
+							else if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_MINUS:
+							if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_DIVIDE:
+							if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_TIMES:
+							if((*(op->GetExp1()))->Execute() == 1 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
+							{
+								*inst = *(op->GetExp2());
+								delete op;
+							}
+							else if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						default:
+							break;
+					}
 				}
 			}
 			break;
@@ -370,22 +422,71 @@ void Program::Optimize(Instruction** inst)
 
 void Program::Optimize(Expression** inst)
 {
+	//std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
 	switch((*inst)->GetInstructionType())
 	{
 		case IT_OPE:
 			{
 				Operation* op = static_cast<Operation*>(*inst);
-				InstruType it1 = (*(op->GetExp1()))->GetInstructionType();
-				InstruType it2 = (*(op->GetExp2()))->GetInstructionType();
 
 				Optimize(op->GetExp1());
 				Optimize(op->GetExp2());
+
+				InstruType it1 = (*(op->GetExp1()))->GetInstructionType();
+				InstruType it2 = (*(op->GetExp2()))->GetInstructionType();
 
 				if((it1 == IT_VAL && it2 == IT_VAL) || (it1 == IT_VAL && it2 == IT_CON) || (it1 == IT_CON && it2 == IT_VAL)
 					|| (it1 == IT_CON && it2 == IT_CON))
 				{
 					*inst = new Value(op->Execute());
 					delete op;
+				}  
+				else
+				{
+					Operator o = op->GetOperator();
+					switch(o)
+					{
+						case OP_PLUS:
+							if((*(op->GetExp1()))->Execute() == 0 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
+							{
+								*inst = *(op->GetExp2());
+								delete op;
+							}
+							else if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_MINUS:
+							if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_DIVIDE:
+							if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_TIMES:
+							if((*(op->GetExp1()))->Execute() == 1 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
+							{
+								*inst = *(op->GetExp2());
+								delete op;
+							}
+							else if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						default:
+							break;
+					}
 				}
 			}
 			break;

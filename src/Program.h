@@ -15,6 +15,7 @@
 #include "Constant.h"
 #include "Word.h"
 #include "NestedExpression.h"
+#include "Operation.h"
 
 bool operator<(const std::string &s1, const std::string &s2);
 
@@ -39,8 +40,9 @@ class Program
 		bool addVariable(Variable *variable);
 		Variable *getGrammarVariable(const std::string &id);
 		Expression *buildExpression(const Word *w);
-		void Optimize(Instruction** inst);
-		void Optimize(Expression** inst);
+		void Optimize(Instruction**);
+		void Optimize(Expression**);
+		void OptimizeOperation(Instruction**);
 
 		std::vector<Instruction*> instructions;
 		std::map<std::string, Variable*> variables;
