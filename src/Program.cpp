@@ -30,6 +30,22 @@ Program::Program()
 {
 }
 
+Program::~Program()
+{
+	std::vector<Instruction*>::iterator itInst;
+	std::map<std::string, Variable*>::iterator itVar;
+	
+	for(itInst = instructions.begin(); itInst != instructions.end(); ++itInst)
+	{
+		delete *itInst;
+	}
+
+	for(itVar = variables.begin(); itVar != variables.end(); ++itVar)
+	{
+		delete itVar->second;
+	}
+}
+
 void Program::Build(const Word *word)
 {
 	WordContainer *container = word->GetVal().wordContainer;

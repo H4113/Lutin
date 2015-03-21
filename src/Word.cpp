@@ -19,10 +19,22 @@ Word::Word(Symbol nsymbol, UWordVal nval) :
 
 Word::~Word()
 {
-	if(symbol == SYM_id) {
+	if(symbol == SYM_id)
+	{
 		delete val.varid;
-	} else if(symbol == SYM_n) {
+	}
+	else if(symbol == SYM_n)
+	{
 		delete val.number;
+	}
+	else if(!IsTerminal(symbol)) // Has a container
+	{
+		for(unsigned int i = 0; i < val.wordContainer->size; ++i)
+		{
+			delete val.wordContainer->words[i];
+		}
+		delete [] val.wordContainer->words;
+		delete val.wordContainer;
 	}
 }
 

@@ -23,6 +23,7 @@ class Program
 {
 	public:
 		Program();
+		virtual ~Program();
 
 		void Build(const Word *word);
 		void DisplayCode(void);
