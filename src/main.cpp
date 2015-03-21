@@ -126,6 +126,9 @@ int main(int argc, char** argv)
 					    x := 3;\n\
 						jambon:=((2+y)*x)+4;\n\
 						optimizeThis := 4*(5+8);\n\
+						testlol := x / 1;\n\
+						test2 := 1 * x;\n\
+						test3 := 4 / 1;\n\
 						kitty := 4;\n\
 						ecrire y;";
 	std::istringstream iss(code);

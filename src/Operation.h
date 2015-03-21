@@ -43,6 +43,8 @@ class Operation: public Expression
 		Expression** GetExp1(void);
 
 		Expression** GetExp2(void);
+
+		Operator GetOperator(void) const;
 	private: 
 		Expression* exp1;
 		Expression* exp2;

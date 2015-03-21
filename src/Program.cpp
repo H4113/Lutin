@@ -15,6 +15,7 @@
 #include "Value.h"
 #include "NestedExpression.h"
 #include "Utils.h"
+#include "Operator.h"
 
 bool operator<(const std::string &s1, const std::string &s2)
 {
@@ -340,6 +341,53 @@ void Program::Optimize(Instruction** inst)
 					*inst = new Value(op->Execute());
 					delete op;
 				}
+				else
+				{
+					Operator o = op->GetOperator();
+					switch(o)
+					{
+						case OP_PLUS:
+							if((*(op->GetExp1()))->Execute() == 0) 
+							{
+								*inst = *(op->GetExp2());
+								delete op;
+							}
+							else if((*(op->GetExp2()))->Execute() == 0)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_MINUS:
+							if((*(op->GetExp2()))->Execute() == 0)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_DIVIDE:
+							if((*(op->GetExp2()))->Execute() == 1)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_TIMES:
+							if((*(op->GetExp1()))->Execute() == 1) 
+							{
+								*inst = *(op->GetExp2());
+								delete op;
+							}
+							else if((*(op->GetExp2()))->Execute() == 1)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						default:
+							break;
+					}
+				}
 			}
 			break;
 		case IT_NES:
@@ -392,6 +440,53 @@ void Program::Optimize(Expression** inst)
 				{
 					*inst = new Value(op->Execute());
 					delete op;
+				}  
+				else
+				{
+					Operator o = op->GetOperator();
+					switch(o)
+					{
+						case OP_PLUS:
+							if((*(op->GetExp1()))->Execute() == 0) 
+							{
+								*inst = *(op->GetExp2());
+								delete op;
+							}
+							else if((*(op->GetExp2()))->Execute() == 0)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_MINUS:
+							if((*(op->GetExp2()))->Execute() == 0)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_DIVIDE:
+							if((*(op->GetExp2()))->Execute() == 1)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						case OP_TIMES:
+							if((*(op->GetExp1()))->Execute() == 1) 
+							{
+								*inst = *(op->GetExp2());
+								delete op;
+							}
+							else if((*(op->GetExp2()))->Execute() == 1)
+							{
+								*inst = *(op->GetExp1());
+								delete op;
+							}
+							break;
+						default:
+							break;
+					}
 				}
 			}
 			break;
