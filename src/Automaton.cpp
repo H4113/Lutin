@@ -81,12 +81,14 @@ Word *Automaton::Read(std::istream &stream)
 						std::cerr << " expected" << std::endl;
 					}
 					analyzer.Shift();
+					delete w;
+					w = 0;
 				}
 				error = true;
 				break;
 		}
 
-		if(w->GetSymbol() == SYM_end)
+		if(w != 0 && w->GetSymbol() == SYM_end)
 			delete w;
 	}
 
