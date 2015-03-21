@@ -90,14 +90,32 @@ InstruType Operation::GetInstructionType(void) const
 	return IT_OPE;
 }
 
-Expression** Operation::GetExp1(void)
+void Operation::SetExp1(Expression *e)
 {
-	return &exp1;
+	if(e == exp1)
+		return;
+	if(exp1 != 0 && exp1->MayBeDeleted())
+		delete exp1;
+	exp1 = e;
 }
 
-Expression** Operation::GetExp2(void)
+Expression* Operation::GetExp1(void)
 {
-	return &exp2;
+	return exp1;
+}
+
+void Operation::SetExp2(Expression *e)
+{
+	if(e == exp2)
+		return;
+	if(exp2 != 0 && exp2->MayBeDeleted())
+		delete exp2;
+	exp2 = e;
+}
+
+Expression* Operation::GetExp2(void)
+{
+	return exp2;
 }
 
 Operator Operation::GetOperator(void) const

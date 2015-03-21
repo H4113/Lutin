@@ -341,163 +341,40 @@ void Program::Optimize(void)
 	for(std::vector<Instruction*>::iterator it = instructions.begin(); it != instructions.end(); ++it)
 	{
 		//(*it)->Display();
-		Optimize(&(*it),varKnown);
+		Optimize(*it,varKnown);
 		//(*it)->Display();
 	}
 }
 
-void Program::Optimize(Instruction** inst, std::map<Variable*, int> & varKnown)
+void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 {
 	//std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
-	switch((*inst)->GetInstructionType())
+	switch((inst)->GetInstructionType())
 	{
-		case IT_OPE:
-			{
-				Operation* op = static_cast<Operation*>(*inst);
-
-				Optimize(op->GetExp1(),varKnown);
-				Optimize(op->GetExp2(),varKnown);
-
-				InstruType it1 = (*(op->GetExp1()))->GetInstructionType();
-				InstruType it2 = (*(op->GetExp2()))->GetInstructionType();
-
-				if((it1 == IT_VAL && it2 == IT_VAL) 
-					|| (it1 == IT_VAL && it2 == IT_CON) 
-					|| (it1 == IT_CON && it2 == IT_VAL)
-					|| (it1 == IT_CON && it2 == IT_CON))
-				{
-					*inst = new Value(op->Execute());
-					delete op;
-				}
-				else if( it1 == IT_VAR && it2 == IT_VAR )
-				{
-					Variable* v1 = static_cast<Variable*>(*(op->GetExp1()));
-					Variable* v2 = static_cast<Variable*>(*(op->GetExp2()));
-					std::map<Variable*, int>::iterator vit1 = varKnown.find(v1);
-					std::map<Variable*, int>::iterator vit2 = varKnown.find(v2);
-					if(vit1 != varKnown.end() && vit2 != varKnown.end())
-					{
-						v1->Set(vit1->second);
-						v2->Set(vit2->second);
-						*inst = new Value(op->Execute());
-						delete op;
-					}
-					else if(vit1 != varKnown.end())
-					{
-						*(op->GetExp1()) = new Value(vit1->second);
-					}else if(vit2 != varKnown.end()){
-						*(op->GetExp2()) = new Value(vit2->second);
-					}
-				}
-				else if( it1 == IT_VAR || it2 == IT_VAR )
-				{
-					Variable* v;
-					if(it1 == IT_VAR)
-					{
-						v = static_cast<Variable*>(*(op->GetExp1()));
-					}else{
-						v = static_cast<Variable*>(*(op->GetExp2()));
-					}
-					std::map<Variable*, int>::iterator vit = varKnown.find(v);
-					if(vit != varKnown.end() && ( 
-						(it1 == IT_VAR && (it2 == IT_VAL || it2 == IT_CON) )
-						|| (it2 == IT_VAR && (it1 == IT_VAL || it1 == IT_CON) ) ) ) 
-					{
-						v->Set(vit->second);
-						*inst = new Value(op->Execute());
-						delete op;
-					}
-					if(it1 == IT_VAR && (it2 == IT_NES || it2 == IT_OPE) )
-					{
-						*(op->GetExp1()) = new Value(vit->second);
-					}
-					else if(it2 == IT_VAR && (it1 == IT_NES || it1 == IT_OPE) )
-					{
-						*(op->GetExp2()) = new Value(vit->second);
-					}
-				}
-				else
-				{
-					Operator o = op->GetOperator();
-					switch(o)
-					{
-						case OP_PLUS:
-							if((*(op->GetExp1()))->Execute() == 0 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
-							{
-								*inst = *(op->GetExp2());
-								delete op;
-							}
-							else if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
-							{
-								*inst = *(op->GetExp1());
-								delete op;
-							}
-							break;
-						case OP_MINUS:
-							if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
-							{
-								*inst = *(op->GetExp1());
-								delete op;
-							}
-							break;
-						case OP_DIVIDE:
-							if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
-							{
-								*inst = *(op->GetExp1());
-								delete op;
-							}
-							break;
-						case OP_TIMES:
-							if((*(op->GetExp1()))->Execute() == 1 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
-							{
-								*inst = *(op->GetExp2());
-								delete op;
-							}
-							else if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
-							{
-								*inst = *(op->GetExp1());
-								delete op;
-							}
-							break;
-						default:
-							break;
-					}
-				}
-			}
-			break;
-		case IT_NES:
-			{
-				NestedExpression* op = static_cast<NestedExpression*>(*inst);
-				Optimize(op->GetExpression(),varKnown);
-
-				InstruType it = (*(op->GetExpression()))->GetInstructionType();
-
-				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
-					*inst = (*(op->GetExpression()));
-					delete op;
-				}
-			}
-			break;
 		case IT_WRI:
 			{
-				Write* w = static_cast<Write*>(*inst);
-				Optimize(w->GetExpression(),varKnown);
+				Write* w = static_cast<Write*>(inst);
+				w->SetExpression(Optimize(w->GetExpression(),varKnown));
 			}
 			break;
 		case IT_ASS:
 			{
-				Assignment* ass = static_cast<Assignment*>(*inst);
-				Optimize(ass->GetExpression(),varKnown);
-				InstruType it = (*(ass->GetExpression()))->GetInstructionType();
+				Assignment* ass = static_cast<Assignment*>(inst);
+				InstruType it;
+				Expression *e;
+				
+				ass->SetExpression(Optimize(ass->GetExpression(),varKnown));
+				e = ass->GetExpression();
+				it = e->GetInstructionType();
 
 				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
-					varKnown[ass->GetAssignedVar()] = (*(ass->GetExpression()))->Execute();
+					varKnown[ass->GetAssignedVar()] = e->Execute();
 				}
 			}
 			break;
 		case IT_REA:
 			{
-				Read* rea = static_cast<Read*>(*inst);
+				Read* rea = static_cast<Read*>(inst);
 				varKnown.erase(rea->GetAssignedVar());
 			}
 		default:
@@ -505,73 +382,79 @@ void Program::Optimize(Instruction** inst, std::map<Variable*, int> & varKnown)
 	}
 }
 
-void Program::Optimize(Expression** inst, std::map<Variable*, int> & varKnown)
+Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKnown)
 {
 	//std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
-	switch((*inst)->GetInstructionType())
+	switch(inst->GetInstructionType())
 	{
 		case IT_OPE:
 			{
-				Operation* op = static_cast<Operation*>(*inst);
+				Operation* op = static_cast<Operation*>(inst);
+				InstruType it1;
+				InstruType it2;
+				Expression *e1;
+				Expression *e2;
 
-				Optimize(op->GetExp1(),varKnown);
-				Optimize(op->GetExp2(),varKnown);
+				op->SetExp1(Optimize(op->GetExp1(),varKnown));
+				op->SetExp2(Optimize(op->GetExp2(),varKnown));
 
-				InstruType it1 = (*(op->GetExp1()))->GetInstructionType();
-				InstruType it2 = (*(op->GetExp2()))->GetInstructionType();
+				e1 = op->GetExp1();
+				e2 = op->GetExp2();
+				it1 = e1->GetInstructionType();
+				it2 = e2->GetInstructionType();
 
 				if((it1 == IT_VAL && it2 == IT_VAL) || (it1 == IT_VAL && it2 == IT_CON) || (it1 == IT_CON && it2 == IT_VAL)
 					|| (it1 == IT_CON && it2 == IT_CON))
 				{
-					*inst = new Value(op->Execute());
-					delete op;
+					return new Value(op->Execute());
 				}
 				else if( it1 == IT_VAR && it2 == IT_VAR )
 				{
-					Variable* v1 = static_cast<Variable*>(*(op->GetExp1()));
-					Variable* v2 = static_cast<Variable*>(*(op->GetExp2()));
+					Variable* v1 = static_cast<Variable*>(e1);
+					Variable* v2 = static_cast<Variable*>(e2);
 					std::map<Variable*, int>::iterator vit1 = varKnown.find(v1);
 					std::map<Variable*, int>::iterator vit2 = varKnown.find(v2);
 					if(vit1 != varKnown.end() && vit2 != varKnown.end())
 					{
 						v1->Set(vit1->second);
 						v2->Set(vit2->second);
-						*inst = new Value(op->Execute());
-						delete op;
+						return new Value(op->Execute());
 					}
 					else if(vit1 != varKnown.end())
 					{
-						*(op->GetExp1()) = new Value(vit1->second);
+						op->SetExp1(new Value(vit1->second));
 						
 					}else if(vit2 != varKnown.end()){
-						*(op->GetExp2()) = new Value(vit2->second);
+						op->SetExp2(new Value(vit2->second));
 					}
 				}
 				else if( it1 == IT_VAR || it2 == IT_VAR )
 				{
 					Variable* v;
+					std::map<Variable*, int>::iterator vit;
+					
 					if(it1 == IT_VAR)
 					{
-						v = static_cast<Variable*>(*(op->GetExp1()));
+						v = static_cast<Variable*>(e1);
 					}else{
-						v = static_cast<Variable*>(*(op->GetExp2()));
+						v = static_cast<Variable*>(e2);
 					}
-					std::map<Variable*, int>::iterator vit = varKnown.find(v);
+
+					vit = varKnown.find(v);
 					if(vit != varKnown.end() && ( 
 						(it1 == IT_VAR && (it2 == IT_VAL || it2 == IT_CON) )
 						|| (it2 == IT_VAR && (it1 == IT_VAL || it1 == IT_CON) ) ) ) 
 					{
 						v->Set(vit->second);
-						*inst = new Value(op->Execute());
-						delete op;
+						return new Value(op->Execute());
 					}
 					if(it1 == IT_VAR && (it2 == IT_NES || it2 == IT_OPE) )
 					{
-						*(op->GetExp1()) = new Value(vit->second);
+						op->SetExp1(new Value(vit->second));
 					}
 					else if(it2 == IT_VAR && (it1 == IT_NES || it1 == IT_OPE) )
 					{
-						*(op->GetExp2()) = new Value(vit->second);
+						op->SetExp2(new Value(vit->second));
 					}
 				}
 				else
@@ -580,41 +463,35 @@ void Program::Optimize(Expression** inst, std::map<Variable*, int> & varKnown)
 					switch(o)
 					{
 						case OP_PLUS:
-							if((*(op->GetExp1()))->Execute() == 0 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
+							if(e1->Execute() == 0 && e1->GetInstructionType() != IT_VAR) 
 							{
-								*inst = *(op->GetExp2());
-								delete op;
+								return e2;
 							}
-							else if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							else if(e2->Execute() == 0 && e2->GetInstructionType() != IT_VAR)
 							{
-								*inst = *(op->GetExp1());
-								delete op;
+								return e1;
 							}
 							break;
 						case OP_MINUS:
-							if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							if(e2->Execute() == 0 && e2->GetInstructionType() != IT_VAR)
 							{
-								*inst = *(op->GetExp1());
-								delete op;
+								return e1;
 							}
 							break;
 						case OP_DIVIDE:
-							if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							if(e2->Execute() == 1 && e2->GetInstructionType() != IT_VAR)
 							{
-								*inst = *(op->GetExp1());
-								delete op;
+								return e1;
 							}
 							break;
 						case OP_TIMES:
-							if((*(op->GetExp1()))->Execute() == 1 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
+							if(e1->Execute() == 1 && e1->GetInstructionType() != IT_VAR) 
 							{
-								*inst = *(op->GetExp2());
-								delete op;
+								return e2;
 							}
-							else if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
+							else if(e2->Execute() == 1 && e2->GetInstructionType() != IT_VAR)
 							{
-								*inst = *(op->GetExp1());
-								delete op;
+								return e1;
 							}
 							break;
 						default:
@@ -625,20 +502,25 @@ void Program::Optimize(Expression** inst, std::map<Variable*, int> & varKnown)
 			break;
 		case IT_NES:
 			{
-				NestedExpression* op = static_cast<NestedExpression*>(*inst);
-				Optimize(op->GetExpression(),varKnown);
+				NestedExpression* op = static_cast<NestedExpression*>(inst);
+				InstruType it;
+				Expression *e;
 
-				InstruType it = (*(op->GetExpression()))->GetInstructionType();
+				op->SetExpression(Optimize(op->GetExpression(),varKnown));
+
+				e = op->GetExpression();
+				it = e->GetInstructionType();
 
 				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
-					*inst = (*(op->GetExpression()));
-					delete op;
+					return e;
 				}
 			}
 			break;
 		default:
 			break;
 	}
+
+	return inst;
 }
 
 void Program::Execute(void) 

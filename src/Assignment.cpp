@@ -55,7 +55,16 @@ Variable* Assignment::GetAssignedVar() const
 	return var;
 }
 
-Expression** Assignment::GetExpression(void)
+void Assignment::SetExpression(Expression *e)
 {
-	return &exp;
+	if(e == exp)
+		return;
+	if(exp != 0 && exp->MayBeDeleted())
+		delete exp;
+	exp = e;
+}
+
+Expression* Assignment::GetExpression(void)
+{
+	return exp;
 }

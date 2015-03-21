@@ -40,9 +40,11 @@ class Operation: public Expression
 		//@Override
 		InstruType GetInstructionType(void) const;
 
-		Expression** GetExp1(void);
+		void SetExp1(Expression *e);
+		Expression* GetExp1(void);
 
-		Expression** GetExp2(void);
+		void SetExp2(Expression *e);
+		Expression* GetExp2(void);
 
 		Operator GetOperator(void) const;
 	private: 

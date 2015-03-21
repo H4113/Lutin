@@ -49,7 +49,16 @@ InstruType Write::GetInstructionType(void) const
 	return IT_WRI;
 }
 
-Expression** Write::GetExpression(void)
+void Write::SetExpression(Expression *e)
 {
-	return &expression;
+	if(e == expression)
+		return;
+	if(expression != 0 && expression->MayBeDeleted())
+		delete expression;
+	expression = e;
+}
+
+Expression* Write::GetExpression(void)
+{
+	return expression;
 }

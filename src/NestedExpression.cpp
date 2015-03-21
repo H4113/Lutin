@@ -38,7 +38,16 @@ InstruType NestedExpression::GetInstructionType(void) const
 	return IT_NES;
 }
 
-Expression** NestedExpression::GetExpression(void)
+void NestedExpression::SetExpression(Expression *e)
 {
-	return &expression;
+	if(e == expression)
+		return;
+	if(expression != 0 && expression->MayBeDeleted())
+		delete expression;
+	expression = e;
+}
+
+Expression* NestedExpression::GetExpression(void)
+{
+	return expression;
 }

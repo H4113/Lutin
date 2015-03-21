@@ -46,7 +46,8 @@ class Assignment: public Instruction
 		//Override
 		Variable* GetAssignedVar() const;
 
-		Expression** GetExpression(void);
+		void SetExpression(Expression *e);
+		Expression* GetExpression(void);
 	private:
 		// The variable to be assigned
 		Variable* var;

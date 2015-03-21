@@ -39,7 +39,8 @@ class Write: public Instruction
 		//@Override
 		InstruType GetInstructionType(void) const;
 
-		Expression** GetExpression(void);
+		void SetExpression(Expression *e);
+		Expression* GetExpression(void);
 	private: 
 		Expression* expression;
 };
