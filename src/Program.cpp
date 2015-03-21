@@ -313,15 +313,12 @@ void Program::Optimize(void)
 {
 	for(std::vector<Instruction*>::iterator it = instructions.begin(); it != instructions.end(); ++it)
 	{
-		(*it)->Display();
 		Optimize(&(*it));
-		(*it)->Display();
 	}
 }
 
 void Program::Optimize(Instruction** inst)
 {
-	std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
 	switch((*inst)->GetInstructionType())
 	{
 		case IT_OPE:
@@ -373,7 +370,6 @@ void Program::Optimize(Instruction** inst)
 
 void Program::Optimize(Expression** inst)
 {
-	std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
 	switch((*inst)->GetInstructionType())
 	{
 		case IT_OPE:

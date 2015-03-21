@@ -140,10 +140,7 @@ int main(int argc, char** argv)
 		std::debug << "This is what Lutin understood:" << std::endl << std::endl;
 		program.DisplayCode();
 
-		std::cout << std::endl << "################" << std::endl;
-		std::cout << "Optimization:" << std::endl << std::endl;	
 		program.Optimize();
-		std::cout << std::endl << "################" << std::endl;
 		program.DisplayCode();
 
 		program.Execute();
