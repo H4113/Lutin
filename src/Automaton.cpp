@@ -36,9 +36,9 @@ Word *Automaton::Read(std::istream &stream)
 	while(!done)
 	{
 		w = analyzer.GetCurrentWord();
-		if(w == 0) {
+		if(w == 0)
 			continue;
-		}
+		
 #ifdef DEBUG
 		Word::DebugWord(w);
 #endif
@@ -46,9 +46,11 @@ Word *Automaton::Read(std::istream &stream)
 		switch(states.top()->Transition(this, w))
 		{
 			case SR_TRANSITION: // Ok
+				error = false;
 				break;
 			case SR_ACCEPT:
 				done = true;
+				error = false;
 #ifdef DEBUG
 				std::cout << "*-----PROGRAM ACCEPTED-----*" << std::endl;
 #endif
@@ -62,28 +64,41 @@ Word *Automaton::Read(std::istream &stream)
 				}
 				else
 				{
-					const std::vector<Symbol> &expected = states.top()->GetExpectedTerminals(); 
-					Word::DebugWord(w);
-					std::cerr << "Syntax error (" << analyzer.GetCurrentLine()
-							  << ":" << analyzer.GetCurrentCharacter() << ") ";
-					
-					for(unsigned int i = 0; i < expected.size(); ++i)
+					if(!error)
 					{
-						std::string name = SymbolToString(expected[i]);
-						std::cerr << name;
-						if(i+1 != expected.size())
-							std::cerr << " or ";
+						const std::vector<Symbol> &expected = states.top()->GetExpectedTerminals(); 
+						Word::DebugWord(w);
+						std::cerr << "Syntax error (" << analyzer.GetCurrentLine()
+								  << ":" << analyzer.GetCurrentCharacter() << ") ";
+						
+						for(unsigned int i = 0; i < expected.size(); ++i)
+						{
+							std::string name = SymbolToString(expected[i]);
+							std::cerr << name;
+							if(i+1 != expected.size())
+								std::cerr << " or ";
+						}
+						std::cerr << " expected" << std::endl;
 					}
-					std::cerr << " expected" << std::endl;
-					error = true;
 					analyzer.Shift();
 				}
+				error = true;
 				break;
 		}
 	}
 
-	if(done)
+	if(!error)
+	{
+		std::cout << words.size() << " ord kvar" << std::endl;
 		return words.top();
+	}
+
+	while(words.size())
+	{
+		delete words.top();
+		words.pop();
+	}
+
 	return 0;
 }
 
@@ -142,13 +157,6 @@ StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
 		
 	return result;  
 }
-
-void Automaton::TestAutomaton(void) 
-{
-	//program.TestProgram();
-	//program.DisplayCode();
-}
-
 
 void Automaton::pushWord(Word *word)
 {
