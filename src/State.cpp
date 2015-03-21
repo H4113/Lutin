@@ -17,3 +17,8 @@ State::~State()
 {
 }
 
+const std::vector<Symbol> &State::GetExpectedTerminals(void) const
+{
+	return expectedTerminals;
+}
+

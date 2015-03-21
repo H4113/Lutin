@@ -35,7 +35,7 @@ const regex REG[NB_RULES] = {
 	regex("^\\("),
 	regex("^\\)"),
 	regex("^([a-zA-Z][a-zA-Z0-9]*)[^a-zA-Z0-9]"),
-	regex("^([0-9]+)[^0-9]+")
+	regex("^([0-9]+)([^0-9]|$)+")
 };
 const Symbol SYMBOLS[NB_RULES] = {
 	SYM_v,
@@ -66,7 +66,8 @@ void LexicalAnalyzer::SetInputStream(std::istream *nstream)
 {
 	stream = nstream;
 	lineCount = 0;
-	characterCount = 0;
+	characterCount = 1;
+	oldCharacterCount = 1;	
 }
 
 Word* LexicalAnalyzer::GetCurrentWord()
@@ -77,6 +78,7 @@ Word* LexicalAnalyzer::GetCurrentWord()
 	// get the new line 
 	if(str.empty()) {
 		++lineCount;
+		oldCharacterCount = characterCount;
 		characterCount = 1;
 		std::getline(*stream, str);
 	}
@@ -90,6 +92,7 @@ Word* LexicalAnalyzer::GetCurrentWord()
 	smatch match;
 	// erase blank characters at the begining of the string
 	if(regex_search(str, match, REG_JUNK) ) {
+		oldCharacterCount = characterCount;
 		characterCount += match[0].length();
 		str.erase(str.begin(),str.begin()+match[0].length());
 	}
@@ -114,6 +117,7 @@ Word* LexicalAnalyzer::GetCurrentWord()
 				nbCharactersToErase = match[0].length();
 			}
 			str.erase(str.begin(),str.begin()+nbCharactersToErase);
+			oldCharacterCount = characterCount;
 			characterCount += nbCharactersToErase;
 
 			lastWordKnown = true;
@@ -124,6 +128,7 @@ Word* LexicalAnalyzer::GetCurrentWord()
 	// no matched rules:
 	std::cerr << "Erreur lexicale ("<< lineCount <<":"<< characterCount
 			  << ") caractere "<<str[0]<<std::endl;
+	oldCharacterCount = characterCount;
 	characterCount += 1;
 	str.erase(str.begin(),str.begin()+1);
 	currentWord = 0;
@@ -154,5 +159,5 @@ unsigned int LexicalAnalyzer::GetCurrentLine()
 
 unsigned int LexicalAnalyzer::GetCurrentCharacter()
 {
-	return characterCount;
+	return oldCharacterCount;
 }
