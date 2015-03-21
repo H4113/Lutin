@@ -105,6 +105,8 @@ int main(int argc, char** argv)
 			{
 				program.Execute();
 			}
+
+			delete p;
 		}
 		else
 		{
