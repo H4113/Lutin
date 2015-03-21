@@ -14,12 +14,13 @@ using namespace std;
 #include <boost/regex.hpp>
 using namespace boost;
 #endif
+
  /**
  * LexicalAnalyzer implementation
  */
 
-const int NB_RULES = 16;
-const regex REG[NB_RULES] = {
+const int NB_LEXER_RULES = 16;
+const regex REG[NB_LEXER_RULES] = {
 	regex("^var\\s"),
 	regex("^ecrire\\s"),
 	regex("^lire\\s"),
@@ -35,9 +36,9 @@ const regex REG[NB_RULES] = {
 	regex("^\\("),
 	regex("^\\)"),
 	regex("^([a-zA-Z][a-zA-Z0-9]*)[^a-zA-Z0-9]"),
-	regex("^([0-9]+)([^0-9]|$)+")
+	regex("^([0-9]+)([^0-9]|$)")
 };
-const Symbol SYMBOLS[NB_RULES] = {
+const Symbol SYMBOLS[NB_LEXER_RULES] = {
 	SYM_v,
 	SYM_w,
 	SYM_r,
@@ -100,7 +101,7 @@ Word* LexicalAnalyzer::GetCurrentWord()
 		return 0;
 	}
 	// test all the rules
-	for(int i=0; i<NB_RULES;++i) {
+	for(int i=0; i<NB_LEXER_RULES;++i) {
 		if(regex_search(str, match, REG[i]) ) {
 			Symbol symbolReturn = SYMBOLS[i];
 
