@@ -16,7 +16,7 @@ class Element: public Expression
 {
 	public:
 		Element();
-		~Element();
+		virtual ~Element();
 		/**
 		 * @param value
 		 */
@@ -32,8 +32,7 @@ class Element: public Expression
 		//Override
 		virtual void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const = 0;
 	protected:
-		// The value
-		int* pointer;
+		int value;
 };
 
 #endif //_ELEMENT_H

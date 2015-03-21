@@ -27,6 +27,8 @@ class Instruction
 {
 	public: 
 		Instruction();
+		virtual ~Instruction();
+
 		virtual int Execute(void) = 0;
 		
 		virtual void Display(void) const = 0;
@@ -48,6 +50,11 @@ class Instruction
 		virtual Variable* GetAssignedVar() const;
 
 		virtual Variable* GetModifiedVariable(void) const;
+
+		/*
+		 * Returns whether the instruction may be deleted by another one or not
+		 */
+		bool MayBeDeleted(void) const;
 };
 
 #endif //_INSTRUCTION_H

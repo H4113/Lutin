@@ -11,9 +11,13 @@
  */
 
 
-Variable::Variable(const std::string& n) : Element(), name(n)
+Variable::Variable(const std::string& n):
+	name(n)
 {
+}
 
+Variable::~Variable()
+{
 }
 
 std::string Variable::GetName(void) const 

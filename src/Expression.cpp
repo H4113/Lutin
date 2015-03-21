@@ -12,3 +12,8 @@
 Expression::Expression()
 {
 }
+
+Expression::~Expression()
+{
+}
+

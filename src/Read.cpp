@@ -10,9 +10,13 @@
  * Read implementation
  */
 
-Read::Read(Variable* v) : var(v) 
+Read::Read(Variable* v):
+	var(v) 
+{	
+}
+
+Read::~Read()
 {
-	
 }
 
 void Read::Display(void) const 

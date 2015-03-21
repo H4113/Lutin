@@ -13,9 +13,9 @@ class Value: public Element
 {
 	public:
 		Value();
-
 		Value(int);
-		
+		virtual ~Value();
+
 		/**
 		 *	Display the code corresponding to the constant.
 		 */ 
@@ -28,11 +28,7 @@ class Value: public Element
 		std::string ToString(void) const;
 
 		//Override
-		void GetVariables(std::set<const Variable*> &set, bool) const
-		{
-			//Does nothing
-			(void)set;
-		};
+		void GetVariables(std::set<const Variable*> &set, bool) const;
 
 		//@Override
 		InstruType GetInstructionType(void) const;

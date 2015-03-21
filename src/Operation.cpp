@@ -9,15 +9,19 @@
  * Operation implementation
  */
 
-Operation::Operation(Expression* e1, Operator o, Expression* e2) :
-	Expression(), exp1(e1), exp2(e2), op(o)
+Operation::Operation(Expression* e1, Operator o, Expression* e2):
+	exp1(e1),
+	exp2(e2),
+	op(o)
 {
-
 }
 
 Operation::~Operation()
 {
-	
+	if(exp1->MayBeDeleted())
+		delete exp1;
+	if(exp2->MayBeDeleted())
+		delete exp2;	
 }
 
 void Operation::Display(void) const {

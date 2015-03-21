@@ -14,9 +14,14 @@
 /**
  * @param value
  */
-Constant::Constant(const std::string& n, const int& value) : Variable(n) 
+Constant::Constant(const std::string& n, const int& val):
+	Variable(n) 
 {
-	*pointer = value;
+	value = val;
+}
+
+Constant::~Constant()
+{
 }
 
 void Constant::Display(void) const 
@@ -31,10 +36,11 @@ bool Constant::IsConstant(void) const
 
 std::string Constant::GetDeclaration(void) const 
 {
-	return "const " + name + " = " + std::to_string(*pointer) + ";";
+	return "const " + name + " = " + std::to_string(value) + ";";
 }
 
 InstruType Constant::GetInstructionType(void) const
 {
 	return IT_CON;
 }
+
