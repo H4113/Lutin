@@ -118,19 +118,9 @@ int main(int argc, char** argv)
     }
 
 #else
-	std::string code = "var x , y, jambon, optimizeThis; \n\
-					    const salade=28, pate = 42 ;\n\
-					    ecrire sample ;\n\
-					    lire x;\n\n\
-					    y := 1;\n\
-					    x := 3;\n\
-						jambon:=((2+y)*x)+4;\n\
-						optimizeThis := 4*(5+8);\n\
-						testlol := x / 1;\n\
-						test2 := 1 * x;\n\
-						test3 := 4 / 1;\n\
-						kitty := 4;\n\
-						ecrire y;";
+	std::string code = "var a;\n\
+lire a;\n\
+ecrire (a+0)*1-0;";
 	std::istringstream iss(code);
 
 	p = automaton.Read(iss);

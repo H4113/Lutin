@@ -347,38 +347,38 @@ void Program::Optimize(Instruction** inst)
 					switch(o)
 					{
 						case OP_PLUS:
-							if((*(op->GetExp1()))->Execute() == 0) 
+							if((*(op->GetExp1()))->Execute() == 0 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
 							{
 								*inst = *(op->GetExp2());
 								delete op;
 							}
-							else if((*(op->GetExp2()))->Execute() == 0)
+							else if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
 							{
 								*inst = *(op->GetExp1());
 								delete op;
 							}
 							break;
 						case OP_MINUS:
-							if((*(op->GetExp2()))->Execute() == 0)
+							if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
 							{
 								*inst = *(op->GetExp1());
 								delete op;
 							}
 							break;
 						case OP_DIVIDE:
-							if((*(op->GetExp2()))->Execute() == 1)
+							if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
 							{
 								*inst = *(op->GetExp1());
 								delete op;
 							}
 							break;
 						case OP_TIMES:
-							if((*(op->GetExp1()))->Execute() == 1) 
+							if((*(op->GetExp1()))->Execute() == 1 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
 							{
 								*inst = *(op->GetExp2());
 								delete op;
 							}
-							else if((*(op->GetExp2()))->Execute() == 1)
+							else if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
 							{
 								*inst = *(op->GetExp1());
 								delete op;
@@ -447,38 +447,38 @@ void Program::Optimize(Expression** inst)
 					switch(o)
 					{
 						case OP_PLUS:
-							if((*(op->GetExp1()))->Execute() == 0) 
+							if((*(op->GetExp1()))->Execute() == 0 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
 							{
 								*inst = *(op->GetExp2());
 								delete op;
 							}
-							else if((*(op->GetExp2()))->Execute() == 0)
+							else if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
 							{
 								*inst = *(op->GetExp1());
 								delete op;
 							}
 							break;
 						case OP_MINUS:
-							if((*(op->GetExp2()))->Execute() == 0)
+							if((*(op->GetExp2()))->Execute() == 0 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
 							{
 								*inst = *(op->GetExp1());
 								delete op;
 							}
 							break;
 						case OP_DIVIDE:
-							if((*(op->GetExp2()))->Execute() == 1)
+							if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
 							{
 								*inst = *(op->GetExp1());
 								delete op;
 							}
 							break;
 						case OP_TIMES:
-							if((*(op->GetExp1()))->Execute() == 1) 
+							if((*(op->GetExp1()))->Execute() == 1 && (*(op->GetExp1()))->GetInstructionType() != IT_VAR) 
 							{
 								*inst = *(op->GetExp2());
 								delete op;
 							}
-							else if((*(op->GetExp2()))->Execute() == 1)
+							else if((*(op->GetExp2()))->Execute() == 1 && (*(op->GetExp2()))->GetInstructionType() != IT_VAR)
 							{
 								*inst = *(op->GetExp1());
 								delete op;
