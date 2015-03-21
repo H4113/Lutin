@@ -15,6 +15,7 @@ class Variable: public Element
 {
 	public: 
 		Variable(const std::string&);
+		virtual ~Variable();
 
 		/**
 		 *	@return name

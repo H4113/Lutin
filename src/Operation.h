@@ -15,8 +15,8 @@ class Operation: public Expression
 {
 	public:
 		Operation(Expression*, Operator, Expression*);
-
 		virtual ~Operation();
+		
 		/**
 		 *	Display the code corresponding to the operation instruction.
 		 */ 

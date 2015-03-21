@@ -12,11 +12,11 @@
 class Expression : public Instruction
 {
 	public:
+		Expression();
+		virtual ~Expression();
+		
 		//Override
 		virtual void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const = 0;
-
-	protected:
-		Expression();
 };
 
 #endif //_EXPRESSION_H

@@ -19,6 +19,7 @@ class Assignment: public Instruction
 {
 	public:
 		Assignment(Variable*, Expression*);
+		virtual ~Assignment();
 
 		/**
 		 *	Display the code corresponding to the assignment instruction.

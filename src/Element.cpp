@@ -7,23 +7,22 @@
  * Element implementation
  */
 
- Element::Element() : Expression()
+ Element::Element():
+	 value(0)
  {
- 	pointer = new int();
  }
 
  Element::~Element()
  {
- 	delete pointer;
  }
 
 /**
  * @param value
  * @return bool
  */
-bool Element::Set(int value) 
+bool Element::Set(int val) 
 {
-	*pointer = value;
+	value = val;
 	return true;
 }
 
@@ -32,10 +31,11 @@ bool Element::Set(int value)
  */
 int Element::Get(void) 
 {
-	return *pointer;
+	return value;
 }
 
 int Element::Execute(void) 
 {
-	return *pointer;
+	return value;
 }
+

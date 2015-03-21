@@ -8,9 +8,16 @@
  * Assignment implementation
  */
 
-Assignment::Assignment(Variable* v, Expression* e) : var(v), exp(e) 
+Assignment::Assignment(Variable* v, Expression* e):
+	var(v),
+	exp(e) 
 {
+}
 
+Assignment::~Assignment()
+{
+	if(exp->MayBeDeleted())
+		delete exp;
 }
 
 std::string Assignment::ToString(void) const 

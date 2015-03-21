@@ -14,6 +14,7 @@ class Write: public Instruction
 {
 	public:
 		Write(Expression*);
+		virtual ~Write();
 
 		/**
 		 *	Display the code corresponding to the write instruction.

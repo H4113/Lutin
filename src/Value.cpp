@@ -10,14 +10,17 @@
  * Value implementation
  */
 
-Value::Value() : Element()
+Value::Value()
 {
-
 }
 
-Value::Value(int val) : Element()
+Value::Value(int val)
 {
-	*pointer = val;
+	value = val;
+}
+
+Value::~Value()
+{
 }
 
 void Value::Display() const 
@@ -27,10 +30,17 @@ void Value::Display() const
 
 std::string Value::ToString(void) const 
 {
-	return std::to_string(*pointer);
+	return std::to_string(value);
+}
+
+void Value::GetVariables(std::set<const Variable*> &set, bool) const
+{
+	//Does nothing
+	//(void)set;
 }
 
 InstruType Value::GetInstructionType(void) const
 {
 	return IT_VAL;
 }
+

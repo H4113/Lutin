@@ -10,9 +10,16 @@
  * Write implementation
  */
 
-Write::Write(Expression* e) : expression(e) 
+Write::Write(Expression* e):
+	expression(e) 
 {
 	
+}
+
+Write::~Write()
+{
+	if(expression->MayBeDeleted())
+		delete expression;
 }
 
 void Write::Display(void) const 

@@ -14,6 +14,7 @@ class Read: public Instruction
 {
 	public:
 		Read(Variable*);
+		virtual ~Read();		
 
 		/**
 		 *	Display the code corresponding to the read instruction.
