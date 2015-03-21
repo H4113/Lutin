@@ -257,9 +257,12 @@ bool Program::addVariable(Variable *variable)
 {
 	bool newVar = variables.insert(std::pair<std::string, Variable*>(variable->GetName(), variable)).second;
 
-	if(!newVar)
+	if(!newVar) // A variable or constant already exists with the given name
 	{
 		std::cerr << "la variable " << variable->GetName() << " est deja declaree" << std::endl;
+		
+		// Delete the new variable, since std::map::insert does not insert if the key already exists
+		delete variable;
 	}
 
 	return newVar;
