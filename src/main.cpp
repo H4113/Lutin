@@ -88,13 +88,12 @@ int main(int argc, char** argv)
 			if( opt.a )
 			{
 				std::debug << "++++++++ Static Analysis +++++++" << std::endl;
-				//program.TestProgram();
 				program.StaticAnalysis();
 			}
 			if( opt.o )
 			{
 				std::debug << "++++++++ Transform +++++++" << std::endl;
-				//automaton.Transform();
+				program.Optimize();
 			}
 			if( opt.p )
 			{
