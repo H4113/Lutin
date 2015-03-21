@@ -36,7 +36,7 @@ std::string Value::ToString(void) const
 void Value::GetVariables(std::set<const Variable*> &set, bool) const
 {
 	//Does nothing
-	//(void)set;
+	(void)set;
 }
 
 InstruType Value::GetInstructionType(void) const
