@@ -15,6 +15,11 @@ Operation::Operation(Expression* e1, Operator o, Expression* e2) :
 
 }
 
+Operation::~Operation()
+{
+	
+}
+
 void Operation::Display(void) const {
 	std::cout << ToString() << ";" << std::endl;
 }

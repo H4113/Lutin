@@ -7,6 +7,11 @@ NestedExpression::NestedExpression(Expression *e):
 {
 }
 
+NestedExpression::~NestedExpression()
+{
+
+}
+
 int NestedExpression::Execute(void)
 {
 	return expression->Execute();

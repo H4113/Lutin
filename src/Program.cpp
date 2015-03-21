@@ -314,20 +314,18 @@ void Program::Optimize(Instruction** inst)
 	{
 		case IT_OPE:
 			{
-				std::cout << "lauwl" << std::endl;
 				Operation* op = static_cast<Operation*>(*inst);
 				InstruType it1 = (*(op->GetExp1()))->GetInstructionType();
 				InstruType it2 = (*(op->GetExp2()))->GetInstructionType();
+
+				Optimize(op->GetExp1());
+				Optimize(op->GetExp2());
+
 				if((it1 == IT_VAL && it2 == IT_VAL) || (it1 == IT_VAL && it2 == IT_CON) || (it1 == IT_CON && it2 == IT_VAL)
 					|| (it1 == IT_CON && it2 == IT_CON))
 				{
 					*inst = new Value(op->Execute());
 					delete op;
-				} 
-				else 
-				{
-					Optimize(op->GetExp1());
-					Optimize(op->GetExp2());
 				}
 			}
 			break;
@@ -335,6 +333,13 @@ void Program::Optimize(Instruction** inst)
 			{
 				NestedExpression* op = static_cast<NestedExpression*>(*inst);
 				Optimize(op->GetExpression());
+
+				InstruType it = (*(op->GetExpression()))->GetInstructionType();
+
+				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
+					*inst = (*(op->GetExpression()));
+					delete op;
+				}
 			}
 			break;
 		case IT_WRI:
@@ -361,20 +366,18 @@ void Program::Optimize(Expression** inst)
 	{
 		case IT_OPE:
 			{
-				std::cout << "lauwl" << std::endl;
 				Operation* op = static_cast<Operation*>(*inst);
 				InstruType it1 = (*(op->GetExp1()))->GetInstructionType();
 				InstruType it2 = (*(op->GetExp2()))->GetInstructionType();
+
+				Optimize(op->GetExp1());
+				Optimize(op->GetExp2());
+
 				if((it1 == IT_VAL && it2 == IT_VAL) || (it1 == IT_VAL && it2 == IT_CON) || (it1 == IT_CON && it2 == IT_VAL)
 					|| (it1 == IT_CON && it2 == IT_CON))
 				{
 					*inst = new Value(op->Execute());
 					delete op;
-				} 
-				else 
-				{
-					Optimize(op->GetExp1());
-					Optimize(op->GetExp2());
 				}
 			}
 			break;
@@ -382,6 +385,13 @@ void Program::Optimize(Expression** inst)
 			{
 				NestedExpression* op = static_cast<NestedExpression*>(*inst);
 				Optimize(op->GetExpression());
+
+				InstruType it = (*(op->GetExpression()))->GetInstructionType();
+
+				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
+					*inst = (*(op->GetExpression()));
+					delete op;
+				}
 			}
 			break;
 		default:
