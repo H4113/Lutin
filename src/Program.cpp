@@ -267,10 +267,14 @@ bool Program::addVariable(Variable *variable)
 
 Variable *Program::getGrammarVariable(const std::string &id)
 {
+	Variable *v;
 	std::map<std::string, Variable*>::iterator it = variables.find(id);
 	if(it != variables.end())
 		return it->second;
-	return new Variable(id);
+	
+	v = new Variable(id);
+	addVariable(v);
+	return v;
 }
 
 Expression *Program::buildExpression(const Word *w)
