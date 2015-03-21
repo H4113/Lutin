@@ -196,7 +196,8 @@ void Program::StaticAnalysis(void)
 	varInstr.clear();
 
 	for(it = instructions.begin(); it != instructions.end(); ++it) 
-	{
+	{	
+		//Get the variables of the current instruction
 		(*it)->GetVariables(varInstr, true);
 
 		for(itDiff = varInstr.begin(); itDiff != varInstr.end(); ++itDiff)
@@ -242,7 +243,7 @@ void Program::StaticAnalysis(void)
 
 	for(it = instructions.begin(); it != instructions.end(); ++it) 
 	{
-		var = (*it)->GetModifiedVariable();
+		var = (*it)->GetAssignedVar();
 
 		if(var != 0 && var->IsConstant())
 		{

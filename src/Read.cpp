@@ -41,7 +41,7 @@ void Read::GetVariables(std::set<const Variable*> &set, bool onlyUsed) const
 	}
 }
 
-Variable* Read::GetModifiedVariable(void) const
+Variable* Read::GetAssignedVar() const
 {
 	return var;
 }

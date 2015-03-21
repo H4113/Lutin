@@ -48,11 +48,6 @@ Variable* Assignment::GetAssignedVar() const
 	return var;
 }
 
-Variable* Assignment::GetModifiedVariable(void) const
-{
-	return GetAssignedVar();
-}
-
 Expression** Assignment::GetExpression(void)
 {
 	return &exp;

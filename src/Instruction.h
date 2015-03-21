@@ -43,11 +43,9 @@ class Instruction
 		virtual void GetVariables(std::set<const Variable*> &set, bool onlyUsed = false) const = 0;
 
 		/*
-		* Returns a variable if the instruction was an assignment
+		* Returns the variables used in the instruction if they were assigned (assignment and read operations)
 		*/
 		virtual Variable* GetAssignedVar() const;
-
-		virtual Variable* GetModifiedVariable(void) const;
 };
 
 #endif //_INSTRUCTION_H
