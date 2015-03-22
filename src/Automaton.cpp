@@ -94,7 +94,9 @@ Word *Automaton::Read(std::istream &stream)
 
 	if(!error)
 	{
+#ifdef DEBUG
 		std::cout << words.size() << " ord kvar" << std::endl;
+#endif	
 		return words.top();
 	}
 
