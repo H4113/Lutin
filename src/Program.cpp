@@ -384,15 +384,12 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 
 Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKnown)
 {
+	inst->Display();
 	//std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
 	switch(inst->GetInstructionType())
 	{
 		case IT_CON:
-			{	
-				Constant* c = static_cast<Constant*>(inst);
-				return new Value(c->Execute());
-			}
-			break;
+			return new Value(inst->Execute());
 		case IT_VAR:
 			{
 				Variable* v = static_cast<Variable*>(inst);
@@ -472,9 +469,9 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 				NestedExpression* op = static_cast<NestedExpression*>(inst);
 				Expression *e = Optimize(op->GetExpression(),varKnown);
 				InstruType it = e->GetInstructionType();
-				
-				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
-					//delete op;
+
+				if(it == IT_VAL || it == IT_VAR || it == IT_CON)
+				{
 					return e;
 				}
 				op->SetExpression(e);
