@@ -472,12 +472,12 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 				NestedExpression* op = static_cast<NestedExpression*>(inst);
 				Expression *e = Optimize(op->GetExpression(),varKnown);
 				InstruType it = e->GetInstructionType();
-
-				op->SetExpression(e);
-
+				
 				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
+					//delete op;
 					return e;
 				}
+				op->SetExpression(e);
 			}
 			break;
 		default:
