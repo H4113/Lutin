@@ -387,75 +387,42 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 	//std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
 	switch(inst->GetInstructionType())
 	{
+		case IT_CON:
+			{	
+				Constant* c = static_cast<Constant*>(inst);
+				return new Value(c->Execute());
+			}
+			break;
+		case IT_VAR:
+			{
+				Variable* v = static_cast<Variable*>(inst);
+				std::map<Variable*, int>::iterator vit = varKnown.find(v);
+				if(vit != varKnown.end())
+				{
+					return new Value(vit->second);
+				}
+			}
+			break;
 		case IT_OPE:
 			{
 				Operation* op = static_cast<Operation*>(inst);
-				InstruType it1;
-				InstruType it2;
 				Expression *e1;
 				Expression *e2;
+				InstruType it1;
+				InstruType it2;
 
 				op->SetExp1(Optimize(op->GetExp1(),varKnown));
 				op->SetExp2(Optimize(op->GetExp2(),varKnown));
 
 				e1 = op->GetExp1();
 				e2 = op->GetExp2();
+
 				it1 = e1->GetInstructionType();
 				it2 = e2->GetInstructionType();
 
-				if((it1 == IT_VAL && it2 == IT_VAL) || (it1 == IT_VAL && it2 == IT_CON) || (it1 == IT_CON && it2 == IT_VAL)
-					|| (it1 == IT_CON && it2 == IT_CON))
+				if(it1 == IT_VAL && it2 == IT_VAL)
 				{
 					return new Value(op->Execute());
-				}
-				else if( it1 == IT_VAR && it2 == IT_VAR )
-				{
-					Variable* v1 = static_cast<Variable*>(e1);
-					Variable* v2 = static_cast<Variable*>(e2);
-					std::map<Variable*, int>::iterator vit1 = varKnown.find(v1);
-					std::map<Variable*, int>::iterator vit2 = varKnown.find(v2);
-					if(vit1 != varKnown.end() && vit2 != varKnown.end())
-					{
-						v1->Set(vit1->second);
-						v2->Set(vit2->second);
-						return new Value(op->Execute());
-					}
-					else if(vit1 != varKnown.end())
-					{
-						op->SetExp1(new Value(vit1->second));
-						
-					}else if(vit2 != varKnown.end()){
-						op->SetExp2(new Value(vit2->second));
-					}
-				}
-				else if( it1 == IT_VAR || it2 == IT_VAR )
-				{
-					Variable* v;
-					std::map<Variable*, int>::iterator vit;
-					
-					if(it1 == IT_VAR)
-					{
-						v = static_cast<Variable*>(e1);
-					}else{
-						v = static_cast<Variable*>(e2);
-					}
-
-					vit = varKnown.find(v);
-					if(vit != varKnown.end() && ( 
-						(it1 == IT_VAR && (it2 == IT_VAL || it2 == IT_CON) )
-						|| (it2 == IT_VAR && (it1 == IT_VAL || it1 == IT_CON) ) ) ) 
-					{
-						v->Set(vit->second);
-						return new Value(op->Execute());
-					}
-					if(it1 == IT_VAR && (it2 == IT_NES || it2 == IT_OPE) )
-					{
-						op->SetExp1(new Value(vit->second));
-					}
-					else if(it2 == IT_VAR && (it1 == IT_NES || it1 == IT_OPE) )
-					{
-						op->SetExp2(new Value(vit->second));
-					}
 				}
 				else
 				{
@@ -503,13 +470,10 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 		case IT_NES:
 			{
 				NestedExpression* op = static_cast<NestedExpression*>(inst);
-				InstruType it;
-				Expression *e;
+				Expression *e = Optimize(op->GetExpression(),varKnown);
+				InstruType it = e->GetInstructionType();
 
-				op->SetExpression(Optimize(op->GetExpression(),varKnown));
-
-				e = op->GetExpression();
-				it = e->GetInstructionType();
+				op->SetExpression(e);
 
 				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
 					return e;
