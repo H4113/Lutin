@@ -352,6 +352,8 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 				Assignment* ass = static_cast<Assignment*>(inst);
 				InstruType it;
 				Expression *e;
+
+				ass->Display();
 				
 				ass->SetExpression(Optimize(ass->GetExpression(),varKnown));
 				e = ass->GetExpression();
