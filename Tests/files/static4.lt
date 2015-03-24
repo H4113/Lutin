@@ -1,0 +1,4 @@
+var a,b; 
+const c = 4;
+a := (c+b)*3-5;
+ecrire a;
