@@ -333,15 +333,12 @@ void Program::Optimize(void)
 	std::map<Variable*, int> varKnown;
 	for(std::vector<Instruction*>::iterator it = instructions.begin(); it != instructions.end(); ++it)
 	{
-		//(*it)->Display();
 		Optimize(*it,varKnown);
-		//(*it)->Display();
 	}
 }
 
 void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 {
-	//std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
 	switch((inst)->GetInstructionType())
 	{
 		case IT_WRI:
@@ -377,8 +374,6 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 
 Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKnown)
 {
-	inst->Display();
-	//std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
 	switch(inst->GetInstructionType())
 	{
 		case IT_CON:

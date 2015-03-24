@@ -1,0 +1,7 @@
+var a;
+const B = 8;
+a := 2*((4+B)*B);
+ecrire (a*1)+1;
+a := (3*(2*2)+3)*3;
+ecrire a;
+
