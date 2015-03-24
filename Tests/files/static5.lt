@@ -1,0 +1,5 @@
+var a; 
+const c = 4;
+a := c*3-5;
+ecrire a;
+c := 42;
