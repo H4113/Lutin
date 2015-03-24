@@ -1,0 +1,6 @@
+const B = 8;
+var a;
+a := 192;
+ecrire 193;
+a := 45;
+ecrire 45;
