@@ -53,6 +53,11 @@ class Instruction
 		 * Returns whether the instruction may be deleted by another one or not
 		 */
 		bool MayBeDeleted(void) const;
+		void Protect(void);
+		void Unprotect(void);
+
+	private:
+		bool protectedFromDeletion;
 };
 
 #endif //_INSTRUCTION_H

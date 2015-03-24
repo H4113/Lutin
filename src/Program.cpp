@@ -331,6 +331,7 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 			{
 				Write* w = static_cast<Write*>(inst);
 				w->SetExpression(Optimize(w->GetExpression(),varKnown));
+				w->GetExpression()->Unprotect();
 			}
 			break;
 		case IT_ASS:
@@ -344,6 +345,8 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 				ass->SetExpression(Optimize(ass->GetExpression(),varKnown));
 				e = ass->GetExpression();
 				it = e->GetInstructionType();
+
+				e->Unprotect();
 
 				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
 					varKnown[ass->GetAssignedVar()] = e->Execute();
@@ -391,7 +394,7 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 				e2 = op->GetExp2();
 
 				it1 = e1->GetInstructionType();
-				it2 = e2->GetInstructionType();
+				it2 = e2->GetInstructionType();			
 
 				if(it1 == IT_VAL && it2 == IT_VAL)
 				{
@@ -405,32 +408,38 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 						case OP_PLUS:
 							if(e1->Execute() == 0 && e1->GetInstructionType() != IT_VAR) 
 							{
+								e2->Protect();
 								return e2;
 							}
 							else if(e2->Execute() == 0 && e2->GetInstructionType() != IT_VAR)
 							{
+								e1->Protect();
 								return e1;
 							}
 							break;
 						case OP_MINUS:
 							if(e2->Execute() == 0 && e2->GetInstructionType() != IT_VAR)
 							{
+								e1->Protect();
 								return e1;
 							}
 							break;
 						case OP_DIVIDE:
 							if(e2->Execute() == 1 && e2->GetInstructionType() != IT_VAR)
 							{
+								e1->Protect();
 								return e1;
 							}
 							break;
 						case OP_TIMES:
 							if(e1->Execute() == 1 && e1->GetInstructionType() != IT_VAR) 
 							{
+								e2->Protect();
 								return e2;
 							}
 							else if(e2->Execute() == 1 && e2->GetInstructionType() != IT_VAR)
 							{
+								e1->Protect();
 								return e1;
 							}
 							break;
@@ -448,9 +457,11 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 
 				if(it == IT_VAL || it == IT_VAR || it == IT_CON)
 				{
+					e->Protect();
 					return e;
 				}
 				op->SetExpression(e);
+				//op->GetExpression()->Protect();
 			}
 			break;
 		default:
