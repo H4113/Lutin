@@ -124,7 +124,7 @@ void Automaton::Shift(Word *word, State *state)
 	}
 }
 
-StateResult Automaton::Reduce(Word *word, unsigned int ruleId)
+StateResult Automaton::Reduce(unsigned int ruleId)
 {
 	const Rule &rule = RULES[ruleId];
 	State *currentState;
