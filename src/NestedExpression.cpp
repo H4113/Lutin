@@ -63,13 +63,11 @@ Instruction *NestedExpression::Optimize(std::map<Variable*, int> &varKnown)
 			delete expression;
 		expression = inst;
 	}
-
 	if(type == IT_VAL || type == IT_CON)
 	{
 		expression = 0;
 		return inst;
 	}
-
 	return this;
 }
 

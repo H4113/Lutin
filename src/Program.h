@@ -41,7 +41,6 @@ class Program
 		bool addVariable(Variable *variable);
 		Variable *getGrammarVariable(const std::string &id);
 		Expression *buildExpression(const Word *w);
-		Expression *Optimize(Expression*, std::map<Variable*, int> & varKnown);
 
 		std::vector<Instruction*> instructions;
 		std::map<std::string, Variable*> variables;

@@ -138,13 +138,13 @@ Instruction *Operation::Optimize(std::map<Variable*, int> &varKnown)
 	if(inst1 != exp1)
 	{
 		if(exp1->MayBeDeleted())
-		delete exp1;
+			delete exp1;
 		exp1 = inst1;
 	}
 	if(inst2 != exp2)
 	{
 		if(exp2->MayBeDeleted())
-		delete exp2;
+			delete exp2;
 		exp2 = inst2;
 	}
 
@@ -152,9 +152,9 @@ Instruction *Operation::Optimize(std::map<Variable*, int> &varKnown)
 	{
 		int v = Execute();
 		if(exp1->MayBeDeleted())
-		delete exp1;
+			delete exp1;
 		if(exp2->MayBeDeleted())
-		delete exp2;
+			delete exp2;
 		exp1 = 0;
 		exp2 = 0;
 		return new Value(v);
@@ -162,6 +162,65 @@ Instruction *Operation::Optimize(std::map<Variable*, int> &varKnown)
 
 	switch(op)
 	{
+		case OP_PLUS:
+			if(exp1->Execute() == 0 && const1)
+			{
+				if(exp1->MayBeDeleted())
+					delete exp1;
+				exp1 = 0;
+				exp2->Protect();
+				return exp2;
+			}
+			else if(exp2->Execute() == 0 && const2)
+			{
+				if(exp2->MayBeDeleted())
+					delete exp2;
+				exp2 = 0;
+				exp1->Protect();
+				return exp1;
+			}
+			break;
+
+		case OP_MINUS:
+			if(exp2->Execute() == 0 && const2)
+			{
+				if(exp2->MayBeDeleted())
+					delete exp2;
+				exp2 = 0;
+				exp1->Protect();
+				return exp1;
+			}
+			break;
+
+		case OP_DIVIDE:
+			if(exp2->Execute() == 1 && const2)
+			{
+				if(exp2->MayBeDeleted())
+					delete exp2;
+				exp2 = 0;
+				exp1->Protect();
+				return exp1;
+			}
+			break;
+
+		case OP_TIMES:
+			if(exp1->Execute() == 1 && const1)
+			{
+				if(exp1->MayBeDeleted())
+					delete exp1;
+				exp1 = 0;
+				exp2->Protect();
+				return exp2;
+			}
+			else if(exp2->Execute() == 1 && const2)
+			{
+				if(exp2->MayBeDeleted())
+					delete exp2;
+				exp2 = 0;
+				exp1->Protect();
+				return exp1;
+			}
+			break;
 		default:
 			break;
 	}
