@@ -26,7 +26,7 @@ Variable* Instruction::GetAssignedVar() const
 bool Instruction::MayBeDeleted(void) const
 {
 	InstruType t = GetInstructionType();
-	return !protectedFromDeletion && t != IT_VAR && t != IT_CON;
+	return GetInstructionType() == IT_VAL || (!protectedFromDeletion && t != IT_VAR && t != IT_CON);
 }
 
 void Instruction::Protect(void)

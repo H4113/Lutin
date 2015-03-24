@@ -331,7 +331,6 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 			{
 				Write* w = static_cast<Write*>(inst);
 				w->SetExpression(Optimize(w->GetExpression(),varKnown));
-				w->GetExpression()->Unprotect();
 			}
 			break;
 		case IT_ASS:
@@ -343,8 +342,6 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 				ass->SetExpression(Optimize(ass->GetExpression(),varKnown));
 				e = ass->GetExpression();
 				it = e->GetInstructionType();
-
-				e->Unprotect();
 
 				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
 					varKnown[ass->GetAssignedVar()] = e->Execute();
