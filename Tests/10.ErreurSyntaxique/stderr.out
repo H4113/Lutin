@@ -1,5 +1,4 @@
-Erreur syntaxique (1:7) symbole , ou ; attendu
-Erreur syntaxique (4:5) symbole , ou ; attendu
-Erreur syntaxique (4:6) symbole = attendu
-Erreur syntaxique (4:6) valeur attendue
-Erreur syntaxique (8:4) operateur := attendu
+Syntax error (1:7) symbol ; or symbol , expected
+Syntax error (4:1) symbol ; or symbol , expected
+Syntax error (8:4) operator := expected
+ERROR: Fix the code and try again later ;)

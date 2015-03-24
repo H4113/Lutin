@@ -67,7 +67,6 @@ Word *Automaton::Read(std::istream &stream)
 					if(!error)
 					{
 						const std::vector<Symbol> &expected = states.top()->GetExpectedTerminals(); 
-						Word::DebugWord(w);
 						std::cerr << "Syntax error (" << analyzer.GetCurrentLine()
 								  << ":" << analyzer.GetCurrentCharacter() << ") ";
 						
