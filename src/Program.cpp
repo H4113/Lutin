@@ -149,12 +149,13 @@ void Program::DisplayCode(void)
 void Program::StaticAnalysis(void)
 {
 	std::set<const Variable*> declaredVar;
+	std::set<const Variable*> affectedVar;
 	std::map<std::string, Variable*>::iterator itVar;
 	std::set<const Variable*> varInstr;
 	std::vector<Instruction*>::iterator it;
 	std::vector<Instruction*>::iterator itBis;
 	std::set<const Variable*> diff;
-	std::set<const Variable*>::iterator itDiff;
+	std::set<const Variable*>::const_iterator itDiff;
 	std::set<const Variable*> rightPart;
 
 	for(it = instructions.begin(); it != instructions.end(); ++it) 
@@ -200,34 +201,20 @@ void Program::StaticAnalysis(void)
 
 	//Var used but not affected
 	varInstr.clear();
-
 	for(it = instructions.begin(); it != instructions.end(); ++it) 
-	{	
+	{
 		//Get the variables of the current instruction
 		(*it)->GetVariables(varInstr, true);
 
 		for(itDiff = varInstr.begin(); itDiff != varInstr.end(); ++itDiff)
 		{
-			if((*itDiff) != 0 && !(*itDiff)->IsConstant())
+			const Variable* var = (*itDiff);
+			if(var != 0 && !var->IsConstant() && affectedVar.find(var) == affectedVar.end())
 			{
-				bool affected = false;
-				Variable* assignedVar;
-
-				for(itBis = instructions.begin(); itBis != it; ++itBis)
-				{
-					assignedVar = (*itBis)->GetAssignedVar();
-					if(assignedVar == (*itDiff))
-					{
-						affected = true;
-						break;
-					}
-				}
-				if(!affected)
-				{
-					std::cerr << "ERROR: Variable " + (*itDiff)->GetName() + " isn't initialized." << std::endl;
-				}
+				std::cerr << "ERROR: Variable " + (*itDiff)->GetName() + " isn't initialized." << std::endl;
 			}
 		}
+		affectedVar.insert((*it)->GetAssignedVar());
 		varInstr.clear();
 	}
 	
@@ -243,7 +230,6 @@ void Program::StaticAnalysis(void)
 			std::cerr << "ERROR: Constant " + (var->GetName()) + " cannot be modified." << std::endl;
 		}
 	}
-
 }
 
 bool Program::addVariable(Variable *variable)
