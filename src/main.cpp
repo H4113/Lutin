@@ -11,8 +11,6 @@
 #include "Options.h"
 #include "Utils.h"
 
-//#define USE_ARGS
-
 namespace std {
 #ifdef DEBUG
 	Logger debug("debug",true);
@@ -26,13 +24,13 @@ void PrintHelp(std::ostream &stream)
 {
 	stream << std::endl <<
 		"||-----------------------------------------------------"<< std::endl<<
-		"||[AIDE] Appel du programme:"<< std::endl<<
+		"||[HELP] Program flags:"<< std::endl<<
 		"||-----------------------------------------------------"<< std::endl<<
     	"||../lutin [-p] [-a] [-e] [-o] source.lt"<< std::endl<<
-    	"||\t[-p] affiche le code source reconnu"<< std::endl<<
-    	"||\t[-a] analyse le programme de maniere statique"<< std::endl<<
-    	"||\t[-e] execute interactivement le programme"<< std::endl<<
-    	"||\t[-o] optimise les expressions et instructions" << std::endl<<
+    	"||\t[-p] displays recognized source code"<< std::endl<<
+    	"||\t[-a] performs static analysis"<< std::endl<<
+    	"||\t[-e] executes the program"<< std::endl<<
+    	"||\t[-o] optimizes instructions and instructions" << std::endl<<
 		"||------------------------------------------------------"<< std::endl << std::endl;
 }
 
@@ -51,11 +49,10 @@ int main(int argc, char** argv)
 	Automaton automaton;
 	Word *p;
 
-#ifdef USE_ARGS
 	// Check for arguments
 	if( argc < 2 )
 	{
-		PrintError("Erreur - Un argument est attendu");
+		PrintError("ERROR: argument required");
 		PrintHelp(std::cerr);
 		return 1;
 	}
@@ -65,15 +62,8 @@ int main(int argc, char** argv)
 		{
 			opt.AddOption(argv[i]);
 		}
-		#ifdef __STATIC_FILE__ // see user.h for custom build
 
-			std::debug << "using user.h" << std::endl;
-			filepath = STATIC_FILE_PATH;
-
-		#else
-			filepath = argv[argc-1];
-
-		#endif // __STATIC_FILE__
+		filepath = argv[argc-1];
 	}
 
 	file.open(filepath.c_str());
@@ -87,17 +77,14 @@ int main(int argc, char** argv)
 			
 			if( opt.a )
 			{
-				std::debug << "++++++++ Static Analysis +++++++" << std::endl;
 				program.StaticAnalysis();
 			}
 			if( opt.o )
 			{
-				std::debug << "++++++++ Transform +++++++" << std::endl;
 				program.Optimize();
 			}
 			if( opt.p )
 			{
-				std::debug << "++++++++ Display Code +++++++" << std::endl;
 				program.DisplayCode();
 			}
 			if( opt.e )
@@ -113,39 +100,12 @@ int main(int argc, char** argv)
 		}
 
         file.close();
-    } else {
-    	PrintError("Erreur a l'ouverture du fichier "+ filepath);
+    }
+    else
+    {
+    	PrintError("ERROR: cannot open file "+ filepath);
     	return 1;
     }
 
-#else
-	std::string code = "var a;\n\
-lire a;\n\
-ecrire (a+0)*1-0;";
-	std::istringstream iss(code);
-
-	p = automaton.Read(iss);
-
-	if(p != 0) // p is a valid program
-	{
-		program.Build(p);
-
-		std::debug << std::endl << "################" << std::endl;
-		std::debug << "This is what Lutin understood:" << std::endl << std::endl;
-		program.DisplayCode();
-
-		program.Optimize();
-		program.DisplayCode();
-
-		program.Execute();
-
-		std::debug << std::endl << "################" << std::endl;
-		std::debug << "Static Analysis:" << std::endl << std::endl;
-
-		program.StaticAnalysis();
-	}
-
-#endif // USE_ARGS
-
-	return 0;
+    return 0;
 }
