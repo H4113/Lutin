@@ -148,17 +148,19 @@ void Program::DisplayCode(void)
 
 void Program::StaticAnalysis(void)
 {
-	std::set<const Variable*> setVar;
+	std::set<const Variable*> declaredVar;
 	std::map<std::string, Variable*>::iterator itVar;
 	std::set<const Variable*> varInstr;
 	std::vector<Instruction*>::iterator it;
 	std::vector<Instruction*>::iterator itBis;
 	std::set<const Variable*> diff;
 	std::set<const Variable*>::iterator itDiff;
+	std::set<const Variable*> rightPart;
 
 	for(it = instructions.begin(); it != instructions.end(); ++it) 
 	{
 		(*it)->GetVariables(varInstr);
+		(*it)->GetVariables(rightPart, true);
 	}
 
 	for(itVar = variables.begin(); itVar != variables.end(); ++itVar)
@@ -166,13 +168,13 @@ void Program::StaticAnalysis(void)
 		Variable* var = itVar->second;
 		if(!var->GetGhost())
 		{
-			setVar.insert(var);
+			declaredVar.insert(var);
 		}
 	}
 
 	//Var used but not declared
-	//Inserts in set "diff" : varInstr - variables 
-	std::set_difference(varInstr.begin(), varInstr.end(), setVar.begin(), setVar.end(), 
+	//Inserts in set "diff" : varInstr - declaredVar 
+	std::set_difference(varInstr.begin(), varInstr.end(), declaredVar.begin(), declaredVar.end(), 
                         std::inserter(diff, diff.begin()));
 	if(!diff.empty())
 	{
@@ -185,8 +187,8 @@ void Program::StaticAnalysis(void)
 	diff.clear();
 
 	//Var declared but not used
-	//Inserts in set "diff" : variables - varInstr
-	std::set_difference(setVar.begin(), setVar.end(), varInstr.begin(), varInstr.end(), 
+	//Inserts in set "diff" : declaredVar - rightPart
+	std::set_difference(declaredVar.begin(), declaredVar.end(), rightPart.begin(), rightPart.end(), 
                         std::inserter(diff, diff.begin()));
 	if(!diff.empty())
 	{
