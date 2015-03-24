@@ -2,9 +2,10 @@
  * Project Lutin
  */
 
+#include <iostream>
 
 #include "Variable.h"
-#include <iostream>
+#include "Value.h"
 
 /**
  * Variable implementation
@@ -59,3 +60,12 @@ bool Variable::IsConstant(void) const
 {
 	return false;
 }
+
+Instruction *Variable::Optimize(std::map<Variable*, int> &varKnown)
+{
+	std::map<Variable*, int>::const_iterator it = varKnown.find(this);
+	if(it != varKnown.end()) // The value is known
+		return new Value(it->second);
+	return this;
+}
+

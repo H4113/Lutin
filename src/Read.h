@@ -42,6 +42,7 @@ class Read: public Instruction
 		//Override
 		Variable* GetAssignedVar(void) const;
 
+		virtual Instruction *Optimize(std::map<Variable*, int> &varKnown);
 	private: 
 		Variable* var;
 };

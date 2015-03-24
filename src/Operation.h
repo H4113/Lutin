@@ -47,6 +47,8 @@ class Operation: public Expression
 		Expression* GetExp2(void);
 
 		Operator GetOperator(void) const;
+
+		virtual Instruction *Optimize(std::map<Variable*, int> &varKnown);
 	private: 
 		Expression* exp1;
 		Expression* exp2;

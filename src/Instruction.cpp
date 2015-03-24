@@ -39,3 +39,8 @@ void Instruction::Unprotect(void)
 	protectedFromDeletion = false;
 }
 
+Instruction *Instruction::Optimize(std::map<Variable*, int> &)
+{
+	return this;
+}
+

@@ -27,6 +27,8 @@ class NestedExpression : public Expression
 
 		//@Override
 		InstruType GetInstructionType(void) const;
+		
+		virtual Instruction *Optimize(std::map<Variable*, int> &varKnown);
 	protected:
 		Expression* expression;
 };

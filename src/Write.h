@@ -41,6 +41,8 @@ class Write: public Instruction
 
 		void SetExpression(Expression *e);
 		Expression* GetExpression(void);
+
+		virtual Instruction *Optimize(std::map<Variable*, int> &varKnown);
 	private: 
 		Expression* expression;
 };

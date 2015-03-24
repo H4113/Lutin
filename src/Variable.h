@@ -55,6 +55,8 @@ class Variable: public Element
 
 		//@Override
 		InstruType GetInstructionType(void) const;
+		
+		virtual Instruction *Optimize(std::map<Variable*, int> &varKnown);
 	protected: 
 		std::string name;
 	private:

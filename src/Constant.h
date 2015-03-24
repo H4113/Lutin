@@ -43,6 +43,8 @@ class Constant: public Variable
 
 		//@Override
 		InstruType GetInstructionType() const;
+		
+		virtual Instruction *Optimize(std::map<Variable*, int> &varKnown);
 };
 
 #endif //_CONSTANT_H

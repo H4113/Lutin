@@ -319,42 +319,7 @@ void Program::Optimize(void)
 	std::map<Variable*, int> varKnown;
 	for(std::vector<Instruction*>::iterator it = instructions.begin(); it != instructions.end(); ++it)
 	{
-		Optimize(*it,varKnown);
-	}
-}
-
-void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
-{
-	switch((inst)->GetInstructionType())
-	{
-		case IT_WRI:
-			{
-				Write* w = static_cast<Write*>(inst);
-				w->SetExpression(Optimize(w->GetExpression(),varKnown));
-			}
-			break;
-		case IT_ASS:
-			{
-				Assignment* ass = static_cast<Assignment*>(inst);
-				InstruType it;
-				Expression *e;
-
-				ass->SetExpression(Optimize(ass->GetExpression(),varKnown));
-				e = ass->GetExpression();
-				it = e->GetInstructionType();
-
-				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
-					varKnown[ass->GetAssignedVar()] = e->Execute();
-				}
-			}
-			break;
-		case IT_REA:
-			{
-				Read* rea = static_cast<Read*>(inst);
-				varKnown.erase(rea->GetAssignedVar());
-			}
-		default:
-			break;
+		(*it)->Optimize(varKnown);
 	}
 }
 
@@ -362,18 +327,6 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 {
 	switch(inst->GetInstructionType())
 	{
-		case IT_CON:
-			return new Value(inst->Execute());
-		case IT_VAR:
-			{
-				Variable* v = static_cast<Variable*>(inst);
-				std::map<Variable*, int>::iterator vit = varKnown.find(v);
-				if(vit != varKnown.end())
-				{
-					return new Value(vit->second);
-				}
-			}
-			break;
 		case IT_OPE:
 			{
 				Operation* op = static_cast<Operation*>(inst);

@@ -54,3 +54,10 @@ InstruType Read::GetInstructionType(void) const
 {
 	return IT_REA;
 }
+
+Instruction *Read::Optimize(std::map<Variable*, int> &varKnown)
+{
+	varKnown.erase(var);
+	return this;
+}
+

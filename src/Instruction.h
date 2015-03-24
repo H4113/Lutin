@@ -8,6 +8,7 @@
 
 #include <string>
 #include <set>
+#include <map>
 
 class Variable;
 
@@ -55,6 +56,8 @@ class Instruction
 		bool MayBeDeleted(void) const;
 		void Protect(void);
 		void Unprotect(void);
+
+		virtual Instruction *Optimize(std::map<Variable*, int> & varKnown);
 
 	private:
 		bool protectedFromDeletion;

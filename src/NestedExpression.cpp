@@ -9,7 +9,7 @@ NestedExpression::NestedExpression(Expression *e):
 
 NestedExpression::~NestedExpression()
 {
-	if(expression->MayBeDeleted())
+	if(expression != 0 && expression->MayBeDeleted())
 		delete expression;
 }
 
@@ -51,3 +51,25 @@ Expression* NestedExpression::GetExpression(void)
 {
 	return expression;
 }
+
+Instruction *NestedExpression::Optimize(std::map<Variable*, int> &varKnown)
+{
+	Expression *inst = static_cast<Expression*>(expression->Optimize(varKnown));
+	InstruType type = inst->GetInstructionType();
+
+	if(inst != expression)
+	{
+		if(expression->MayBeDeleted())
+			delete expression;
+		expression = inst;
+	}
+
+	if(type == IT_VAL || type == IT_CON)
+	{
+		expression = 0;
+		return inst;
+	}
+
+	return this;
+}
+

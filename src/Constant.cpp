@@ -3,8 +3,10 @@
  */
 
 
-#include "Constant.h"
 #include <iostream>
+
+#include "Constant.h"
+#include "Value.h"
 
 /**
  * Constant implementation
@@ -42,5 +44,10 @@ std::string Constant::GetDeclaration(void) const
 InstruType Constant::GetInstructionType(void) const
 {
 	return IT_CON;
+}
+
+Instruction *Constant::Optimize(std::map<Variable*, int> &)
+{
+	return new Value(value);
 }
 

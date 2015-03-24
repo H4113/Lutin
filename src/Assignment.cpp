@@ -68,3 +68,22 @@ Expression* Assignment::GetExpression(void)
 {
 	return exp;
 }
+
+Instruction *Assignment::Optimize(std::map<Variable*, int> &varKnown)
+{
+	Expression *inst = static_cast<Expression*>(exp->Optimize(varKnown));
+	InstruType type = inst->GetInstructionType();
+
+	if(inst != exp)
+	{
+		if(exp->MayBeDeleted())
+			delete exp;
+		exp = inst;
+	}
+
+	if(type == IT_VAL || type == IT_VAR || type == IT_CON)
+		varKnown[var] = inst->Execute();
+
+	return this;
+}
+

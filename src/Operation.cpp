@@ -4,6 +4,7 @@
 
 
 #include "Operation.h"
+#include "Value.h"
 
 /**
  * Operation implementation
@@ -18,9 +19,9 @@ Operation::Operation(Expression* e1, Operator o, Expression* e2):
 
 Operation::~Operation()
 {
-	if(exp1->MayBeDeleted())
+	if(exp1 != 0 && exp1->MayBeDeleted())
 		delete exp1;
-	if(exp2->MayBeDeleted())
+	if(exp2 != 0 && exp2->MayBeDeleted())
 		delete exp2;	
 }
 
@@ -122,3 +123,49 @@ Operator Operation::GetOperator(void) const
 {
 	return op;
 }
+
+Instruction *Operation::Optimize(std::map<Variable*, int> &varKnown)
+{
+	Expression *inst1 = static_cast<Expression*>(exp1->Optimize(varKnown));
+	Expression *inst2 = static_cast<Expression*>(exp2->Optimize(varKnown));
+	
+	InstruType type1 = inst1->GetInstructionType();
+	InstruType type2 = inst2->GetInstructionType();
+	
+	bool const1 = (type1 == IT_CON || type1 == IT_VAL);
+	bool const2 = (type2 == IT_CON || type2 == IT_VAL);
+
+	if(inst1 != exp1)
+	{
+		if(exp1->MayBeDeleted())
+		delete exp1;
+		exp1 = inst1;
+	}
+	if(inst2 != exp2)
+	{
+		if(exp2->MayBeDeleted())
+		delete exp2;
+		exp2 = inst2;
+	}
+
+	if(type1 == IT_VAL && type2 == IT_VAL)
+	{
+		int v = Execute();
+		if(exp1->MayBeDeleted())
+		delete exp1;
+		if(exp2->MayBeDeleted())
+		delete exp2;
+		exp1 = 0;
+		exp2 = 0;
+		return new Value(v);
+	}
+
+	switch(op)
+	{
+		default:
+			break;
+	}
+
+	return this;
+}
+

@@ -62,3 +62,16 @@ Expression* Write::GetExpression(void)
 {
 	return expression;
 }
+
+Instruction *Write::Optimize(std::map<Variable*, int> &varKnown)
+{
+	Instruction *inst = expression->Optimize(varKnown);
+	if(inst != expression)
+	{
+		if(expression->MayBeDeleted())
+			delete expression;
+		expression = static_cast<Expression*>(inst);
+	}
+	return this;
+}
+
