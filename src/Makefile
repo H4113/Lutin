@@ -4,6 +4,7 @@ OBJDIR=obj
 BINNAME=lutin
 BIN=$(BINDIR)/$(BINNAME)
 CLEAN=clean
+TEST=test
 
 DEBUGDIR=Debug2
 RELEASEDIR=Release
@@ -50,6 +51,9 @@ $(RELEASE): $(OBJRELEASE)
 
 $(CLEAN):
 	rm -f $(BINDEBUG) $(BINRELEASE) $(BINBOOST) $(OBJDEBUG) $(OBJRELEASE) $(OBJBOOST)
+
+$(TEST):
+	(cd ../Tests;./mktest.sh)
 
 $(DEBUGDIR)/$(OBJDIR)/%.o: %.cpp
 	$(GPP) $(ADDFLAGS) $(CFLAGS) $(FLAGSDEBUG) $(INCLUDE) -c -o $@ $<
