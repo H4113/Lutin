@@ -11,8 +11,8 @@
  */
 
 
-Variable::Variable(const std::string& n):
-	name(n)
+Variable::Variable(const std::string& n, bool g):
+	name(n), ghost(g)
 {
 }
 
@@ -30,9 +30,9 @@ void Variable::Display(void) const
 	std::cout << ToString() << ";" << std::endl;
 }
 
-bool Variable::GetInitialized(void) const 
+bool Variable::GetGhost(void) const 
 {
-	return initialized;
+	return ghost;
 }
 
 std::string Variable::ToString(void) const 

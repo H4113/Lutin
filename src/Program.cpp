@@ -163,7 +163,11 @@ void Program::StaticAnalysis(void)
 
 	for(itVar = variables.begin(); itVar != variables.end(); ++itVar)
 	{
-		setVar.insert(itVar->second);
+		Variable* var = itVar->second;
+		if(!var->GetGhost())
+		{
+			setVar.insert(var);
+		}
 	}
 
 	//Var used but not declared
@@ -174,7 +178,7 @@ void Program::StaticAnalysis(void)
 	{
 		for(itDiff = diff.begin(); itDiff != diff.end(); ++itDiff) 
 		{
-			std::cerr << "ERROR : Variable "+ (*itDiff)->GetName() +" used but not declared." << std::endl;
+			std::cerr << "ERROR: Variable "+ (*itDiff)->GetName() +" used but not declared." << std::endl;
 		}
 	}
 
@@ -188,7 +192,7 @@ void Program::StaticAnalysis(void)
 	{
 		for(itDiff = diff.begin(); itDiff != diff.end(); ++itDiff)
 		{
-			std::cerr << "WARNING : Variable "+ (*itDiff)->GetName() +" not used." << std::endl;
+			std::cerr << "WARNING: Variable "+ (*itDiff)->GetName() +" not used." << std::endl;
 		}
 	}
 
@@ -218,20 +222,7 @@ void Program::StaticAnalysis(void)
 				}
 				if(!affected)
 				{
-					std::cerr << "ERROR : Variable " + (*itDiff)->GetName() + " in the expression ";
-					switch ((*it)->GetInstructionType())
-					{
-						case IT_ASS:
-							//std::cerr << ((Assignment*) (*it))->GetExpression()->ToString();
-							break;
-						case IT_WRI:
-							//std::cerr << ((Write*) (*it))->GetExpression()->ToString();
-							break;
-						default:
-							std::cerr <<"**ERROR**";
-							break;
-					}
-					std::cerr << " isn't initialized." << std::endl;
+					std::cerr << "ERROR: Variable " + (*itDiff)->GetName() + " isn't initialized." << std::endl;
 				}
 			}
 		}
@@ -247,7 +238,7 @@ void Program::StaticAnalysis(void)
 
 		if(var != 0 && var->IsConstant())
 		{
-			std::cerr << "ERROR : Constant " + (var->GetName()) + " cannot be modified." << std::endl;
+			std::cerr << "ERROR: Constant " + (var->GetName()) + " cannot be modified." << std::endl;
 		}
 	}
 
@@ -275,7 +266,7 @@ Variable *Program::getGrammarVariable(const std::string &id)
 	if(it != variables.end())
 		return it->second;
 	
-	v = new Variable(id);
+	v = new Variable(id, true);
 	addVariable(v);
 	return v;
 }
@@ -340,15 +331,12 @@ void Program::Optimize(void)
 	std::map<Variable*, int> varKnown;
 	for(std::vector<Instruction*>::iterator it = instructions.begin(); it != instructions.end(); ++it)
 	{
-		//(*it)->Display();
 		Optimize(*it,varKnown);
-		//(*it)->Display();
 	}
 }
 
 void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 {
-	//std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
 	switch((inst)->GetInstructionType())
 	{
 		case IT_WRI:
@@ -384,8 +372,6 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 
 Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKnown)
 {
-	inst->Display();
-	//std::cout << ttos((*inst)->GetInstructionType()) << std::endl;
 	switch(inst->GetInstructionType())
 	{
 		case IT_CON:
