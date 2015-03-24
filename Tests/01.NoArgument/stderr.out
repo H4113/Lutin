@@ -1,12 +1,12 @@
 ERROR: argument required
 
 ||-----------------------------------------------------
-||[AIDE] Appel du programme:
+||[HELP] Program flags:
 ||-----------------------------------------------------
 ||../lutin [-p] [-a] [-e] [-o] source.lt
-||	[-p] affiche le code source reconnu
-||	[-a] analyse le programme de maniere statique
-||	[-e] execute interactivement le programme
-||	[-o] optimise les expressions et instructions
+||	[-p] displays recognized source code
+||	[-a] performs static analysis
+||	[-e] executes the program
+||	[-o] optimizes instructions and instructions
 ||------------------------------------------------------
 
