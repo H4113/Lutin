@@ -340,8 +340,6 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 				InstruType it;
 				Expression *e;
 
-				ass->Display();
-				
 				ass->SetExpression(Optimize(ass->GetExpression(),varKnown));
 				e = ass->GetExpression();
 				it = e->GetInstructionType();
@@ -386,6 +384,8 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 				Expression *e2;
 				InstruType it1;
 				InstruType it2;
+				bool const1;
+				bool const2;
 
 				op->SetExp1(Optimize(op->GetExp1(),varKnown));
 				op->SetExp2(Optimize(op->GetExp2(),varKnown));
@@ -394,8 +394,11 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 				e2 = op->GetExp2();
 
 				it1 = e1->GetInstructionType();
-				it2 = e2->GetInstructionType();			
+				it2 = e2->GetInstructionType();
 
+				const1 = (it1 == IT_CON || it1 == IT_VAL);
+				const2 = (it2 == IT_CON || it2 == IT_VAL);
+				
 				if(it1 == IT_VAL && it2 == IT_VAL)
 				{
 					return new Value(op->Execute());
@@ -406,38 +409,38 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 					switch(o)
 					{
 						case OP_PLUS:
-							if(e1->Execute() == 0 && e1->GetInstructionType() != IT_VAR) 
+							if(e1->Execute() == 0 && const1) 
 							{
 								e2->Protect();
 								return e2;
 							}
-							else if(e2->Execute() == 0 && e2->GetInstructionType() != IT_VAR)
+							else if(e2->Execute() == 0 && const2)
 							{
 								e1->Protect();
 								return e1;
 							}
 							break;
 						case OP_MINUS:
-							if(e2->Execute() == 0 && e2->GetInstructionType() != IT_VAR)
+							if(e2->Execute() == 0 && const2)
 							{
 								e1->Protect();
 								return e1;
 							}
 							break;
 						case OP_DIVIDE:
-							if(e2->Execute() == 1 && e2->GetInstructionType() != IT_VAR)
+							if(e2->Execute() == 1 && const2)
 							{
 								e1->Protect();
 								return e1;
 							}
 							break;
 						case OP_TIMES:
-							if(e1->Execute() == 1 && e1->GetInstructionType() != IT_VAR) 
+							if(e1->Execute() == 1 && const1) 
 							{
 								e2->Protect();
 								return e2;
 							}
-							else if(e2->Execute() == 1 && e2->GetInstructionType() != IT_VAR)
+							else if(e2->Execute() == 1 && const2)
 							{
 								e1->Protect();
 								return e1;

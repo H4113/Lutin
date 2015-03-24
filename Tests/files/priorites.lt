@@ -1,0 +1,6 @@
+var a,b,c,d,e;
+lire a;
+lire b;
+lire c;
+lire d;
+e := ((a+b)*(c+d)) + 0*1;
