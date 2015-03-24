@@ -14,7 +14,7 @@
 class Variable: public Element 
 {
 	public: 
-		Variable(const std::string&);
+		Variable(const std::string&, bool g=false);
 		virtual ~Variable();
 
 		/**
@@ -28,9 +28,9 @@ class Variable: public Element
 		virtual void Display(void) const;
 
 		/**
-		 *	@return initialized
+		 *	@return ghost
 		 */
-		bool GetInitialized(void) const;
+		bool GetGhost(void) const;
 
 		/**
 		 *	Creates a string representing the variable
@@ -58,8 +58,8 @@ class Variable: public Element
 	protected: 
 		std::string name;
 	private:
-		//May be unused 
-		bool initialized;
+		//True if variable is used but not declared 
+		bool ghost;
 };
 
 #endif //_VARIABLE_H

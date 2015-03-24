@@ -40,7 +40,7 @@ enum Symbol
 };
 
 /*
-*	Returns true if symbol is terminal. False if not. BITCH
+*	Returns true if symbol is terminal. False if not.
 */
 bool IsTerminal(Symbol s);
 
