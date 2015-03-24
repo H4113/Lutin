@@ -458,7 +458,7 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 				Expression *e = Optimize(op->GetExpression(),varKnown);
 				InstruType it = e->GetInstructionType();
 
-				if(it == IT_VAL || it == IT_VAR || it == IT_CON)
+				if(it == IT_VAL || it == IT_CON)
 				{
 					e->Protect();
 					return e;
