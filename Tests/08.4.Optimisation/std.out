@@ -1,6 +1,11 @@
-const B = 8;
-var a;
-a := 192;
-ecrire 193;
-a := 45;
-ecrire 45;
+const abc = 1;
+var b;
+var c;
+const cba = 2;
+var d;
+b := 3;
+c := 1;
+d := 36;
+ecrire 1;
+lire b;
+ecrire (((b + 3)));

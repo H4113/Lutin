@@ -1,0 +1,10 @@
+var a;
+var b;
+var c;
+var d;
+var e;
+lire a;
+lire b;
+lire c;
+lire d;
+e := ((a+b)*(c+d));

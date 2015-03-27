@@ -9,7 +9,8 @@
  * Instruction implementation
  */
  
-Instruction::Instruction()
+Instruction::Instruction():
+	protectedFromDeletion(false)
 {
 }
 
@@ -25,5 +26,16 @@ Variable* Instruction::GetAssignedVar() const
 bool Instruction::MayBeDeleted(void) const
 {
 	InstruType t = GetInstructionType();
-	return t != IT_VAR && t != IT_CON;
+	return GetInstructionType() == IT_VAL || (!protectedFromDeletion && t != IT_VAR && t != IT_CON);
 }
+
+void Instruction::Protect(void)
+{
+	protectedFromDeletion = true;
+}
+
+void Instruction::Unprotect(void)
+{
+	protectedFromDeletion = false;
+}
+
