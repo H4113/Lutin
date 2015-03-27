@@ -26,11 +26,11 @@ void PrintHelp(std::ostream &stream)
 		"||-----------------------------------------------------"<< std::endl<<
 		"||[HELP] Program flags:"<< std::endl<<
 		"||-----------------------------------------------------"<< std::endl<<
-    	"||../lutin [-p] [-a] [-e] [-o] source.lt"<< std::endl<<
-    	"||\t[-p] displays recognized source code"<< std::endl<<
-    	"||\t[-a] performs static analysis"<< std::endl<<
-    	"||\t[-e] executes the program"<< std::endl<<
-    	"||\t[-o] optimizes instructions and instructions" << std::endl<<
+		"||../lutin [-p] [-a] [-e] [-o] source.lt"<< std::endl<<
+		"||\t[-p] displays recognized source code"<< std::endl<<
+		"||\t[-a] performs static analysis"<< std::endl<<
+		"||\t[-e] executes the program"<< std::endl<<
+		"||\t[-o] optimizes instructions and instructions" << std::endl<<
 		"||------------------------------------------------------"<< std::endl << std::endl;
 }
 
@@ -69,7 +69,7 @@ int main(int argc, char** argv)
 	file.open(filepath.c_str());
 
 	if ( file )
-    {
+	{
 		p = automaton.Read(file);
 		if(p != 0) // p is a valid program
 		{
@@ -99,13 +99,13 @@ int main(int argc, char** argv)
 			std::cerr << "ERROR: Fix the code and try again later ;)" << std::endl;
 		}
 
-        file.close();
-    }
-    else
-    {
-    	PrintError("ERROR: cannot open file "+ filepath);
-    	return 1;
-    }
+		file.close();
+	}
+	else
+	{
+		PrintError("ERROR: cannot open file "+ filepath);
+		return 1;
+	}
 
-    return 0;
+	return 0;
 }

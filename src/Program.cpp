@@ -176,7 +176,7 @@ void Program::StaticAnalysis(void)
 	//Var used but not declared
 	//Inserts in set "diff" : varInstr - declaredVar 
 	std::set_difference(varInstr.begin(), varInstr.end(), declaredVar.begin(), declaredVar.end(), 
-                        std::inserter(diff, diff.begin()));
+						std::inserter(diff, diff.begin()));
 	if(!diff.empty())
 	{
 		for(itDiff = diff.begin(); itDiff != diff.end(); ++itDiff) 
@@ -190,7 +190,7 @@ void Program::StaticAnalysis(void)
 	//Var declared but not used
 	//Inserts in set "diff" : declaredVar - rightPart
 	std::set_difference(declaredVar.begin(), declaredVar.end(), rightPart.begin(), rightPart.end(), 
-                        std::inserter(diff, diff.begin()));
+						std::inserter(diff, diff.begin()));
 	if(!diff.empty())
 	{
 		for(itDiff = diff.begin(); itDiff != diff.end(); ++itDiff)

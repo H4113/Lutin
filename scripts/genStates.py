@@ -22,7 +22,7 @@ with open("%s%s.h"%(DIR,FILENAME), "w") as headerfile:
 with open("%s%s.cpp"%(DIR,FILENAME), "w") as cppfile:
 	cppfile.write(PREFIX)
 	cppfile.write("#include \"%s.h\"\n"%FILENAME)
-        cppfile.write("#include \"Automaton.h\"\n\n")
+		cppfile.write("#include \"Automaton.h\"\n\n")
 	
 	for x in range(STATES_NUM):
 		classname = "State%02d"%x
@@ -33,4 +33,3 @@ with open("%s%s.cpp"%(DIR,FILENAME), "w") as cppfile:
 		cppfile.write("}\n\n")
 		if x != STATES_NUM-1:
 			cppfile.write("// %s\n\n"%("-"*64))
-

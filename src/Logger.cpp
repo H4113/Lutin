@@ -24,10 +24,10 @@ int Logger::LogBuf::sync()
 {
 	if(print)
 	{
-        std::cout << prefix << ": " << str();
-        str("");
-    }
+		std::cout << prefix << ": " << str();
+		str("");
+	}
 
-    return !std::cout;
+	return !std::cout;
 }
-        
+		

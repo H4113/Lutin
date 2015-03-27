@@ -9,21 +9,21 @@
 
 class Logger : public std::ostream {
 private:
-    class LogBuf : public std::stringbuf {
+	class LogBuf : public std::stringbuf {
 
-    public:
-        bool print;
-        std::string prefix;
+	public:
+		bool print;
+		std::string prefix;
 
-        LogBuf(const std::string& prefix, bool print);
-        ~LogBuf();
+		LogBuf(const std::string& prefix, bool print);
+		~LogBuf();
 
-        int sync();
-    };
+		int sync();
+	};
 
 public:
-    Logger(const std::string& prefix, bool print = true);
-    ~Logger();
+	Logger(const std::string& prefix, bool print = true);
+	~Logger();
 };
 
 #endif

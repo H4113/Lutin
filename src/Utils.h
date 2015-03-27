@@ -28,10 +28,10 @@ std::string ttos( T t )
 template <typename T>
 T stot( std::string s )
 {
-    std::istringstream ss( s );
-    T t;
-    ss >> t;
-    return t;
+	std::istringstream ss( s );
+	T t;
+	ss >> t;
+	return t;
 }
 
 #endif // UTILS_H
