@@ -39,11 +39,12 @@ class LexicalAnalyzer
 
 		unsigned int GetCurrentLine();
 		unsigned int GetCurrentCharacter();
-
-	protected:
 		
+		bool HasError(void) const;
+
 	private: 
 		bool lastWordKnown;
+		bool error;
 		Word* currentWord;
 		std::istream* stream;
 		std::string str;

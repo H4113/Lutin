@@ -59,7 +59,11 @@ const Symbol SYMBOLS[NB_LEXER_RULES] = {
 const regex REG_JUNK("^\\s+");
 
 LexicalAnalyzer::LexicalAnalyzer() :
-	lastWordKnown(false), currentWord(0), stream(), str()
+	lastWordKnown(false),
+	error(false),
+	currentWord(0),
+	stream(),
+	str()
 {
 }
 
@@ -131,8 +135,11 @@ Word* LexicalAnalyzer::GetCurrentWord()
 		}
 	}
 	// no matched rules:
-	std::cerr << "Erreur lexicale ("<< lineCount <<":"<< characterCount
-			  << ") caractere "<<str[0]<<std::endl;
+	std::cerr << "Lexer error ("<< lineCount <<":"<< characterCount
+			  << ") character "<<str[0]<<std::endl;
+	
+	error = true;
+	
 	oldCharacterCount = characterCount;
 	characterCount += 1;
 	str.erase(str.begin(),str.begin()+1);
@@ -165,4 +172,9 @@ unsigned int LexicalAnalyzer::GetCurrentLine()
 unsigned int LexicalAnalyzer::GetCurrentCharacter()
 {
 	return oldCharacterCount;
+}
+
+bool LexicalAnalyzer::HasError(void) const
+{
+	return error;
 }

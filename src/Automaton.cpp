@@ -91,7 +91,7 @@ Word *Automaton::Read(std::istream &stream)
 			delete w;
 	}
 
-	if(!error)
+	if(!error && !analyzer.HasError())
 	{
 #ifdef DEBUG
 		std::cout << words.size() << " ord kvar" << std::endl;
