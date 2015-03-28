@@ -21,7 +21,7 @@ using namespace boost;
 
 const int NB_LEXER_RULES = 16;
 const regex REG[NB_LEXER_RULES] = {
-	regex("^var\\s"),
+	regex("^(var\\s|var$)"),
 	regex("^ecrire\\s"),
 	regex("^lire\\s"),
 	regex("^const\\s"),
@@ -35,7 +35,7 @@ const regex REG[NB_LEXER_RULES] = {
 	regex("^="),
 	regex("^\\("),
 	regex("^\\)"),
-	regex("^([a-zA-Z][a-zA-Z0-9]*)[^a-zA-Z0-9]"),
+	regex("^([a-zA-Z][a-zA-Z0-9]*)([^a-zA-Z0-9]|$)"),
 	regex("^([0-9]+)([^0-9]|$)")
 };
 const Symbol SYMBOLS[NB_LEXER_RULES] = {
