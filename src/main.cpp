@@ -11,15 +11,6 @@
 #include "Options.h"
 #include "Utils.h"
 
-namespace std {
-#ifdef DEBUG
-	Logger debug("debug",true);
-#else
-	
-	Logger debug("debug",false);
-#endif	
-}
-
 void PrintHelp(std::ostream &stream)
 {
 	stream << std::endl <<
