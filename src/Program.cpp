@@ -315,7 +315,6 @@ Expression *Program::buildExpression(const Word *w)
 
 void Program::Optimize(void) 
 {
-	std::map<std::string, Variable*>::iterator itVar;
 	std::map<Variable*, int> varKnown;
 	for(std::vector<Instruction*>::iterator it = instructions.begin(); it != instructions.end(); ++it)
 	{
@@ -331,6 +330,7 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 			{
 				Write* w = static_cast<Write*>(inst);
 				w->SetExpression(Optimize(w->GetExpression(),varKnown));
+				w->GetExpression()->Unprotect();
 			}
 			break;
 		case IT_ASS:
@@ -345,7 +345,9 @@ void Program::Optimize(Instruction* inst, std::map<Variable*, int> & varKnown)
 
 				if(it == IT_VAL || it == IT_VAR || it == IT_CON) {
 					varKnown[ass->GetAssignedVar()] = e->Execute();
+					
 				}
+				e->Unprotect();
 			}
 			break;
 		case IT_REA:
@@ -461,7 +463,7 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 					return e;
 				}
 				op->SetExpression(e);
-				//op->GetExpression()->Protect();
+				op->GetExpression()->Unprotect();
 			}
 			break;
 		default:
