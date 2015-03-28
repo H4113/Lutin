@@ -364,6 +364,7 @@ Expression *Program::Optimize(Expression* inst, std::map<Variable*, int> & varKn
 {
 	switch(inst->GetInstructionType())
 	{
+		case IT_VAL:
 		case IT_CON:
 			return new Value(inst->Execute());
 		case IT_VAR:
