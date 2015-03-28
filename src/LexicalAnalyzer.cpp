@@ -22,9 +22,9 @@ using namespace boost;
 const int NB_LEXER_RULES = 16;
 const regex REG[NB_LEXER_RULES] = {
 	regex("^(var\\s|var$)"),
-	regex("^ecrire\\s"),
-	regex("^lire\\s"),
-	regex("^const\\s"),
+	regex("^(ecrire\\s|ecrire$)"),
+	regex("^(lire\\s|lire$)"),
+	regex("^(const\\s|const$)"),
 	regex("^:="),
 	regex("^;"),
 	regex("^,"),
