@@ -1,7 +1,0 @@
-var x ;
-const n=42, n2=100 ;
-ecrire n+n2;
-x := n+n2 ;
-ecrire x+2 ;
-lire x;
-ecrire x prout;
