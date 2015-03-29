@@ -1,0 +1,12 @@
+var
+v,
+var1,a
+;
+const
+ecrire1=
+42;
+v:=4;
+var1
+:=2;
+ecrire v*
+2+var1-ecrire1;

@@ -1,0 +1,7 @@
+var a;
+const ecrire1 = 42;
+var v;
+var var1;
+v := 4;
+var1 := 2;
+ecrire v * 2 + var1 - ecrire1;
