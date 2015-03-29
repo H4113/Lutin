@@ -19,6 +19,10 @@
 
 bool operator<(const std::string &s1, const std::string &s2);
 
+/**
+ *	@class Program
+ *  @brief Contains all declarations and instructions of the program.
+ */
 class Program 
 {
 	public:

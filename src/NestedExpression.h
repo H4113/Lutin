@@ -8,6 +8,10 @@
 
 #include "Expression.h"
 
+/**
+ *	@class NestedExpression
+ *  @brief An expression between parentheses
+ */
 class NestedExpression : public Expression
 {
 	public:

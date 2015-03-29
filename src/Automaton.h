@@ -17,6 +17,7 @@
 
 /**
  *	@class Automaton
+ *  @brief An automaton to parse the language 
  */
 class Automaton 
 {

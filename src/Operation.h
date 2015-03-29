@@ -11,6 +11,11 @@
 #include "Operator.h"
 #include <iostream>
 
+/**
+ *	@class Operation
+ * @brief An expression formed like this:
+ * expression1 operator expression2
+ */
 class Operation: public Expression 
 {
 	public:

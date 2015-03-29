@@ -8,7 +8,10 @@
 
 #include "Instruction.h"
 
-
+/**
+ *	@class Expression
+ *  @brief An abstract class which can be executed to give a value.
+ */
 class Expression : public Instruction
 {
 	public:

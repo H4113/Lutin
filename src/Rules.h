@@ -9,6 +9,10 @@
 
 #define RULE_COUNT 22
 
+/** Rule
+ *  @brief Represent a grammar rule. Used to know the number of 
+ *  elements of a right part of a grammar rule.
+ */
 typedef struct Rule 
 {
 	Symbol leftPart;

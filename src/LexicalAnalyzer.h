@@ -13,8 +13,8 @@
 
 /**
  *	@class LexicalAnalyzer 
- * Transforms a string stream in a tokens represented by 
- * the Word class
+ * @brief Transforms a string stream in a tokens represented by 
+ * the Word class.
  */
 class LexicalAnalyzer 
 {

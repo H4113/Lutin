@@ -23,6 +23,11 @@ enum InstruType
 	IT_WRI  // WRITE
 };
 
+/**
+ *	@class Instruction
+ *  @brief An instruction in lutin can be an assignment,
+ *  a read or a write on the standard ouput.
+ */
 class Instruction 
 {
 	public: 

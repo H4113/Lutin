@@ -13,8 +13,8 @@
 #include <set>
 
 /**
- *	@class Assignement
- *	Instruction allowing to assign a value to a variable
+ *	@class Assignment
+ *	@brief Instruction allowing to assign a value to a variable
  */
 class Assignment: public Instruction 
 {

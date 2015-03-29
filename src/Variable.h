@@ -10,7 +10,10 @@
 
 #include "Element.h"
 
-
+/**
+ *	@class Variable
+ *  @brief A variable (association between a unique string the id and a value)
+ */
 class Variable: public Element 
 {
 	public: 

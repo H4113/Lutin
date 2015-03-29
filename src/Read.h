@@ -11,6 +11,10 @@
 #include <string>
 #include <set>
 
+/**
+ *	@class Read
+ *  @brief Instruction to read from the standard input
+ */
 class Read: public Instruction 
 {
 	public:

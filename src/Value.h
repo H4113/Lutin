@@ -9,6 +9,10 @@
 #include "Element.h"
 #include <string>
 
+/**
+ *	@class Value
+ *  @brief Represent a number hardcoded in the program
+ */
 class Value: public Element 
 {
 	public:

@@ -5,6 +5,9 @@
 #ifndef _OPTIONS_H
 #define _OPTIONS_H
 
+/** Options
+ * @brief Parse the parameters of the command line for the options
+*/
 struct Options
 {
 	bool a,o,p,e;

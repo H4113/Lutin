@@ -11,7 +11,10 @@
 #include <string>
 #include <set>
 
-
+/**
+ *	@class Write
+ *  @brief An instruction used to write on the standard input
+ */
 class Write: public Instruction 
 {
 	public:

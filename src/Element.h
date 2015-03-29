@@ -10,7 +10,7 @@
 
 /**
  *	@class Element
- *	An expression representing a specific value
+ *	@brief An expression representing a specific value
  */
 class Element: public Expression 
 {
@@ -18,10 +18,13 @@ class Element: public Expression
 		Element();
 		virtual ~Element();
 		/**
-		 * @param value
+		 * @param value The new value
 		 */
 		bool Set(int value);
 		
+		/**
+		 * @return the current value
+		 */
 		int Get(void);
 
 		/**
