@@ -5,6 +5,8 @@
 #ifndef _OPTIONS_H
 #define _OPTIONS_H
 
+#include <algorithm>
+
 /** Options
  * @brief Parse the parameters of the command line for the options
 */

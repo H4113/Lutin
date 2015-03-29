@@ -44,10 +44,16 @@ std::string SymbolToString(Symbol s)
 			oss << "operator :=";
 			break;
 		case SYM_plus:
+			oss << "arithmetic operator +";
+			break;
 		case SYM_times:
+			oss << "arithmetic operator *";
+			break;
 		case SYM_minus:
+			oss << "arithmetic operator -";
+			break;
 		case SYM_div:
-			oss << "arithmetic operator";
+			oss << "arithmetic operator /";
 			break;
 		case SYM_op_par:
 			oss << "symbol (";
