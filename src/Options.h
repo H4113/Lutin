@@ -19,13 +19,16 @@ struct Options
 		if( str.compare("-a") == 0 )
 		{
 			this->a = true;
-		} else if( str.compare("-e") == 0 )
+		}
+		else if( str.compare("-e") == 0 )
 		{
 			this->e = true;
-		} else if( str.compare("-p") == 0 )
+		}
+		else if( str.compare("-p") == 0 )
 		{
 			this->p = true;
-		} else if( str.compare("-o") == 0 )
+		}
+		else if( str.compare("-o") == 0 )
 		{
 			this->o = true;
 		}

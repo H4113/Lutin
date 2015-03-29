@@ -138,9 +138,13 @@ StateResult Automaton::Reduce(unsigned int ruleId)
 
 	val.wordContainer = new WordContainer;
 	if(rule.rightPartCount > 0)
+	{
 		val.wordContainer->words = new Word*[rule.rightPartCount];
+	}
 	else
+	{
 		val.wordContainer->words = 0;
+	}
 	val.wordContainer->size = rule.rightPartCount; 
 	
 	// First pop all right value symbols

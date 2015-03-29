@@ -40,7 +40,6 @@ class Word
 
 	private: 
 		Symbol symbol;
-
 		UWordVal val;
 };
 

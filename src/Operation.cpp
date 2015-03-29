@@ -54,7 +54,6 @@ std::string Operation::ToString(void) const
 
 int Operation::Execute(void) 
 {
-	//std::cout << ToString() << " | ";
 	switch(op) 
 	{
 		case OP_PLUS:

@@ -1,7 +1,5 @@
 #include <iostream>
-#include <sstream>
 #include <string>
-#include <algorithm>
 #include <fstream>
 
 #include "user.h"
@@ -9,7 +7,6 @@
 #include "Automaton.h"
 #include "Program.h"
 #include "Options.h"
-#include "Utils.h"
 
 void PrintHelp(std::ostream &stream)
 {

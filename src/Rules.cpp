@@ -1,6 +1,7 @@
 #include "Rules.h"
 
-const Rule RULES[RULE_COUNT] = {
+const Rule RULES[RULE_COUNT] = 
+{
 	{SYM_Pprim, 1},
 	{SYM_P, 2},
 	{SYM_Pd, 3},

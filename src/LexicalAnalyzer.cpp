@@ -20,7 +20,8 @@ using namespace boost;
  */
 
 const int NB_LEXER_RULES = 16;
-const regex REG[NB_LEXER_RULES] = {
+const regex REG[NB_LEXER_RULES] = 
+{
 	regex("^(var\\s|var$)"),
 	regex("^(ecrire\\s|ecrire$)"),
 	regex("^(lire\\s|lire$)"),
@@ -38,7 +39,8 @@ const regex REG[NB_LEXER_RULES] = {
 	regex("^([a-zA-Z][a-zA-Z0-9]*)([^a-zA-Z0-9]|$)"),
 	regex("^([0-9]+)([^0-9]|$)")
 };
-const Symbol SYMBOLS[NB_LEXER_RULES] = {
+const Symbol SYMBOLS[NB_LEXER_RULES] = 
+{
 	SYM_v,
 	SYM_w,
 	SYM_r,
@@ -81,18 +83,21 @@ void LexicalAnalyzer::SetInputStream(std::istream *nstream)
 
 Word* LexicalAnalyzer::GetCurrentWord()
 {
-	if(lastWordKnown) {
+	if(lastWordKnown)
+	{
 		return currentWord;
 	}
 	// get the new line 
-	if(str.empty()) {
+	if(str.empty())
+	{
 		++lineCount;
 		oldCharacterCount = characterCount;
 		characterCount = 1;
 		std::getline(*stream, str);
 	}
 	// EOF case
-	if(str.empty() && stream->eof()){
+	if(str.empty() && stream->eof())
+	{
 		UWordVal endVal = {0};
 		currentWord = new Word(SYM_end, endVal);
 		return currentWord;
@@ -100,29 +105,39 @@ Word* LexicalAnalyzer::GetCurrentWord()
 
 	smatch match;
 	// erase blank characters at the begining of the string
-	if(regex_search(str, match, REG_JUNK) ) {
+	if(regex_search(str, match, REG_JUNK) )
+	{
 		oldCharacterCount = characterCount;
 		characterCount += match[0].length();
 		str.erase(str.begin(),str.begin()+match[0].length());
 	}
-	if(str.empty()) {
+	if(str.empty())
+	{
 		return 0;
 	}
 	// test all the rules
-	for(int i=0; i<NB_LEXER_RULES;++i) {
-		if(regex_search(str, match, REG[i]) ) {
-			Symbol symbolReturn = SYMBOLS[i];
-
+	for(int i=0; i<NB_LEXER_RULES;++i)
+	{
+		if(regex_search(str, match, REG[i]) )
+		{
 			UWordVal valReturn; // to save the matched value
 			unsigned int nbCharactersToErase;
-			if(match.size() >= 2) { 
-				if(symbolReturn == SYM_id) {
+			Symbol symbolReturn = SYMBOLS[i];
+
+			if(match.size() >= 2)
+			{ 
+				if(symbolReturn == SYM_id)
+				{
 					valReturn.varid = new std::string(match[1].str());
-				}else if(symbolReturn == SYM_n) {
+				}
+				else if(symbolReturn == SYM_n)
+				{
 					valReturn.number = new int(stot<int>(match[1].str()));
 				}
 				nbCharactersToErase = match[1].length();
-			} else {
+			}
+			else 
+			{
 				nbCharactersToErase = match[0].length();
 			}
 			str.erase(str.begin(),str.begin()+nbCharactersToErase);

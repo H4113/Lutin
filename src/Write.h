@@ -8,6 +8,8 @@
 
 #include "Instruction.h"
 #include "Expression.h"
+#include <string>
+#include <set>
 
 
 class Write: public Instruction 
@@ -41,6 +43,7 @@ class Write: public Instruction
 
 		void SetExpression(Expression *e);
 		Expression* GetExpression(void);
+
 	private: 
 		Expression* expression;
 };

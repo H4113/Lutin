@@ -7,7 +7,6 @@
 #define _CONSTANT_H
 
 #include "Variable.h"
-#include <iostream>
 #include <string>
 
 /**

@@ -13,14 +13,14 @@ class Variable;
 
 enum InstruType
 {
-	IT_OPE,
-	IT_ASS,
-	IT_VAR,
-	IT_CON,
-	IT_VAL,
+	IT_OPE, // OPERATION
+	IT_ASS, // ASSIGNMENT
+	IT_VAR, // VARIABLE
+	IT_CON, // CONSTANT
+	IT_VAL, // VALUE
 	IT_NES, // NESTED
-	IT_REA,
-	IT_WRI
+	IT_REA, // READ
+	IT_WRI  // WRITE
 };
 
 class Instruction 

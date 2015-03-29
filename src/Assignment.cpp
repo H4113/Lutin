@@ -4,6 +4,8 @@
 
 #include "Assignment.h"
 
+ #include <iostream>
+
 /**
  * Assignment implementation
  */

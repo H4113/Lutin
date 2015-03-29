@@ -55,7 +55,8 @@ UWordVal Word::GetVal(void) const
 
 void Word::DebugWord(const Word *w)
 {
-	switch(w->GetSymbol()){
+	switch(w->GetSymbol())
+	{
 		case SYM_v: std::cout<<"Keyword var"; break;
 		case SYM_c: std::cout<<"Keyword const"; break;
 		case SYM_r: std::cout<<"Function lire"; break;
@@ -82,7 +83,7 @@ void Word::DebugWord(const Word *w)
 		case SYM_Lconst: std::cout<<"Lconst";break;
 		case SYM_I: std::cout<<"I (Instruction)";break;
 		case SYM_E: std::cout<<"E (Expression)";break;
-		default:std::cout<<"Token code ("<<(int)(w->GetSymbol())<<")";
+		default: std::cout<<"Token code ("<<(int)(w->GetSymbol())<<")";
 	}
 	std::cout<<std::endl;
 }

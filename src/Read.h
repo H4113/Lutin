@@ -8,7 +8,8 @@
 
 #include "Instruction.h"
 #include "Variable.h"
-#include <iostream>
+#include <string>
+#include <set>
 
 class Read: public Instruction 
 {

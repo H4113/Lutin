@@ -9,7 +9,8 @@
 #include "Instruction.h"
 #include "Variable.h"
 #include "Expression.h"
-#include <iostream>
+#include <string>
+#include <set>
 
 /**
  *	@class Assignement
