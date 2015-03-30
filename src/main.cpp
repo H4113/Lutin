@@ -2,8 +2,6 @@
 #include <string>
 #include <fstream>
 
-#include "user.h"
-
 #include "Automaton.h"
 #include "Program.h"
 #include "Options.h"
