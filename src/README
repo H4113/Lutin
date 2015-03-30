@@ -1,0 +1,7 @@
+Before building Lutin, make sure that ./Debug/obj, ./Debug/bin, ./Release/obj, ./Release/bin exist if you're willing
+to use boost while compiling. If you want to use libc++ from C++11, make sure that ./cpp11Debug/obj, ./cpp11Debug/bin,
+./cpp11Release/obj, ./cpp11Release/bin exist.
+
+To make the boost debug target, simply run "make". The output binary will be located at ./Debug/bin/lutin .
+To run the tests once the boost debug target is made, run "make tests". If you want another target to be tested, you'll
+have to change the link /Tests/lut.
