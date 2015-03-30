@@ -148,6 +148,8 @@ void Program::DisplayCode(void)
 
 void Program::StaticAnalysis(void)
 {
+	bool error = false;
+
 	std::set<const Variable*> declaredVar;
 	std::set<const Variable*> affectedVar;
 	std::map<std::string, Variable*>::iterator itVar;
@@ -182,6 +184,7 @@ void Program::StaticAnalysis(void)
 		for(itDiff = diff.begin(); itDiff != diff.end(); ++itDiff) 
 		{
 			std::cerr << "ERROR: Variable "+ (*itDiff)->GetName() +" used but not declared." << std::endl;
+			error = true;
 		}
 	}
 
@@ -212,6 +215,7 @@ void Program::StaticAnalysis(void)
 			if(var != 0 && !var->IsConstant() && affectedVar.find(var) == affectedVar.end())
 			{
 				std::cerr << "ERROR: Variable " + (*itDiff)->GetName() + " isn't initialized." << std::endl;
+				error = true;
 			}
 		}
 		affectedVar.insert((*it)->GetAssignedVar());
@@ -228,7 +232,13 @@ void Program::StaticAnalysis(void)
 		if(var != 0 && var->IsConstant())
 		{
 			std::cerr << "ERROR: Constant " + (var->GetName()) + " cannot be modified." << std::endl;
+			error = true;
 		}
+	}
+
+	if(error)
+	{
+		exit(0);
 	}
 }
 

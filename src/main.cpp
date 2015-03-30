@@ -67,6 +67,9 @@ int main(int argc, char** argv)
 			}
 			if( opt.o )
 			{
+				if(!opt.a)
+					program.StaticAnalysis();
+
 				program.Optimize();
 			}
 			if( opt.p )
@@ -75,6 +78,9 @@ int main(int argc, char** argv)
 			}
 			if( opt.e )
 			{
+				if(!opt.a && !opt.o)
+					program.StaticAnalysis();
+
 				program.Execute();
 			}
 
