@@ -4,6 +4,7 @@
 
 
 #include "Write.h"
+#include "Utils.h"
 #include <iostream>
 
 /**
@@ -30,7 +31,7 @@ void Write::Display(void) const
 int Write::Execute(void) 
 {
 	int v = expression->Execute();
-	std::cout << std::to_string(v) << std::endl;
+	std::cout << ttos(v) << std::endl;
 	return v;
 }
 

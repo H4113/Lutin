@@ -4,6 +4,7 @@
 
 
 #include "Value.h"
+#include "Utils.h"
 #include <iostream>
 
 /**
@@ -30,7 +31,7 @@ void Value::Display() const
 
 std::string Value::ToString(void) const 
 {
-	return std::to_string(value);
+	return ttos(value);
 }
 
 void Value::GetVariables(std::set<const Variable*> &set, bool) const

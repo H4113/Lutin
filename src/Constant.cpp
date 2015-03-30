@@ -4,6 +4,7 @@
 
 
 #include "Constant.h"
+#include "Utils.h"
 #include <iostream>
 
 /**
@@ -36,7 +37,7 @@ bool Constant::IsConstant(void) const
 
 std::string Constant::GetDeclaration(void) const 
 {
-	return "const " + name + " = " + std::to_string(value) + ";";
+	return "const " + name + " = " + ttos(value) + ";";
 }
 
 InstruType Constant::GetInstructionType(void) const
