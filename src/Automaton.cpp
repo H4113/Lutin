@@ -6,7 +6,6 @@
 #include "Automaton.h"
 #include "Rules.h"
 #include "ConcreteStates.h"
-#include "user.h"
 
 /**
  * Automaton implementation
